@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary: #21647D;
+  --primary-light: #3CB6E3;
+  --primary-dark: #235467;
+  --secondary: #3CB6E3;
+  --text-primary: #235467;
+  --text-secondary: #EFFAFC;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-end-rgb));
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+  animation: fadeIn 0.5s ease-in-out;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Page transition animations */
+.page-transition {
+  animation: fadeOut 0.3s ease-in-out;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Fade in animation for page load */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Input focus styles */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(33, 100, 125, 0.2);
+}
+
+/* Button hover effect */
+button {
+  transition: all 0.3s ease;
+}
+
+/* Form elements */
+input,
+textarea,
+select {
+  transition: all 0.3s ease;
+}
+
+/* Figma specific styles */
+.signup-page {
+  background: linear-gradient(236.61deg, rgba(22, 171, 217, 0.8) 30.14%, rgba(62, 142, 171, 0.8) 92.86%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+}
+
+.white-circle {
+  background: #FFFFFF;
+  box-shadow: 0px 222px 89px rgba(0, 0, 0, 0.01), 0px 125px 75px rgba(0, 0, 0, 0.05), 0px 55px 55px rgba(0, 0, 0, 0.09), 0px 14px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.gradient-button-blue {
+  background: linear-gradient(90deg, #21647D 0%, #3CB6E3 100%);
+  border: 1px solid #2C809D;
+  border-radius: 100px;
+}
+
+.gradient-button-teal {
+  background: linear-gradient(90deg, #3CB6E3 0%, #21647D 100%);
+  border: 1px solid #EFFAFC;
+  border-radius: 100px;
+}
+
+/* Add the following autofill override styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+  -webkit-text-fill-color: inherit !important;
+  box-shadow: 0 0 0 30px transparent inset !important;
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

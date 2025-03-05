@@ -1,0 +1,53 @@
+/* Aggressive overrides for autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:-internal-autofill-selected,
+input:-internal-autofill-previewed {
+    -webkit-text-fill-color: #FFFFFF !important;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    box-shadow: 0 0 0 1000px transparent inset !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    transition-property: background-color, color;
+    transition-delay: 99999s, 99999s;
+    transition-duration: 99999s;
+}
+
+/* Hide autofill icon (the yellow key in some browsers) */
+::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+}
+
+/* Force transparent background for all inputs */
+input,
+textarea,
+select {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Additional overrides for Material-UI */
+.MuiInputBase-root,
+.MuiOutlinedInput-root,
+.MuiFilledInput-root,
+.MuiInput-root {
+    background-color: transparent !important;
+}
+
+.MuiInputBase-input,
+.MuiOutlinedInput-input,
+.MuiFilledInput-input,
+.MuiInput-input {
+    background-color: transparent !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+/* Ensure no background colors are applied when focused */
+*:focus {
+    background-color: transparent !important;
+}
