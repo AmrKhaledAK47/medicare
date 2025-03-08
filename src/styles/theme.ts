@@ -20,7 +20,7 @@ const theme = createTheme({
         },
         text: {
             primary: '#235467', // Dark teal for text
-            secondary: '#EFFAFC', // Light blue for secondary text
+            secondary: '#adb1b2', // Medium gray for secondary text
         },
         error: {
             main: '#FF5252',
