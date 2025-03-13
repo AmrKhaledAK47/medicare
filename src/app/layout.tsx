@@ -1,22 +1,23 @@
-'use client';
-
-import React from 'react';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import theme from '../styles/theme';
 import './globals.css';
 import './no-autofill.css';
 import { AnimationProvider } from '@/context/AnimationContext';
+import { ThemeProvider } from '../providers/ThemeProvider';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'MediCare - Your Health Dashboard',
+  description: 'A comprehensive healthcare management platform',
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+        <ThemeProvider>
           <AnimationProvider>
             {children}
           </AnimationProvider>

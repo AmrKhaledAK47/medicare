@@ -1,0 +1,13 @@
+<svg width="49" height="49" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 16.5292C0 7.69268 7.16344 0.529236 16 0.529236H33C41.8366 0.529236 49 7.69268 49 16.5292V32.5292C49 41.3658 41.8366 48.5292 33 48.5292H16C7.16345 48.5292 0 41.3658 0 32.5292V16.5292Z" fill="white"/>
+<path d="M4 16.5292C4 9.90182 9.37258 4.52924 16 4.52924H32C38.6274 4.52924 44 9.90182 44 16.5292V32.5292C44 39.1567 38.6274 44.5292 32 44.5292H16C9.37258 44.5292 4 39.1567 4 32.5292V16.5292Z" fill="white"/>
+<path d="M24.5 13.5292L24.5 15.5292" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+<path d="M35.5 24.5292L33.5 24.5292" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+<path d="M32.2773 32.3074L30.981 31.011" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+<path d="M16.7207 32.3075L18.0171 31.0111" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+<path d="M24.5 33.5292L24.5 35.5292" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+<path d="M15.5 24.5292L13.5 24.5292" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+<path d="M18.0176 18.0474L16.7212 16.7511" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+<path d="M30.9824 18.0474L32.2788 16.7511" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+<circle cx="24.5" cy="24.5292" r="6" stroke="#217C99" stroke-width="1.5" stroke-linecap="square"/>
+</svg>
