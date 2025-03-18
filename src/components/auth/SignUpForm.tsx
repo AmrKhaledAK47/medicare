@@ -151,7 +151,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onLoginClick }) => {
         console.log('Form values', values);
         setTimeout(() => {
             setSubmitting(false);
-            router.push('/dashboard');
+            router.push('/patient/dashboard');
         }, 1000);
     };
 

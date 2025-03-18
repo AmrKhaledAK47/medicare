@@ -1,7 +1,7 @@
 import './globals.css';
 import './no-autofill.css';
 import { AnimationProvider } from '@/context/AnimationContext';
-import { ThemeProvider } from '../providers/ThemeProvider';
+import { ConditionalThemeProvider } from '../providers/ConditionalThemeProvider';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,11 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider>
+        <ConditionalThemeProvider>
           <AnimationProvider>
             {children}
           </AnimationProvider>
-        </ThemeProvider>
+        </ConditionalThemeProvider>
       </body>
     </html>
   );

@@ -18,6 +18,10 @@ const PageContainer = styled('div')({
   overflow: 'hidden',
   position: 'relative',
   background: '#2C809D',
+  '@media (max-width: 600px)': {
+    height: 'auto',
+    minHeight: '100vh',
+  },
 });
 
 const WelcomeSection = styled('div')({
@@ -43,6 +47,7 @@ const FormSection = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  justifyContent: 'center',
   position: 'relative',
   zIndex: 2,
   '@media (max-width: 1200px)': {
@@ -50,6 +55,10 @@ const FormSection = styled('div')({
   },
   '@media (max-width: 900px)': {
     width: '100%',
+    padding: '0 20px',
+  },
+  '@media (max-width: 600px)': {
+    padding: '40px 20px',
   },
 });
 
@@ -86,6 +95,23 @@ const LogoContainer = styled('div')({
   top: '31px',
   left: '56px',
   zIndex: 10,
+  '@media (max-width: 600px)': {
+    top: '20px',
+    left: '20px',
+  },
+});
+
+const MobileLogoContainer = styled('div')({
+  display: 'none',
+  position: 'relative',
+  zIndex: 10,
+  marginBottom: '20px',
+  '@media (max-width: 900px)': {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    marginTop: '20px',
+  },
 });
 
 const FormContainer = styled('div')({
@@ -102,6 +128,9 @@ const FormContainer = styled('div')({
     maxWidth: '100%',
     padding: '0 20px',
   },
+  '@media (max-width: 600px)': {
+    padding: '0 10px',
+  },
 });
 
 const LoginTitle = styled(Typography)({
@@ -115,16 +144,19 @@ const LoginTitle = styled(Typography)({
   textAlign: 'center',
   color: '#FFFFFF',
   marginBottom: '20px',
-  marginTop: '140px',
+  marginTop: '0',
   '@media (max-width: 1400px)': {
     fontSize: '32px',
     lineHeight: '48px',
-    marginTop: '40px',
   },
   '@media (max-width: 900px)': {
     fontSize: '28px',
     lineHeight: '42px',
-    marginTop: '30px',
+    marginTop: '0',
+  },
+  '@media (max-width: 600px)': {
+    fontSize: '24px',
+    lineHeight: '36px',
   },
 });
 
@@ -145,6 +177,11 @@ const LoginSubtitle = styled(Typography)({
     fontSize: '14px',
     lineHeight: '16px',
     marginBottom: '20px',
+  },
+  '@media (max-width: 600px)': {
+    fontSize: '13px',
+    lineHeight: '16px',
+    marginBottom: '15px',
   },
 });
 
@@ -240,6 +277,39 @@ const SignUpButton = styled(motion(Button))({
     height: '60px',
     fontSize: '20px',
     lineHeight: '30px',
+  },
+  '@media (max-width: 600px)': {
+    width: '220px',
+    height: '50px',
+    fontSize: '18px',
+    lineHeight: '28px',
+  },
+});
+
+// New component for mobile sign-up button
+const MobileSignUpButton = styled(Button)({
+  display: 'none',
+  width: '100%',
+  maxWidth: '280px',
+  height: '50px',
+  background: 'linear-gradient(90deg, #3CB6E3 0%, #21647D 100%)',
+  border: '1px solid #EFFAFC',
+  borderRadius: '100px',
+  fontFamily: "'Poppins', sans-serif",
+  fontStyle: 'normal',
+  fontWeight: 700,
+  fontSize: '18px',
+  lineHeight: '28px',
+  textAlign: 'center',
+  color: '#FFFFFF',
+  textTransform: 'none',
+  marginTop: '20px',
+  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+  '&:hover': {
+    background: 'linear-gradient(90deg, #35A3CC, #1A5369)',
+  },
+  '@media (max-width: 900px)': {
+    display: 'block',
   },
 });
 
@@ -387,10 +457,21 @@ const LoginPage = () => {
         </WelcomeSection>
 
         <FormSection>
+          <MobileLogoContainer>
+            <Logo color="white" position="relative" />
+          </MobileLogoContainer>
+          
           <FormContainer>
             <LoginTitle>Log In</LoginTitle>
             <LoginSubtitle>-Or use your email account-</LoginSubtitle>
             <LoginForm onSignUpClick={handleSignUpClick} />
+            
+            <MobileSignUpButton 
+              onClick={handleSignUpClick}
+              disableRipple
+            >
+              Don't have an account? Sign Up
+            </MobileSignUpButton>
           </FormContainer>
         </FormSection>
       </PageContainer>

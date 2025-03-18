@@ -30,6 +30,12 @@ const StyledForm = styled('form')(({ theme }) => ({
     maxWidth: '480px',
     margin: '0 auto',
     padding: theme.spacing(2),
+    '@media (max-width: 900px)': {
+        padding: theme.spacing(1.5),
+    },
+    '@media (max-width: 600px)': {
+        padding: theme.spacing(1),
+    },
 }));
 
 const SubmitButton = styled(Button)({
@@ -65,6 +71,15 @@ const SubmitButton = styled(Button)({
         marginTop: '20px',
         marginBottom: '16px',
     },
+    '@media (max-width: 600px)': {
+        width: '100%',
+        maxWidth: '220px',
+        height: '45px',
+        fontSize: '15px',
+        lineHeight: '22px',
+        marginTop: '15px',
+        marginBottom: '12px',
+    },
 });
 
 const ForgotPasswordLink = styled('a')(({ theme }) => ({
@@ -79,6 +94,10 @@ const ForgotPasswordLink = styled('a')(({ theme }) => ({
     cursor: 'pointer',
     '&:hover': {
         textDecoration: 'underline',
+    },
+    '@media (max-width: 600px)': {
+        fontSize: '13px',
+        marginBottom: theme.spacing(1.5),
     },
 }));
 
@@ -97,6 +116,7 @@ const SignUpPrompt = styled(Typography)({
     '@media (max-width: 900px)': {
         fontSize: '13px',
         lineHeight: '16px',
+        display: 'none', // Hide on mobile as we'll use the dedicated button instead
     },
 });
 
@@ -120,6 +140,18 @@ const IconContainer = styled(Box)({
         width: '18px',
         height: '18px',
     },
+    '@media (max-width: 600px)': {
+        width: '16px',
+        height: '16px',
+    },
+});
+
+const InputWrapper = styled(Box)({
+    width: '100%',
+    marginBottom: '16px',
+    '@media (max-width: 600px)': {
+        marginBottom: '12px',
+    },
 });
 
 const LoginSchema = Yup.object().shape({
@@ -139,7 +171,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSignUpClick }) => {
     const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
     const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down('lg'));
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const { setDirection } = useAnimation();
 
     const handleSubmit = (
@@ -150,7 +182,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSignUpClick }) => {
         console.log('Form values', values);
         setTimeout(() => {
             setSubmitting(false);
-            router.push('/dashboard');
+            router.push('/patient/dashboard');
         }, 1000);
     };
 
@@ -173,36 +205,52 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSignUpClick }) => {
         >
             {({ isSubmitting }) => (
                 <StyledForm autoComplete="off">
-                    <Input
-                        name="email"
-                        label="Email Address"
-                        fullWidth
-                        autoComplete="new-password"
-                        data-form-type="other"
-                        endAdornment={
-                            <IconContainer>
-                                <EmailIcon sx={{ color: '#FFFFFF', marginRight: '22px' }} />
-                            </IconContainer>
-                        }
-                    />
-                    <Input
-                        name="password"
-                        label="Password"
-                        type={showPassword ? 'text' : 'password'}
-                        fullWidth
-                        autoComplete="new-password"
-                        data-form-type="other"
-                        endAdornment={
-                            <IconButton
-                                onClick={handleClickShowPassword}
-                                edge="end"
-                                sx={{ color: '#FFFFFF', padding: '6px', marginRight: '3px' }}
-                                size="small"
-                            >
-                                {showPassword ? <VisibilityOffIcon fontSize="small" /> : <VisibilityIcon fontSize="small" />}
-                            </IconButton>
-                        }
-                    />
+                    <InputWrapper>
+                        <Input
+                            name="email"
+                            label="Email Address"
+                            fullWidth
+                            autoComplete="new-password"
+                            data-form-type="other"
+                            endAdornment={
+                                <IconContainer>
+                                    <EmailIcon sx={{ 
+                                        color: '#FFFFFF', 
+                                        marginRight: '22px',
+                                        fontSize: isMobile ? '18px' : '24px'
+                                    }} />
+                                </IconContainer>
+                            }
+                        />
+                    </InputWrapper>
+                    
+                    <InputWrapper>
+                        <Input
+                            name="password"
+                            label="Password"
+                            type={showPassword ? 'text' : 'password'}
+                            fullWidth
+                            autoComplete="new-password"
+                            data-form-type="other"
+                            endAdornment={
+                                <IconButton
+                                    onClick={handleClickShowPassword}
+                                    edge="end"
+                                    sx={{ 
+                                        color: '#FFFFFF', 
+                                        padding: isMobile ? '4px' : '6px', 
+                                        marginRight: '3px' 
+                                    }}
+                                    size={isMobile ? "small" : "medium"}
+                                >
+                                    {showPassword ? 
+                                        <VisibilityOffIcon fontSize={isMobile ? "small" : "medium"} /> : 
+                                        <VisibilityIcon fontSize={isMobile ? "small" : "medium"} />
+                                    }
+                                </IconButton>
+                            }
+                        />
+                    </InputWrapper>
 
                     <ForgotPasswordLink onClick={handleForgotPasswordClick}>
                         Forgot Password?

@@ -8,11 +8,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Sidebar from '../../../components/patient/Sidebar';
 import Logo from '../../../components/common/Logo';
+import { useThemeContext } from '../../../components/patient/Sidebar';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: 10,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: theme.palette.mode === 'light' ? '#F5F5F5' : '#2B2B2B',
     marginRight: theme.spacing(2),
     paddingLeft: 10,
     width: '100%',
@@ -32,11 +33,11 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#888',
+    color: theme.palette.mode === 'light' ? '#888' : '#999',
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: '#333',
+    color: theme.palette.mode === 'light' ? '#333' : '#FFF',
     width: '100%',
     height: '100%',
     fontSize: '17px',
@@ -55,6 +56,7 @@ export default function PatientDashboardLayout({
 }) {
     const pathname = usePathname();
     const [isExpanded, setIsExpanded] = useState(false);
+    const { mode } = useThemeContext();
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
@@ -68,8 +70,8 @@ export default function PatientDashboardLayout({
                 color="default"
                 elevation={0}
                 sx={{
-                    backgroundColor: 'white',
-                    borderBottom: '1px solid #EEF1F4',
+                    backgroundColor: mode === 'light' ? 'white' : '#2B2B2B',
+                    borderBottom: mode === 'light' ? '4px solid #EEF1F4' : '4px solid #333',
                     boxShadow: 'none',
                     height: '70px',
                     zIndex: (theme) => theme.zIndex.drawer + 1,
@@ -79,17 +81,17 @@ export default function PatientDashboardLayout({
                     {/* Logo and title - Use the Logo component */}
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Link href="/">
-                            <Logo color="blue" position="relative" />
+                            <Logo color={mode === 'light' ? "blue" : "white"} position="relative" />
                         </Link>
-                        <Typography variant="body2" color="text.secondary" sx={{ ml: 2, fontWeight: 600, display: { xs: 'none', md: 'block' }, fontSize: '17px' }}>
+                        <Typography variant="body2" sx={{ ml: -2, marginTop: 1, fontWeight: 500, display: { xs: 'none', md: 'block' }, fontSize: '15px', color: mode === 'light' ? "#97A4A9" : "#B8C7CC", fontFamily: "poppins" }}>
                             Dashboard overview
                         </Typography>
                     </Box>
 
                     {/* Search bar */}
-                    <Search sx={{ mx: 'auto', flexGrow: 1, ml: 4 }}>
+                    <Search sx={{ mx: 'auto', flexGrow: 1, ml: 4, }}>
                         <SearchIconWrapper>
-                            <Image src="/icons/search.svg" alt="Search" fill style={{ objectFit: 'contain' }} />
+                            <Image src="/icons/search.svg" alt="Search" fill style={{ objectFit: 'contain', marginLeft: 10, filter: mode === 'dark' ? 'invert(0.8)' : 'none' }} />
                         </SearchIconWrapper>
                         <StyledInputBase
                             placeholder="Search here..."
@@ -97,7 +99,7 @@ export default function PatientDashboardLayout({
                         />
                     </Search>
 
-                    <MuiLink href="/share-profile" sx={{ display: 'flex', alignItems: 'center', mr: 2, textDecoration: 'none', color: '#21647D', fontSize: '17px', fontWeight: 600, marginRight: '30px' }}>
+                    <MuiLink href="/share-profile" sx={{ display: 'flex', alignItems: 'center', mr: 2, textDecoration: 'none', color: mode === 'light' ? '#21647D' : '#B8C7CC', fontSize: '17px', fontWeight: 650, marginRight: '30px' }}>
                         Share Profile
                     </MuiLink>
 
@@ -113,7 +115,7 @@ export default function PatientDashboardLayout({
                                         src="/icons/chat.svg"
                                         alt="Chat"
                                         fill
-                                        style={{ objectFit: 'contain' }}
+                                        style={{ objectFit: 'contain', filter: mode === 'dark' ? 'invert(0.8)' : 'none' }}
                                     />
                                 </Box>
                             </Badge>
@@ -129,7 +131,7 @@ export default function PatientDashboardLayout({
                                         src="/icons/notification.svg"
                                         alt="Notifications"
                                         fill
-                                        style={{ objectFit: 'contain' }}
+                                        style={{ objectFit: 'contain', filter: mode === 'dark' ? 'invert(0.8)' : 'none' }}
                                     />
                                 </Box>
                             </Badge>
@@ -145,7 +147,7 @@ export default function PatientDashboardLayout({
             </AppBar>
 
             {/* Content area with sidebar and main content */}
-            <Box sx={{ display: 'flex', flexGrow: 1, overflow: 'hidden' }}>
+            <Box sx={{ display: 'flex', flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
                 {/* Sidebar */}
                 <Sidebar isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
 
@@ -158,8 +160,9 @@ export default function PatientDashboardLayout({
                         display: 'flex',
                         flexDirection: 'column',
                         overflow: 'auto',
-                        backgroundColor: '#F5F9FA',
-                        zIndex: -1,
+                        backgroundColor: mode === 'light' ? '#F5F9FA' : '#1A1A1A',
+                        position: 'relative',
+                        zIndex: 1, // Lower z-index than the sidebar toggle
                     }}
                 >
                     {/* Main content area */}

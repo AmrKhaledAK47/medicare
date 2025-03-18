@@ -71,6 +71,9 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
         fontFamily: '"Montserrat", sans-serif',
         fontSize: '12px',
         marginTop: '4px',
+        marginLeft: '0',
+        textAlign: 'left',
+        width: '100%',
     },
 
     '& .MuiInputAdornment-root': {
@@ -122,6 +125,36 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
         },
         '& .MuiInputAdornment-root .MuiSvgIcon-root': {
             fontSize: '20px',
+        },
+    },
+
+    '@media (max-width: 600px)': {
+        '& .MuiInputBase-input': {
+            fontSize: '14px',
+            lineHeight: '20px',
+            height: '20px',
+            padding: '8px 0',
+        },
+        '& .MuiFormLabel-root': {
+            fontSize: '14px',
+            lineHeight: '20px',
+        },
+        '& .MuiInputAdornment-root .MuiSvgIcon-root': {
+            fontSize: '18px',
+        },
+        '& .MuiFormHelperText-root': {
+            fontSize: '11px',
+            marginTop: '2px',
+        },
+    },
+
+    // Add touch-friendly adjustments for mobile
+    '@media (pointer: coarse)': {
+        '& .MuiInputBase-input': {
+            padding: '12px 0',
+        },
+        '& .MuiIconButton-root': {
+            padding: '8px',
         },
     },
 }));

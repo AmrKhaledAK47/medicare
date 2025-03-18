@@ -1,12 +1,7 @@
-'use client';
+import { createTheme } from '@mui/material/styles';
 
-import React from 'react';
-import { ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeContextProvider, useThemeContext } from '../components/patient/Sidebar';
-
-// Base theme with common settings
-const lightTheme = createTheme({
+// Light theme definition
+export const lightTheme = createTheme({
     palette: {
         mode: 'light',
         primary: {
@@ -71,7 +66,8 @@ const lightTheme = createTheme({
     }
 });
 
-const darkTheme = createTheme({
+// Dark theme definition
+export const darkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
@@ -134,28 +130,4 @@ const darkTheme = createTheme({
             }
         }
     }
-});
-
-// MUI Theme Provider that uses our ThemeContext to determine current theme
-const ThemeProviderWithContext = ({ children }: { children: React.ReactNode }) => {
-    const { mode } = useThemeContext();
-    const currentTheme = mode === 'light' ? lightTheme : darkTheme;
-
-    return (
-        <MuiThemeProvider theme={currentTheme}>
-            <CssBaseline />
-            {children}
-        </MuiThemeProvider>
-    );
-};
-
-// Main ThemeProvider that includes both context and MUI theme
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    return (
-        <ThemeContextProvider>
-            <ThemeProviderWithContext>
-                {children}
-            </ThemeProviderWithContext>
-        </ThemeContextProvider>
-    );
-} 
+}); 
