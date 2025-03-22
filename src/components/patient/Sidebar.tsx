@@ -58,7 +58,7 @@ const menuItems = [
     { name: 'Profile', icon: '/icons/profile.svg', path: '/dashboard/patient/profile' },
     { name: 'Health Overview', icon: '/icons/file.svg', path: '/dashboard/patient/health-overview' },
     { name: 'Schedule', icon: '/icons/schedule.svg', path: '/dashboard/patient/schedule' },
-    { name: 'Medical Records', icon: '/icons/record.svg', path: '/dashboard/patient/records' },
+    { name: 'Medical Records', icon: '/icons/record.svg', path: '/dashboard/patient/medical-records' },
     { name: 'Devices & Apps', icon: '/icons/device.svg', path: '/dashboard/patient/devices' },
     { name: 'Payment', icon: '/icons/pay.svg', path: '/dashboard/patient/payment' },
 ];
@@ -77,7 +77,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isExpanded, toggleSidebar }) => {
                     position: 'fixed',
                     left: isExpanded ? 228 : 68,
                     top: 110,
-                    zIndex: 9999,
+                    zIndex: 9000,
                     cursor: 'pointer',
                     transition: 'left 0.2s ease-in-out',
                 }}
@@ -167,7 +167,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isExpanded, toggleSidebar }) => {
                                                         fill
                                                         style={{
                                                             objectFit: 'contain',
-                                                            filter: isActive ? 'brightness(0) invert(1)' : (mode === 'dark' && !isActive) ? 'invert(0.8)' : 'none',
+                                                            filter: isActive
+                                                                ? 'brightness(0) invert(1)'
+                                                                : item.name === "Dashboard" && !isActive
+                                                                    ? 'invert(61%) sepia(95%) saturate(380%) hue-rotate(152deg) brightness(84%) contrast(88%)'
+                                                                    : mode === 'dark' && !isActive
+                                                                        ? 'invert(0.8)'
+                                                                        : 'none',
                                                         }}
                                                     />
                                                 </Box>
