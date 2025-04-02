@@ -27,7 +27,7 @@ const biomarkerCategories = [
     },
     {
         name: 'Sugar',
-        icon: '/icons/sugar.svg',
+        icon: '/images/sugar-icon.png',
         indicators: [1, 2, 3],
         color: '#FF9800',
     },
@@ -57,7 +57,7 @@ const Biomarkers: React.FC = () => {
     return (
         <Box
             sx={{
-                mb: 4,
+                mb: { xs: 3, sm: 3.5, md: 4 },
                 overflow: 'hidden',
                 borderRadius: '12px',
             }}
@@ -65,7 +65,7 @@ const Biomarkers: React.FC = () => {
             {/* Header */}
             <Box
                 sx={{
-                    p: 2.5,
+                    p: { xs: 1.75, sm: 2, md: 2.5 },
                     backgroundColor: mode === 'light' ? '#E7F6FC' : 'rgba(33, 124, 153, 0.15)',
                     display: 'flex',
                     alignItems: 'center',
@@ -74,17 +74,19 @@ const Biomarkers: React.FC = () => {
                 <Box
                     sx={{
                         position: 'relative',
-                        width: 35,
-                        height: 35,
-                        mr: 2,
+                        width: { xs: 28, sm: 32, md: 35 },
+                        height: { xs: 28, sm: 32, md: 35 },
+                        mr: { xs: 1.5, sm: 2 },
                     }}
                 >
                     <Image
                         src="/icons/biomarker.svg"
                         alt="Biomarkers"
-                        width={35}
-                        height={35}
-                        style={{ filter: mode === 'dark' ? 'brightness(0.8) invert(0.8)' : 'none' }}
+                        fill
+                        style={{ 
+                            filter: mode === 'dark' ? 'brightness(0.8) invert(0.8)' : 'none',
+                            objectFit: 'contain'
+                        }}
                     />
                 </Box>
                 <Typography
@@ -94,7 +96,7 @@ const Biomarkers: React.FC = () => {
                         fontWeight: 400,
                         color: mode === 'light' ? '#21647D' : '#B8C7CC',
                         fontFamily: 'poppins',
-                        fontSize: '1.5rem',
+                        fontSize: { xs: '1.2rem', sm: '1.35rem', md: '1.5rem' },
                     }}
                 >
                     Biomarkers
@@ -114,26 +116,29 @@ const Biomarkers: React.FC = () => {
                         <Box
                             key={category.name}
                             sx={{
-                                width: '25%',
-                                borderRight: (index + 1) % 4 !== 0 ? mode === 'light' ? '1px solid #eaeaea' : '1px solid #333' : 'none',
-                                borderBottom: index < 7 ? mode === 'light' ? '1px solid #eaeaea' : '1px solid #333' : 'none',
-                                p: 2.5,
+                                width: { xs: '50%', sm: '33.33%', md: '25%' },
+                                borderRight: {
+                                    xs: (index % 2 === 0) ? (mode === 'light' ? '1px solid #eaeaea' : '1px solid #333') : 'none',
+                                    sm: (index % 3 !== 2) ? (mode === 'light' ? '1px solid #eaeaea' : '1px solid #333') : 'none',
+                                    md: (index % 4 !== 3) ? (mode === 'light' ? '1px solid #eaeaea' : '1px solid #333') : 'none',
+                                },
+                                borderBottom: index < biomarkerCategories.length ? mode === 'light' ? '1px solid #eaeaea' : '1px solid #333' : 'none',
+                                p: { xs: 1.75, sm: 2, md: 2.5 },
                             }}
                         >
                             <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                                 <Box
                                     sx={{
                                         position: 'relative',
-                                        width: 26,
-                                        height: 26,
-                                        mr: 2,
+                                        width: { xs: 22, sm: 24, md: 26 },
+                                        height: { xs: 22, sm: 24, md: 26 },
+                                        mr: { xs: 1, sm: 1.5, md: 2 },
                                     }}
                                 >
                                     <Image
                                         src={category.icon}
                                         alt={category.name}
-                                        width={30}
-                                        height={30}
+                                        fill
                                         style={{
                                             objectFit: 'contain',
                                             filter: mode === 'dark' ? 'brightness(0.8) invert(0.8)' : 'none'
@@ -144,7 +149,7 @@ const Biomarkers: React.FC = () => {
                                     variant="h6"
                                     sx={{
                                         fontWeight: 400,
-                                        fontSize: '1.3rem',
+                                        fontSize: { xs: '1rem', sm: '1.15rem', md: '1.3rem' },
                                         fontFamily: 'poppins',
                                         color: mode === 'light' ? '#000000' : '#FFFFFF'
                                     }}
@@ -153,13 +158,13 @@ const Biomarkers: React.FC = () => {
                                 </Typography>
                             </Box>
 
-                            <Box sx={{ display: 'flex', gap: 1, mt: 2, pl: 0.5 }}>
+                            <Box sx={{ display: 'flex', gap: { xs: 0.75, sm: 1 }, mt: { xs: 1.5, sm: 2 }, pl: 0.5 }}>
                                 {category.indicators.map((_, index) => (
                                     <Box
                                         key={index}
                                         sx={{
-                                            width: 9,
-                                            height: 9,
+                                            width: { xs: 7, sm: 8, md: 9 },
+                                            height: { xs: 7, sm: 8, md: 9 },
                                             borderRadius: '50%',
                                             backgroundColor: '#E0E0E0',
                                             opacity: 0.7
@@ -173,11 +178,11 @@ const Biomarkers: React.FC = () => {
                     {/* See All Link */}
                     <Box
                         sx={{
-                            width: '25%',
+                            width: { xs: '50%', sm: '33.33%', md: '25%' },
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            p: 2.5,
+                            p: { xs: 1.75, sm: 2, md: 2.5 },
                             borderBottom: mode === 'light' ? '1px solid #eaeaea' : '1px solid #333',
                         }}
                     >
@@ -194,7 +199,7 @@ const Biomarkers: React.FC = () => {
                             >
                                 <Typography
                                     sx={{
-                                        fontSize: '1.3rem',
+                                        fontSize: { xs: '1rem', sm: '1.15rem', md: '1.3rem' },
                                         fontWeight: 600,
                                         fontFamily: 'poppins',
                                         mr: 1
@@ -202,17 +207,19 @@ const Biomarkers: React.FC = () => {
                                 >
                                     See All
                                 </Typography>
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 12H19" stroke="#21647D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M12 5L19 12L12 19" stroke="#21647D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
+                                <Box sx={{ width: { xs: 18, sm: 20, md: 22 }, height: { xs: 18, sm: 20, md: 22 } }}>
+                                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 12H19" stroke="#21647D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                        <path d="M12 5L19 12L12 19" stroke="#21647D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </Box>
                             </Box>
                         </Link>
                     </Box>
                 </Box>
 
                 {/* Add Result Button */}
-                <Box sx={{ p: 2.5, display: 'flex' }}>
+                <Box sx={{ p: { xs: 1.75, sm: 2, md: 2.5 }, display: 'flex' }}>
                     <Button
                         variant="outlined"
                         sx={{
@@ -220,9 +227,9 @@ const Biomarkers: React.FC = () => {
                             borderColor: mode === 'light' ? '#21647D' : '#B8C7CC',
                             color: mode === 'light' ? '#21647D' : '#B8C7CC',
                             backgroundColor: 'transparent',
-                            px: 3,
-                            py: 1,
-                            fontSize: '0.95rem',
+                            px: { xs: 2, sm: 2.5, md: 3 },
+                            py: { xs: 0.75, sm: 0.85, md: 1 },
+                            fontSize: { xs: '0.85rem', sm: '0.9rem', md: '0.95rem' },
                             fontFamily: 'poppins',
                             fontWeight: 500,
                             textTransform: 'none',

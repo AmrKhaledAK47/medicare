@@ -7,6 +7,11 @@ import { useThemeContext } from './Sidebar';
 // Define the days of the week
 const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+// Define props interface
+interface CalendarProps {
+    mobileView?: boolean;
+}
+
 // Define event interface for proper typing
 interface CalendarEvent {
     title: string;
@@ -31,7 +36,7 @@ const SAMPLE_EVENTS: Record<string, CalendarEvent[]> = {
     '2023-10-22': [{ title: 'Follow-up', type: 'appointment' }],
 };
 
-const Calendar: React.FC = () => {
+const Calendar: React.FC<CalendarProps> = ({ mobileView = false }) => {
     const { mode } = useThemeContext();
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -145,22 +150,34 @@ const Calendar: React.FC = () => {
     };
 
     return (
-        <Box sx={{ mb: 4 }}>
+        <Box sx={{ 
+            mb: { xs: 3, sm: 3.5, md: 4 },
+            ...(mobileView && {
+                backgroundColor: mode === 'light' ? '#ffffff' : '#2B2B2B',
+                borderRadius: '12px',
+                p: { xs: 1.5, sm: 2 },
+                boxShadow: mode === 'light' ? '0 2px 8px rgba(0,0,0,0.05)' : 'none',
+                border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #333',
+            })
+        }}>
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                mb: 3
+                mb: { xs: 2, sm: 2.5, md: 3 },
+                flexDirection: { xs: mobileView ? 'column' : 'row', sm: 'row' },
+                gap: { xs: mobileView ? 1.5 : 0, sm: 0 }
             }}>
-                <Typography
-                    variant="h6"
-                    sx={{
+                    <Typography
+                        variant="h6"
+                        sx={{
                         position: 'relative',
                         fontFamily: 'poppins',
                         color: mode === 'light' ? '#000000' : '#FFFFFF',
-                        fontWeight: 600,
-                        fontSize: '1.25rem',
-                        pb: 0.5,
+                            fontWeight: 600,
+                        fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.25rem' },
+                            pb: 0.5,
+                        width: mobileView ? { xs: '100%', sm: 'auto' } : 'auto',
                         '&:after': {
                             content: '""',
                             position: 'absolute',
@@ -169,12 +186,12 @@ const Calendar: React.FC = () => {
                             width: '100px',
                             height: '3px',
                             backgroundColor: '#217C99',
-                            borderRadius: '5px'
+                            borderRadius: '5px 5px 0 0'
                         }
-                    }}
-                >
-                    Calendar
-                </Typography>
+                        }}
+                    >
+                        Calendar
+                    </Typography>
 
                 <Button
                     variant="contained"
@@ -188,11 +205,12 @@ const Calendar: React.FC = () => {
                             backgroundColor: '#d45679',
                             boxShadow: '0 4px 12px rgba(225, 106, 138, 0.3)',
                         },
-                        padding: '6px 16px',
-                        height: '36px',
+                        padding: { xs: '4px 12px', sm: '5px 14px', md: '6px 16px' },
+                        height: { xs: '38px', sm: '40px', md: '45px' },
+                        minWidth: mobileView ? { xs: '100%', sm: 'auto' } : 'auto',
                         fontFamily: 'poppins',
                         fontWeight: 500,
-                        fontSize: '0.875rem',
+                        fontSize: { xs: '0.8rem', sm: '0.85rem', md: '0.875rem' },
                     }}
                     onMouseEnter={() => setIsHoveringButton(true)}
                     onMouseLeave={() => setIsHoveringButton(false)}
@@ -210,66 +228,68 @@ const Calendar: React.FC = () => {
                     mb: 1.5,
                     backgroundColor: mode === 'light' ? '#F0F8FB' : '#2B2B2B',
                     borderRadius: '12px',
-                    p: 0.5,
+                    p: { xs: 0.3, sm: 0.4, md: 0.5 },
                 }}
             >
-                <IconButton
+                        <IconButton
                     onClick={() => changeMonth(-1)}
-                    sx={{
+                            sx={{
                         color: mode === 'light' ? '#21647D' : '#B8C7CC',
-                        '&:hover': {
+                        p: { xs: 0.7, sm: 1 },
+                                '&:hover': {
                             backgroundColor: mode === 'light' ? 'rgba(33, 100, 125, 0.08)' : 'rgba(184, 199, 204, 0.08)',
-                        },
-                    }}
-                >
+                                },
+                            }}
+                        >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </IconButton>
+                            </svg>
+                        </IconButton>
 
                 <Typography
                     variant="h6"
                     sx={{
                         fontFamily: 'poppins',
                         fontWeight: 600,
-                        fontSize: '1rem',
+                        fontSize: { xs: '0.85rem', sm: '0.9rem', md: '1rem' },
                         color: mode === 'light' ? '#21647D' : '#B8C7CC',
                     }}
                 >
                     {getMonthAndYear()}
                 </Typography>
 
-                <IconButton
+                        <IconButton
                     onClick={() => changeMonth(1)}
-                    sx={{
+                            sx={{
                         color: mode === 'light' ? '#21647D' : '#B8C7CC',
-                        '&:hover': {
+                        p: { xs: 0.7, sm: 1 },
+                                '&:hover': {
                             backgroundColor: mode === 'light' ? 'rgba(33, 100, 125, 0.08)' : 'rgba(184, 199, 204, 0.08)',
-                        },
-                    }}
-                >
+                                },
+                            }}
+                        >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                </IconButton>
+                            </svg>
+                        </IconButton>
             </Box>
 
             {/* Days of the Week */}
-            <Grid container spacing={1} sx={{ mb: 1 }}>
+            <Grid container spacing={0.5} sx={{ mb: 1 }}>
                 {DAYS_OF_WEEK.map((day) => (
                     <Grid item xs={12 / 7} key={day}>
-                        <Typography
+                            <Typography
                             align="center"
-                            sx={{
+                                sx={{
                                 fontFamily: 'poppins',
                                 fontWeight: 500,
-                                fontSize: '0.75rem',
+                                fontSize: { xs: '0.65rem', sm: '0.7rem', md: '0.75rem' },
                                 color: mode === 'light' ? '#6C7A89' : '#888',
                                 textTransform: 'uppercase',
-                            }}
-                        >
-                            {day}
-                        </Typography>
+                                }}
+                            >
+                                {day}
+                            </Typography>
                     </Grid>
                 ))}
             </Grid>
@@ -277,10 +297,10 @@ const Calendar: React.FC = () => {
             {/* Calendar Grid */}
             <Grid
                 container
-                spacing={0.6}
+                spacing={0.4}
                 sx={{
                     backgroundColor: mode === 'light' ? '#fff' : '#2B2B2B',
-                    p: 1.5,
+                    p: { xs: 1, sm: 1.25, md: 1.5 },
                     borderRadius: '12px',
                     border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #333',
                     boxShadow: mode === 'light' ? '0 2px 4px rgba(0,0,0,0.02)' : 'none',
@@ -291,7 +311,7 @@ const Calendar: React.FC = () => {
                         <Box
                             onClick={() => date && setSelectedDate(date)}
                             sx={{
-                                height: '40px',
+                                height: { xs: '30px', sm: '35px', md: '40px' },
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
@@ -300,9 +320,9 @@ const Calendar: React.FC = () => {
                                 cursor: date ? 'pointer' : 'default',
                                 backgroundColor: isSelected(date)
                                     ? '#E16A8A'
-                                    : isToday(date)
+                                        : isToday(date)
                                         ? mode === 'light' ? 'rgba(225, 106, 138, 0.1)' : 'rgba(225, 106, 138, 0.15)'
-                                        : 'transparent',
+                                    : 'transparent',
                                 color: isSelected(date)
                                     ? '#fff'
                                     : mode === 'light'
@@ -325,7 +345,7 @@ const Calendar: React.FC = () => {
                                 sx={{
                                     fontFamily: 'poppins',
                                     fontWeight: isToday(date) || isSelected(date) ? 600 : 400,
-                                    fontSize: '0.875rem',
+                                    fontSize: { xs: '0.75rem', sm: '0.8rem', md: '0.875rem' },
                                 }}
                             >
                                 {date?.getDate()}
@@ -344,8 +364,8 @@ const Calendar: React.FC = () => {
                                         <Box
                                             key={i}
                                             sx={{
-                                                width: '4px',
-                                                height: '4px',
+                                                width: { xs: '3px', sm: '3.5px', md: '4px' },
+                                                height: { xs: '3px', sm: '3.5px', md: '4px' },
                                                 borderRadius: '50%',
                                                 backgroundColor: '#E16A8A',
                                             }}
@@ -356,24 +376,24 @@ const Calendar: React.FC = () => {
                         </Box>
                     </Grid>
                 ))}
-            </Grid>
+                </Grid>
 
             {/* Selected Day Information */}
             {selectedDate && (
                 <Box
                     sx={{
                         mt: 2,
-                        p: 2,
+                        p: { xs: 1.5, sm: 1.75, md: 2 },
                         borderRadius: '12px',
                         backgroundColor: mode === 'light' ? '#F0F8FB' : '#333',
                         border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #444',
                     }}
                 >
                     <Typography
-                        sx={{
+                sx={{
                             fontFamily: 'poppins',
                             fontWeight: 600,
-                            fontSize: '0.9rem',
+                            fontSize: { xs: '0.8rem', sm: '0.85rem', md: '0.9rem' },
                             color: mode === 'light' ? '#21647D' : '#B8C7CC',
                             mb: 1,
                         }}
@@ -390,15 +410,14 @@ const Calendar: React.FC = () => {
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: 1,
-                                        p: 1.5,
+                                        p: { xs: 1, sm: 1.25, md: 1.5 },
                                         borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? 'rgba(225, 106, 138, 0.1)' : 'rgba(225, 106, 138, 0.15)',
                                     }}
                                 >
                                     <Box
                                         sx={{
-                                            width: 8,
-                                            height: 8,
+                                            width: { xs: 6, sm: 7, md: 8 },
+                                            height: { xs: 6, sm: 7, md: 8 },
                                             borderRadius: '50%',
                                             backgroundColor: '#E16A8A',
                                         }}
@@ -407,8 +426,8 @@ const Calendar: React.FC = () => {
                                         <Typography
                                             sx={{
                                                 fontFamily: 'poppins',
-                                                fontWeight: 500,
-                                                fontSize: '0.875rem',
+                                                fontWeight: 600,
+                                                fontSize: { xs: '0.8rem', sm: '0.85rem', md: '0.875rem' },
                                                 color: mode === 'light' ? '#21647D' : '#B8C7CC',
                                             }}
                                         >
@@ -419,7 +438,7 @@ const Calendar: React.FC = () => {
                                                 sx={{
                                                     fontFamily: 'poppins',
                                                     fontWeight: 400,
-                                                    fontSize: '0.75rem',
+                                                    fontSize: { xs: '0.7rem', sm: '0.725rem', md: '0.75rem' },
                                                     color: mode === 'light' ? '#6C7A89' : '#999',
                                                 }}
                                             >
@@ -435,7 +454,7 @@ const Calendar: React.FC = () => {
                             sx={{
                                 fontFamily: 'poppins',
                                 fontWeight: 400,
-                                fontSize: '0.875rem',
+                                fontSize: { xs: '0.8rem', sm: '0.85rem', md: '0.875rem' },
                                 color: mode === 'light' ? '#6C7A89' : '#888',
                                 fontStyle: 'italic',
                             }}

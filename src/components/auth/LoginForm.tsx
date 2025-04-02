@@ -27,9 +27,19 @@ const StyledForm = styled('form')(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    maxWidth: '480px',
-    margin: '0 auto',
     padding: theme.spacing(2),
+    '@media (max-width:1200px)': {
+        margin: '0 auto',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '0',
+      
+       
+    
+    },
     '@media (max-width: 900px)': {
         padding: theme.spacing(1.5),
     },
@@ -63,28 +73,36 @@ const SubmitButton = styled(Button)({
         fontSize: '18px',
         lineHeight: '32px',
     },
+    '@media (max-width: 1200px)': {
+        width: '230px',
+        height: '52px',
+        fontSize: '17px',
+        lineHeight: '30px',
+        marginTop: '18px',
+        marginBottom: '18px',
+    },
     '@media (max-width: 900px)': {
-        width: '220px',
-        height: '50px',
-        fontSize: '16px',
+        width: '170px',
+        height: '20px',
+        fontSize: '14px',
         lineHeight: '26px',
-        marginTop: '20px',
-        marginBottom: '16px',
+        marginTop: '10px',
+       
     },
     '@media (max-width: 600px)': {
-        width: '100%',
-        maxWidth: '220px',
-        height: '45px',
-        fontSize: '15px',
-        lineHeight: '22px',
-        marginTop: '15px',
-        marginBottom: '12px',
+        
+        width: '170px',
+        height: '20px',
+        fontSize: '16px',
+        lineHeight: '26px',
+        marginTop: '10px',
+       
     },
 });
 
 const ForgotPasswordLink = styled('a')(({ theme }) => ({
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(2),
+   marginTop: theme.spacing(-2.5),
+    marginBottom: theme.spacing(2), 
     color: '#EFFAFC',
     fontFamily: '"Montserrat", sans-serif',
     fontSize: '14px',
@@ -92,12 +110,19 @@ const ForgotPasswordLink = styled('a')(({ theme }) => ({
     textDecoration: 'none',
     alignSelf: 'flex-end',
     cursor: 'pointer',
+  
     '&:hover': {
         textDecoration: 'underline',
     },
-    '@media (max-width: 600px)': {
-        fontSize: '13px',
-        marginBottom: theme.spacing(1.5),
+    '@media (max-width: 1200px)': {
+        fontSize: '15px', 
+        
+       
+    },
+    '@media (max-width:600px)': {
+        fontSize: '15px', 
+        
+       
     },
 }));
 
@@ -109,14 +134,30 @@ const SignUpPrompt = styled(Typography)({
     lineHeight: '20px',
     color: '#EFFAFC',
     marginBottom: '16px',
-    '@media (max-width: 1400px)': {
-        fontSize: '14px',
+    textAlign: 'center',
+    width: '100%',
+    '@media (max-width: 2000px)': {
+        fontSize: '16px',
         lineHeight: '18px',
     },
+    '@media (max-width: 1400px)': {
+        fontSize: '16px',
+        lineHeight: '18px',
+    },
+    '@media (max-width: 1200px)': {
+        fontSize: '16px',
+        lineHeight: '17px',
+        marginBottom: '14px',
+    },
     '@media (max-width: 900px)': {
-        fontSize: '13px',
+        fontSize: '16px',
         lineHeight: '16px',
-        display: 'none', // Hide on mobile as we'll use the dedicated button instead
+        marginBottom: '12px',
+    },
+    '@media (max-width: 600px)': {
+        fontSize: '14px',
+        lineHeight: '15px',
+        marginBottom: '10px',
     },
 });
 
@@ -127,6 +168,10 @@ const SignUpLink = styled('span')({
     '&:hover': {
         textDecoration: 'underline',
     },
+    '@media (max-width: 600px)': {
+       fontSize:'16px'
+    },
+    
 });
 
 const IconContainer = styled(Box)({

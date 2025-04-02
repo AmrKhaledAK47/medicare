@@ -64,12 +64,11 @@ const SubmitButton = styled(Button)({
         lineHeight: '32px',
     },
     '@media (max-width: 900px)': {
-        width: '220px',
-        height: '50px',
-        fontSize: '16px',
+        width: '160px',
+        height: '20px',
+        fontSize: '14px',
         lineHeight: '26px',
-        marginTop: '20px',
-        marginBottom: '16px',
+        marginTop: '10px',
     },
 });
 
@@ -81,13 +80,30 @@ const LoginPrompt = styled(Typography)({
     lineHeight: '20px',
     color: '#EFFAFC',
     marginBottom: '16px',
-    '@media (max-width: 1400px)': {
-        fontSize: '14px',
+    textAlign: 'center',
+    width: '100%',
+    '@media (max-width: 2000px)': {
+        fontSize: '16px',
         lineHeight: '18px',
     },
+    '@media (max-width: 1400px)': {
+        fontSize: '16px',
+        lineHeight: '18px',
+    },
+    '@media (max-width: 1200px)': {
+        fontSize: '16px',
+        lineHeight: '17px',
+        marginBottom: '14px',
+    },
     '@media (max-width: 900px)': {
-        fontSize: '13px',
+        fontSize: '16px',
         lineHeight: '16px',
+        marginBottom: '12px',
+    },
+    '@media (max-width: 600px)': {
+        fontSize: '14px',
+        lineHeight: '15px',
+        marginBottom: '10px',
     },
 });
 
@@ -97,6 +113,9 @@ const LoginLink = styled('span')({
     color: '#EFFAFC',
     '&:hover': {
         textDecoration: 'underline',
+    },
+    '@media (max-width: 600px)': {
+        fontSize: '16px'
     },
 });
 
@@ -256,6 +275,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onLoginClick }) => {
                         Already have an account?{' '}
                         <LoginLink onClick={onLoginClick}>Log In</LoginLink>
                     </LoginPrompt>
+
                 </StyledForm>
             )}
         </Formik>

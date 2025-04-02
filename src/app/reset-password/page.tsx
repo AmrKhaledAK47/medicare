@@ -23,28 +23,36 @@ interface ResetPasswordValues {
 
 const PageContainer = styled('div')({
     width: '100%',
-    height: '100vh',
+    minHeight: '100vh',
+    height: 'auto',
     display: 'flex',
     overflow: 'hidden',
     position: 'relative',
     background: '#FFFFFF',
+  
     '@media (min-width: 2000px)': {
         maxWidth: '100vw',
         margin: '0 auto',
     },
     '@media (max-width: 480px)': {
+        paddingTop :'60px',
         flexDirection: 'column',
+        minHeight: '100vh',
+        height: 'auto',
+        overflow: 'hidden',
     }
 });
 
 const FormSection = styled('div')({
     width: '50%',
-    height: '100%',
+    minHeight: '100vh',
+    height: 'auto',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     position: 'relative',
     zIndex: 2,
+    overflow: 'hidden',
     '@media (min-width: 2000px)': {
         width: '50%',
     },
@@ -55,7 +63,9 @@ const FormSection = styled('div')({
         width: '100%',
     },
     '@media (max-width: 480px)': {
-        height: '60%',
+        minHeight: '100vh',
+        height: 'auto',
+        padding: '20px 0',
     }
 });
 
@@ -81,7 +91,7 @@ const ImageSection = styled('div')({
     '@media (max-width: 480px)': {
         width: '100%',
         height: '40%',
-        display: 'flex',
+        display: 'none',
     }
 });
 
@@ -108,7 +118,8 @@ const FormContainer = styled('div')({
     justifyContent: 'center',
     maxWidth: '480px',
     margin: '0 auto',
-    height: '100%',
+    minHeight: '100vh',
+    height: 'auto',
     padding: '0 20px',
     '@media (min-width: 2000px)': {
         maxWidth: '600px',
@@ -123,6 +134,10 @@ const FormContainer = styled('div')({
     },
     '@media (max-width: 480px)': {
         padding: '0 20px',
+        minHeight: '100vh',
+        height: 'auto',
+        justifyContent: 'flex-start',
+        marginTop: '60px',
     }
 });
 
@@ -143,7 +158,7 @@ const Title = styled(motion(Typography))({
         lineHeight: '48px',
     },
     '@media (max-width: 900px)': {
-        fontSize: '28px',
+        fontSize: '32px',
         lineHeight: '42px',
     },
     '@media (max-width: 480px)': {
@@ -153,9 +168,9 @@ const Title = styled(motion(Typography))({
 });
 
 const Subtitle = styled(motion(Typography))({
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: 'Poppins',
     fontStyle: 'normal',
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: '16px',
     lineHeight: '24px',
     color: '#235467',
@@ -165,16 +180,16 @@ const Subtitle = styled(motion(Typography))({
         lineHeight: '28px',
     },
     '@media (max-width: 1400px)': {
-        fontSize: '15px',
+        fontSize: '16px',
         lineHeight: '22px',
     },
     '@media (max-width: 900px)': {
-        fontSize: '14px',
+        fontSize: '16px',
         lineHeight: '20px',
         marginBottom: '30px',
     },
     '@media (max-width: 480px)': {
-        fontSize: '13px',
+        fontSize: '14px',
         lineHeight: '18px',
         marginBottom: '25px',
     }
@@ -190,7 +205,7 @@ const ResetButton = styled(motion(Button))({
     border: '1px solid #ffffff',
     boxShadow: '0px 64px 26px rgba(0, 0, 0, 0.01), 0px 36px 22px rgba(0, 0, 0, 0.05), 0px 16px 16px rgba(0, 0, 0, 0.09), 0px 4px 9px rgba(0, 0, 0, 0.1)',
     fontFamily: '"Poppins", sans-serif',
-    fontWeight: 700,
+    fontWeight: 500,
     fontSize: '18px',
     lineHeight: '36px',
     textAlign: 'center',
@@ -206,42 +221,50 @@ const ResetButton = styled(motion(Button))({
         lineHeight: '36px',
     },
     '@media (max-width: 1400px)': {
-        width: '240px',
+        width: '250px',
         height: '55px',
         fontSize: '18px',
         lineHeight: '32px',
     },
     '@media (max-width: 900px)': {
-        width: '220px',
-        height: '50px',
-        fontSize: '16px',
+        width: '250px',
+        height: '60px',
+        fontSize: '18px',
         lineHeight: '26px',
     },
     '@media (max-width: 480px)': {
-        width: '200px',
-        height: '50px',
-        fontSize: '16px',
+        width: '220px',
+        height: '45px',
+        fontSize: '14px',
         marginTop: '20px',
         marginBottom: '16px',
     }
 });
 
 const LoginPrompt = styled(motion(Typography))({
-    fontFamily: '"Montserrat", sans-serif',
+    fontFamily: '"Poppins", sans-serif',
     fontStyle: 'normal',
-    fontWeight: 400,
+    fontWeight: 500,
     fontSize: '14px',
     lineHeight: '20px',
     color: '#235467',
     marginTop: '10px',
     textAlign: 'center',
     width: '100%',
+    '@media (max-width: 2000px)': {
+        fontSize: '16px',
+        lineHeight: '18px',
+    },
     '@media (max-width: 1400px)': {
-        fontSize: '14px',
+        fontSize: '16px',
         lineHeight: '18px',
     },
     '@media (max-width: 900px)': {
-        fontSize: '13px',
+        fontSize: '16px',
+        lineHeight: '16px',
+    },
+    '@media (max-width: 600px)': {
+        fontSize: '14px',
         lineHeight: '16px',
     }
 });
@@ -257,7 +280,7 @@ const LoginLink = styled('span')({
 
 const PasswordInput = styled(TextField)(({ theme }) => ({
     width: '100%',
-    marginBottom: theme.spacing(3),
+    marginBottom: theme.spacing(2),
     '& .MuiInputBase-root': {
         color: '#235467',
         fontFamily: '"Montserrat", sans-serif',
@@ -278,15 +301,15 @@ const PasswordInput = styled(TextField)(({ theme }) => ({
     },
     '& .MuiInputLabel-root': {
         color: '#235467',
-        fontFamily: '"Montserrat", sans-serif',
-        fontSize: '16px',
-        fontWeight: 400,
+        fontFamily: "Poppins",
+        fontSize: '20px',
+        fontWeight: 450,
         '&.Mui-focused': {
             color: '#2C809D',
         },
     },
     '& .MuiFormHelperText-root': {
-        fontFamily: '"Montserrat", sans-serif',
+        fontFamily: "Poppins",
         fontSize: '12px',
         marginTop: '2px',
         color: '#ff1744',
@@ -361,7 +384,19 @@ const SuccessOverlay = styled(motion.div)({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 100
+    zIndex: 100,
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    '@media (max-width: 600px)': {
+        width: '100vw',
+        height: '100vh',
+        padding: '20px',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
 });
 
 const SuccessIcon = styled(motion.div)({
@@ -374,7 +409,13 @@ const SuccessIcon = styled(motion.div)({
     justifyContent: 'center',
     marginBottom: '24px',
     color: 'white',
-    fontSize: '60px'
+    fontSize: '60px',
+    '@media (max-width: 600px)': {
+        width: '100px',
+        height: '100px',
+        fontSize: '50px',
+        marginBottom: '20px'
+    }
 });
 
 const SuccessMessage = styled(motion.h2)({
@@ -382,7 +423,24 @@ const SuccessMessage = styled(motion.h2)({
     fontSize: '28px',
     color: '#21647D',
     marginBottom: '16px',
-    fontWeight: 600
+    fontWeight: 600,
+    textAlign: 'center',
+    '@media (max-width: 600px)': {
+        fontSize: '24px',
+        marginBottom: '12px',
+        padding: '0 20px'
+    }
+});
+
+const SuccessMessageText = styled(motion.p)({
+    fontFamily: '"Poppins", sans-serif',
+    color: '#235467',
+    textAlign: 'center',
+    padding: '0 20px',
+    '@media (max-width: 600px)': {
+        fontSize: '14px',
+        padding: '0 15px'
+    }
 });
 
 const validationSchema = Yup.object().shape({
@@ -1010,7 +1068,7 @@ const ResetPasswordPage = () => {
                                 initial="initial"
                                 animate="animate"
                             >
-                                <CheckCircleOutlineIcon style={{ fontSize: '60px' }} />
+                                <CheckCircleOutlineIcon style={{ fontSize: 'inherit' }} />
                             </SuccessIcon>
                             <SuccessMessage
                                 variants={successMessageVariants}
@@ -1019,20 +1077,16 @@ const ResetPasswordPage = () => {
                             >
                                 Password Reset Successfully!
                             </SuccessMessage>
-                            <motion.p
+                            <SuccessMessageText
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{
                                     opacity: 1,
                                     y: 0,
                                     transition: { delay: 0.6, duration: 0.5 }
                                 }}
-                                style={{
-                                    fontFamily: '"Montserrat", sans-serif',
-                                    color: '#235467'
-                                }}
                             >
                                 Redirecting to login...
-                            </motion.p>
+                            </SuccessMessageText>
                         </SuccessOverlay>
                     )}
                 </AnimatePresence>

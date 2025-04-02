@@ -57,8 +57,8 @@ const SetupMedicare: React.FC = () => {
                 background: mode === 'light' ? '#FFFFFF' : '#2B2B2B',
                 border: mode === 'light' ? '2px solid #217C99' : '2px solid #21647D',
                 borderRadius: '12px',
-                p: { xs: 2, md: 3 },
-                mb: 4,
+                p: { xs: 1.5, sm: 2, md: 3 },
+                mb: { xs: 3, md: 4 },
                 overflow: 'hidden',
             }}
         >
@@ -70,19 +70,19 @@ const SetupMedicare: React.FC = () => {
                     fontFamily: 'poppins',
                     color: mode === 'light' ? '#7F7F7F' : '#B8C7CC',
                     fontWeight: 600,
-                    fontSize: '1.1rem',
-                    mb: 2
+                    fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.1rem' },
+                    mb: { xs: 1.5, sm: 2 }
                 }}
             >
                 Set Up Medicare
             </Typography>
 
             {/* Step Progress Indicators */}
-            <Box sx={{ mb: 3, display: 'flex', gap: 1 }}>
+            <Box sx={{ mb: { xs: 2, sm: 3 }, display: 'flex', gap: { xs: 0.5, sm: 1 } }}>
                 <Box
                     sx={{
                         height: '8px',
-                        width: '120px',
+                        width: { xs: '28%', sm: '120px' },
                         backgroundColor: '#217C99',
                         borderRadius: '10px'
                     }}
@@ -90,7 +90,7 @@ const SetupMedicare: React.FC = () => {
                 <Box
                     sx={{
                         height: '8px',
-                        width: '120px',
+                        width: { xs: '28%', sm: '120px' },
                         backgroundColor: '#E0E0E0',
                         borderRadius: '10px'
                     }}
@@ -98,7 +98,7 @@ const SetupMedicare: React.FC = () => {
                 <Box
                     sx={{
                         height: '8px',
-                        width: '120px',
+                        width: { xs: '28%', sm: '120px' },
                         backgroundColor: '#E0E0E0',
                         borderRadius: '10px'
                     }}
@@ -110,28 +110,39 @@ const SetupMedicare: React.FC = () => {
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    mt: 4,
-                    mb: 5
+                    mt: { xs: 3, md: 4 },
+                    mb: { xs: 3, sm: 4, md: 5 }
                 }}
             >
                 <Box
                     sx={{
                         position: 'relative',
-                        width: 38,
-                        height: 38,
-                        mr: 2,
+                        width: { xs: 32, sm: 38 },
+                        height: { xs: 32, sm: 38 },
+                        mr: { xs: 1.5, sm: 2 },
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}
                 >
-                    <Image src="/icons/device-gray.svg" alt="Medicare" width={33} height={33} style={{ filter: mode === 'dark' ? 'invert(0.8)' : 'none' }} />
+                    <Image 
+                        src="/icons/device-gray.svg" 
+                        alt="Medicare" 
+                        width={33} 
+                        height={33} 
+                        style={{ 
+                            filter: mode === 'dark' ? 'invert(0.8)' : 'none',
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain'
+                        }} 
+                    />
                 </Box>
                 <Typography
                     variant="h5"
                     sx={{
                         fontWeight: 500,
-                        fontSize: '1.7rem',
+                        fontSize: { xs: '1.25rem', sm: '1.5rem', md: '1.7rem' },
                         fontFamily: 'poppins',
                         color: mode === 'light' ? '#000000' : '#FFFFFF',
                     }}
@@ -144,23 +155,27 @@ const SetupMedicare: React.FC = () => {
             <Box
                 sx={{
                     display: 'flex',
+                    flexDirection: { xs: 'column', sm: 'row' },
                     justifyContent: 'space-between',
-                    alignItems: 'center',
-                    mt: 5
+                    alignItems: { xs: 'stretch', sm: 'center' },
+                    mt: { xs: 3, sm: 4, md: 5 },
+                    gap: { xs: 2, sm: 0 }
                 }}
             >
                 <Button
                     variant="text"
                     sx={{
                         color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
-                        fontSize: '1.25rem',
+                        fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
                         fontFamily: 'poppins',
                         fontWeight: 400,
-                        px: 5,
-                        py: 1.2,
+                        px: { xs: 3, sm: 4, md: 5 },
+                        py: { xs: 1, sm: 1.2 },
                         border: '1px solid #DEDEDE',
                         textTransform: 'none',
                         borderRadius: '30px',
+                        width: { xs: '100%', sm: 'auto' },
+                        order: { xs: 2, sm: 1 },
                         '&:hover': {
                             backgroundColor: 'transparent',
                             opacity: 0.8,
@@ -172,21 +187,26 @@ const SetupMedicare: React.FC = () => {
                 <Button
                     variant="contained"
                     endIcon={
-                        <Typography component="span" sx={{ fontSize: '1.5rem', marginLeft: '-5px', fontWeight: 'light' }}>
+                        <Typography component="span" sx={{ 
+                            fontSize: { xs: '1.2rem', sm: '1.3rem', md: '1.5rem' }, 
+                            marginLeft: '-5px', 
+                            fontWeight: 'light' 
+                        }}>
                             ›
                         </Typography>
                     }
                     sx={{
                         backgroundColor: '#217C99',
                         borderRadius: '30px',
-                        px: 5,
-                        py: 1.2,
+                        px: { xs: 3, sm: 4, md: 5 },
+                        py: { xs: 1, sm: 1.2 },
                         fontFamily: 'poppins',
-                        fontSize: '1.25rem',
+                        fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
                         fontWeight: 200,
                         textTransform: 'none',
                         boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                        minWidth: '90px',
+                        minWidth: { xs: '100%', sm: '90px' },
+                        order: { xs: 1, sm: 2 },
                         '&:hover': {
                             color: '#217C99',
                             backgroundColor: '#FFFFFF',

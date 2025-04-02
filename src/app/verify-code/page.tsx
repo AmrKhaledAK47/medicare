@@ -15,15 +15,24 @@ import PageTransition from '@/components/common/PageTransition';
 
 const PageContainer = styled('div')({
     width: '100%',
-    height: '100vh',
+    minHeight: '100vh',
+    height: 'auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     background: '#FFFFFF',
     padding: '0 20px',
+    overflow: 'hidden',
+ 
     '@media (min-width: 2000px)': {
         maxWidth: '100vw',
         margin: '0 auto',
+    },
+    '@media (max-width: 480px)': {
+        paddingTop :'70px',
+        minHeight: '100vh',
+        height: 'auto',
+        alignItems: 'flex-start',
     }
 });
 
@@ -58,10 +67,13 @@ const VerificationCard = styled(motion.div)({
     '@media (max-width: 768px)': {
         padding: '50px 20px',
         borderRadius: '30px',
+        marginTop: '80px',
     },
     '@media (max-width: 480px)': {
         padding: '40px 15px',
         borderRadius: '25px',
+        marginTop: '60px',
+        minHeight: 'auto',
     }
 });
 
@@ -340,7 +352,19 @@ const SuccessOverlay = styled(motion.div)({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 100
+    zIndex: 100,
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    '@media (max-width: 600px)': {
+        width: '100vw',
+        height: '100vh',
+        padding: '20px',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
 });
 
 const SuccessIcon = styled(motion.div)({
@@ -353,7 +377,13 @@ const SuccessIcon = styled(motion.div)({
     justifyContent: 'center',
     marginBottom: '24px',
     color: 'white',
-    fontSize: '60px'
+    fontSize: '60px',
+    '@media (max-width: 600px)': {
+        width: '100px',
+        height: '100px',
+        fontSize: '50px',
+        marginBottom: '20px'
+    }
 });
 
 const SuccessMessage = styled(motion.h2)({
@@ -361,7 +391,24 @@ const SuccessMessage = styled(motion.h2)({
     fontSize: '28px',
     color: '#2583A0',
     marginBottom: '16px',
-    fontWeight: 600
+    fontWeight: 600,
+    textAlign: 'center',
+    '@media (max-width: 600px)': {
+        fontSize: '24px',
+        marginBottom: '12px',
+        padding: '0 20px'
+    }
+});
+
+const SuccessMessageText = styled(motion.p)({
+    fontFamily: '"Poppins", sans-serif',
+    color: '#235467',
+    textAlign: 'center',
+    padding: '0 20px',
+    '@media (max-width: 600px)': {
+        fontSize: '14px',
+        padding: '0 15px'
+    }
 });
 
 // Progress bar for verification timeout
@@ -1051,7 +1098,7 @@ const VerifyCodePage = () => {
                                 initial="initial"
                                 animate="animate"
                             >
-                                <LockOpenIcon style={{ fontSize: '60px' }} />
+                                <LockOpenIcon style={{ fontSize: 'inherit' }} />
                             </SuccessIcon>
                             <SuccessMessage
                                 variants={successMessageVariants}
@@ -1060,20 +1107,16 @@ const VerifyCodePage = () => {
                             >
                                 Verification Successful!
                             </SuccessMessage>
-                            <motion.p
+                            <SuccessMessageText
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{
                                     opacity: 1,
                                     y: 0,
                                     transition: { delay: 0.6, duration: 0.5 }
                                 }}
-                                style={{
-                                    fontFamily: '"Montserrat", sans-serif',
-                                    color: '#235467'
-                                }}
                             >
                                 Redirecting to reset password...
-                            </motion.p>
+                            </SuccessMessageText>
                         </SuccessOverlay>
                     )}
                 </AnimatePresence>

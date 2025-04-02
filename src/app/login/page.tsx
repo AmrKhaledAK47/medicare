@@ -34,8 +34,8 @@ const WelcomeSection = styled('div')({
   position: 'relative',
   zIndex: 2,
   '@media (max-width: 1200px)': {
-    width: '45%',
-  },
+    display: 'none',
+    },
   '@media (max-width: 900px)': {
     display: 'none',
   },
@@ -50,16 +50,28 @@ const FormSection = styled('div')({
   justifyContent: 'center',
   position: 'relative',
   zIndex: 2,
+  '@media (max-width: 1400px)': {
+  
+    padding: '40px 20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   '@media (max-width: 1200px)': {
-    width: '55%',
+    width: '100%',
+    padding: '40px 20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   '@media (max-width: 900px)': {
     width: '100%',
-    padding: '0 20px',
+    padding: '30px 20px',
   },
   '@media (max-width: 600px)': {
-    padding: '40px 20px',
+  marginTop:'120px'
   },
+
 });
 
 const WhiteCircle = styled(motion.div)({
@@ -74,20 +86,11 @@ const WhiteCircle = styled(motion.div)({
   boxShadow: '0px 222px 89px rgba(0, 0, 0, 0.01), 0px 125px 75px rgba(0, 0, 0, 0.05), 0px 55px 55px rgba(0, 0, 0, 0.09), 0px 14px 30px rgba(0, 0, 0, 0.1)',
   zIndex: 1,
   '@media (max-width: 1400px)': {
-    width: '900px',
-    height: '900px',
-    left: '-250px',
-    top: '-120px',
+   marginLeft:'-50px'
   },
   '@media (max-width: 1200px)': {
-    width: '800px',
-    height: '800px',
-    left: '-200px',
-    top: '-100px',
-  },
-  '@media (max-width: 900px)': {
     display: 'none',
-  },
+  }
 });
 
 const LogoContainer = styled('div')({
@@ -95,23 +98,30 @@ const LogoContainer = styled('div')({
   top: '31px',
   left: '56px',
   zIndex: 10,
-  '@media (max-width: 600px)': {
-    top: '20px',
-    left: '20px',
-  },
+  '@media (max-width: 1200px)': {
+    display: 'none'
+  }
 });
 
 const MobileLogoContainer = styled('div')({
   display: 'none',
   position: 'relative',
   zIndex: 10,
-  marginBottom: '20px',
-  '@media (max-width: 900px)': {
+  '@media (max-width: 1200px)': {
     display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-    marginTop: '20px',
+    position: 'absolute',
+    top: '31px',
+    left: '56px',
+    marginTop: '-5px',
+    marginLeft: '-35px'
   },
+  '@media (max-width: 900px)': {
+    marginTop: '-5px',
+    marginLeft: '-35px'
+  },
+  '@media (max-width: 600px)': {
+    marginTop:'-115px'
+    },
 });
 
 const FormContainer = styled('div')({
@@ -121,15 +131,24 @@ const FormContainer = styled('div')({
   alignItems: 'center',
   maxWidth: '480px',
   marginTop: '10px',
+  zIndex: 3,
   '@media (max-width: 1400px)': {
     maxWidth: '450px',
   },
+  '@media (max-width: 1200px)': {
+    maxWidth: '500px',
+    marginTop: '0',
+    margin: '0 auto',
+  },
   '@media (max-width: 900px)': {
-    maxWidth: '100%',
-    padding: '0 20px',
+    maxWidth: '500px',
+    padding: '0',
+    marginTop: '0',
   },
   '@media (max-width: 600px)': {
-    padding: '0 10px',
+    maxWidth: '450px',
+    padding: '0',
+    marginTop: '0',
   },
 });
 
@@ -141,7 +160,9 @@ const LoginTitle = styled(Typography)({
   lineHeight: '54px',
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   textAlign: 'center',
+  width: '100%',
   color: '#FFFFFF',
   marginBottom: '20px',
   marginTop: '0',
@@ -149,15 +170,18 @@ const LoginTitle = styled(Typography)({
     fontSize: '32px',
     lineHeight: '48px',
   },
+  '@media (max-width: 1200px)': {
+    fontSize: '30px',
+    lineHeight: '45px',
+  },
   '@media (max-width: 900px)': {
-    fontSize: '28px',
+    fontSize: '30px',
     lineHeight: '42px',
-    marginTop: '0',
   },
   '@media (max-width: 600px)': {
-    fontSize: '24px',
-    lineHeight: '36px',
+    fontSize: '30px',
   },
+ 
 });
 
 const LoginSubtitle = styled(Typography)({
@@ -166,6 +190,8 @@ const LoginSubtitle = styled(Typography)({
   fontWeight: 500,
   fontSize: '14px',
   lineHeight: '20px',
+  textAlign: 'center',
+  width: '100%',
   color: '#EFFAFC',
   marginBottom: '30px',
   '@media (max-width: 1400px)': {
@@ -173,13 +199,18 @@ const LoginSubtitle = styled(Typography)({
     lineHeight: '18px',
     marginBottom: '25px',
   },
+  '@media (max-width: 1200px)': {
+    fontSize: '16px',
+    lineHeight: '17px',
+    marginBottom: '22px',
+  },
   '@media (max-width: 900px)': {
-    fontSize: '14px',
+    fontSize: '16px',
     lineHeight: '16px',
     marginBottom: '20px',
   },
   '@media (max-width: 600px)': {
-    fontSize: '13px',
+    fontSize: '16px',
     lineHeight: '16px',
     marginBottom: '15px',
   },
@@ -196,8 +227,7 @@ const HeartIconContainer = styled(motion.div)({
     height: '150px',
   },
   '@media (max-width: 1200px)': {
-    width: '130px',
-    height: '130px',
+    display: 'none',
   },
 });
 
@@ -218,8 +248,7 @@ const WelcomeTitle = styled(motion(Typography))({
     lineHeight: '55px',
   },
   '@media (max-width: 1200px)': {
-    fontSize: '32px',
-    lineHeight: '48px',
+    display: 'none',
   },
 });
 
@@ -240,9 +269,7 @@ const WelcomeText = styled(motion(Typography))({
     lineHeight: '28px',
   },
   '@media (max-width: 1200px)': {
-    fontSize: '16px',
-    lineHeight: '24px',
-    marginBottom: '30px',
+    display: 'none',
   },
 });
 
@@ -273,10 +300,7 @@ const SignUpButton = styled(motion(Button))({
     lineHeight: '33px',
   },
   '@media (max-width: 1200px)': {
-    width: '260px',
-    height: '60px',
-    fontSize: '20px',
-    lineHeight: '30px',
+    display: 'none',
   },
   '@media (max-width: 600px)': {
     width: '220px',
@@ -309,7 +333,7 @@ const MobileSignUpButton = styled(Button)({
     background: 'linear-gradient(90deg, #35A3CC, #1A5369)',
   },
   '@media (max-width: 900px)': {
-    display: 'block',
+    display: 'none',
   },
 });
 
@@ -460,18 +484,10 @@ const LoginPage = () => {
           <MobileLogoContainer>
             <Logo color="white" position="relative" />
           </MobileLogoContainer>
-          
           <FormContainer>
             <LoginTitle>Log In</LoginTitle>
             <LoginSubtitle>-Or use your email account-</LoginSubtitle>
             <LoginForm onSignUpClick={handleSignUpClick} />
-            
-            <MobileSignUpButton 
-              onClick={handleSignUpClick}
-              disableRipple
-            >
-              Don't have an account? Sign Up
-            </MobileSignUpButton>
           </FormContainer>
         </FormSection>
       </PageContainer>
