@@ -48,6 +48,6 @@ select {
 }
 
 /* Ensure no background colors are applied when focused */
-*:focus {
+/* *:focus {
     background-color: transparent !important;
-}
+} */
