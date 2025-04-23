@@ -1452,6 +1452,19 @@ const MedicalRecordsPage = () => {
         notes: ''
     });
 
+    // Add New Condition Dialog State
+    const [openAddConditionDialog, setOpenAddConditionDialog] = useState(false);
+    const [newCondition, setNewCondition] = useState<Partial<Condition>>({
+        id: 0,
+        name: '',
+        clinicalStatus: 'Active',
+        category: 'Diagnosis',
+        verificationStatus: 'Confirmed',
+        bodySite: '',
+        severity: 'Moderate',
+        recordedDate: new Date().toISOString().split('T')[0]
+    });
+
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
@@ -2593,6 +2606,76 @@ const MedicalRecordsPage = () => {
         }
     ];
 
+    // Handler for opening the Add Condition dialog
+    const handleAddCondition = () => {
+        setOpenAddConditionDialog(true);
+    };
+
+    // Handler for closing the Add Condition dialog
+    const handleCloseConditionDialog = () => {
+        setOpenAddConditionDialog(false);
+        // Reset form
+        setNewCondition({
+            id: 0,
+            name: '',
+            clinicalStatus: 'Active',
+            category: 'Diagnosis',
+            verificationStatus: 'Confirmed',
+            bodySite: '',
+            severity: 'Moderate',
+            recordedDate: new Date().toISOString().split('T')[0]
+        });
+    };
+
+    // Handler for condition input changes
+    const handleConditionInputChange = (e: React.ChangeEvent<HTMLInputElement | { name?: string; value: unknown }>) => {
+        const { name, value } = e.target;
+        setNewCondition({
+            ...newCondition,
+            [name as string]: value
+        });
+    };
+
+    // Handler for category change
+    const handleCategoryChange = (event: SelectChangeEvent) => {
+        setNewCondition({
+            ...newCondition,
+            category: event.target.value
+        });
+    };
+
+    // Handler for condition status change
+    const handleConditionStatusChange = (event: SelectChangeEvent) => {
+        setNewCondition({
+            ...newCondition,
+            clinicalStatus: event.target.value as 'Active' | 'Inactive'
+        });
+    };
+
+    // Handler for verification status change
+    const handleVerificationStatusChange = (event: SelectChangeEvent) => {
+        setNewCondition({
+            ...newCondition,
+            verificationStatus: event.target.value as 'Confirmed' | 'Problem'
+        });
+    };
+
+    // Handler for severity change
+    const handleConditionSeverityChange = (event: SelectChangeEvent) => {
+        setNewCondition({
+            ...newCondition,
+            severity: event.target.value as 'Severe' | 'Moderate' | 'Mild'
+        });
+    };
+
+    // Handler for saving the new condition
+    const handleSaveCondition = () => {
+        console.log('Saving new condition:', newCondition);
+        // Here you would implement API call to save the condition
+        // For now, we'll just close the dialog
+        handleCloseConditionDialog();
+    };
+
     return (
         <Box
             sx={{
@@ -3344,6 +3427,7 @@ const MedicalRecordsPage = () => {
                                             </FilterButton>
                                             <AddButton
                                                 startIcon={<PlusIcon />}
+                                                onClick={handleAddCondition}
                                             >
                                                 Add Condition
                                             </AddButton>
@@ -3512,6 +3596,53 @@ const MedicalRecordsPage = () => {
                                         )}
                                     </ConditionsTableContainer>
                                 )}
+
+                                {/* About Conditions Section */}
+                                <Box sx={{
+                                    mt: 4,
+                                    p: 3,
+                                    backgroundColor: mode === 'light' ? '#F8FBFC' : '#2B2B2B',
+                                    border: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`,
+                                    borderRadius: '12px',
+                                }}>
+                                    <Typography variant="subtitle1" sx={{
+                                        fontWeight: 600,
+                                        color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                        mb: 1
+                                    }}>
+                                        About Conditions
+                                    </Typography>
+                                    <Typography sx={{
+                                        color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                                        fontSize: '14px',
+                                        lineHeight: 1.7
+                                    }}>
+                                        Medical conditions are health problems or diseases that affect your health.
+                                        Keeping track of your conditions helps your healthcare providers maintain a complete
+                                        picture of your health and provide appropriate care. It's important to document
+                                        both active and inactive conditions, as past medical history can be relevant to
+                                        future treatment decisions.
+                                    </Typography>
+                                    <Box sx={{ mt: 2 }}>
+                                        <Typography sx={{
+                                            color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                                            fontSize: '14px',
+                                            fontWeight: 600,
+                                            mb: 0.5
+                                        }}>
+                                            Condition Statuses:
+                                        </Typography>
+                                        <Box component="ul" sx={{
+                                            pl: 2,
+                                            m: 0,
+                                            color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                                            fontSize: '14px',
+                                        }}>
+                                            <li><strong>Active:</strong> Current health problems requiring attention or monitoring.</li>
+                                            <li><strong>Inactive:</strong> Previous conditions that are resolved or in remission.</li>
+                                        </Box>
+                                    </Box>
+                                </Box>
                             </Box>
                         ) : selectedSection === 'allergies' ? (
                             // Allergies detail view
@@ -5516,6 +5647,7 @@ const MedicalRecordsPage = () => {
                                 onChange={handleImmunizationInputChange}
                                 sx={{
                                     mb: 2,
+                                    mt: 1,
                                     '& .MuiOutlinedInput-root': {
                                         borderRadius: '8px',
                                         backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
@@ -5586,6 +5718,7 @@ const MedicalRecordsPage = () => {
                                 onChange={handleImmunizationInputChange}
                                 sx={{
                                     mb: 2,
+                                    mt: 1,
                                     '& .MuiOutlinedInput-root': {
                                         borderRadius: '8px',
                                         backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
@@ -5722,6 +5855,7 @@ const MedicalRecordsPage = () => {
                                 onChange={handleFamilyMemberInputChange}
                                 sx={{
                                     mb: 2,
+                                    mt: 1,
                                     '& .MuiOutlinedInput-root': {
                                         borderRadius: '8px',
                                         backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
@@ -5938,6 +6072,7 @@ const MedicalRecordsPage = () => {
                                 onChange={handleLabResultInputChange}
                                 sx={{
                                     mb: 2,
+                                    mt: 1,
                                     '& .MuiOutlinedInput-root': {
                                         borderRadius: '8px',
                                         backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
@@ -5990,6 +6125,7 @@ const MedicalRecordsPage = () => {
                                 onChange={handleLabResultInputChange}
                                 sx={{
                                     mb: 2,
+                                    mt: 1,
                                     '& .MuiOutlinedInput-root': {
                                         borderRadius: '8px',
                                         backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
@@ -6455,6 +6591,205 @@ const MedicalRecordsPage = () => {
                         }}
                     >
                         Save Imaging Study
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Add Condition Dialog */}
+            <Dialog
+                open={openAddConditionDialog}
+                onClose={handleCloseConditionDialog}
+                maxWidth="md"
+                fullWidth
+                PaperProps={{
+                    style: {
+                        borderRadius: '12px',
+                        backgroundColor: mode === 'light' ? '#FFFFFF' : '#2D2D2D',
+                        boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)',
+                    },
+                }}
+            >
+                <DialogTitle sx={{
+                    p: 2.5,
+                    fontWeight: 600,
+                    color: mode === 'light' ? '#333333' : '#FFFFFF',
+                    borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`
+                }}>
+                    Add New Condition
+                </DialogTitle>
+                <DialogContent sx={{ p: 3, mt: 1 }}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} md={6}>
+                            <TextField
+                                name="name"
+                                label="Condition Name"
+                                variant="outlined"
+                                fullWidth
+                                required
+                                value={newCondition.name}
+                                onChange={handleConditionInputChange}
+                                sx={{
+                                    mb: 2,
+                                    mt: 1,
+                                    '& .MuiOutlinedInput-root': {
+                                        borderRadius: '8px',
+                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
+                                    }
+                                }}
+                            />
+                            <FormControl fullWidth sx={{ mb: 2 }}>
+                                <InputLabel id="clinical-status-label">Clinical Status</InputLabel>
+                                <Select
+                                    labelId="clinical-status-label"
+                                    id="clinicalStatus"
+                                    name="clinicalStatus"
+                                    value={newCondition.clinicalStatus || 'Active'}
+                                    label="Clinical Status"
+                                    onChange={handleConditionStatusChange}
+                                    sx={{
+                                        borderRadius: '8px',
+                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
+                                    }}
+                                >
+                                    <MenuItem value="Active">Active</MenuItem>
+                                    <MenuItem value="Inactive">Inactive</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth sx={{ mb: 2 }}>
+                                <InputLabel id="category-label">Category</InputLabel>
+                                <Select
+                                    labelId="category-label"
+                                    id="category"
+                                    name="category"
+                                    value={newCondition.category || 'Diagnosis'}
+                                    label="Category"
+                                    onChange={handleCategoryChange}
+                                    sx={{
+                                        borderRadius: '8px',
+                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
+                                    }}
+                                >
+                                    <MenuItem value="Diagnosis">Diagnosis</MenuItem>
+                                    <MenuItem value="Problem">Problem</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth sx={{ mb: 2 }}>
+                                <InputLabel id="verification-status-label">Verification Status</InputLabel>
+                                <Select
+                                    labelId="verification-status-label"
+                                    id="verificationStatus"
+                                    name="verificationStatus"
+                                    value={newCondition.verificationStatus || 'Confirmed'}
+                                    label="Verification Status"
+                                    onChange={handleVerificationStatusChange}
+                                    sx={{
+                                        borderRadius: '8px',
+                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
+                                    }}
+                                >
+                                    <MenuItem value="Confirmed">Confirmed</MenuItem>
+                                    <MenuItem value="Problem">Problem</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <TextField
+                                name="bodySite"
+                                label="Body Site"
+                                variant="outlined"
+                                fullWidth
+                                required
+                                value={newCondition.bodySite}
+                                onChange={handleConditionInputChange}
+                                sx={{
+                                    mb: 2,
+                                    '& .MuiOutlinedInput-root': {
+                                        borderRadius: '8px',
+                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
+                                    }
+                                }}
+                            />
+                            <FormControl fullWidth sx={{ mb: 2 }}>
+                                <InputLabel id="severity-label">Severity</InputLabel>
+                                <Select
+                                    labelId="severity-label"
+                                    id="severity"
+                                    name="severity"
+                                    value={newCondition.severity || 'Moderate'}
+                                    label="Severity"
+                                    onChange={handleConditionSeverityChange}
+                                    sx={{
+                                        borderRadius: '8px',
+                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
+                                    }}
+                                >
+                                    <MenuItem value="Severe">Severe</MenuItem>
+                                    <MenuItem value="Moderate">Moderate</MenuItem>
+                                    <MenuItem value="Mild">Mild</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <TextField
+                                name="recordedDate"
+                                label="Recorded Date"
+                                type="date"
+                                variant="outlined"
+                                fullWidth
+                                required
+                                value={newCondition.recordedDate}
+                                onChange={handleConditionInputChange}
+                                InputLabelProps={{ shrink: true }}
+                                sx={{
+                                    mb: 2,
+                                    '& .MuiOutlinedInput-root': {
+                                        borderRadius: '8px',
+                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
+                                    }
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                name="notes"
+                                label="Notes"
+                                variant="outlined"
+                                fullWidth
+                                multiline
+                                rows={4}
+                                value={newCondition.notes || ''}
+                                onChange={handleConditionInputChange}
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        borderRadius: '8px',
+                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
+                                    }
+                                }}
+                            />
+                        </Grid>
+                    </Grid>
+                </DialogContent>
+                <DialogActions sx={{
+                    p: 2.5,
+                    borderTop: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`
+                }}>
+                    <Button
+                        onClick={handleCloseConditionDialog}
+                        sx={{
+                            color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                            textTransform: 'none',
+                        }}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={handleSaveCondition}
+                        variant="contained"
+                        sx={{
+                            backgroundColor: '#21647D',
+                            textTransform: 'none',
+                            '&:hover': {
+                                backgroundColor: '#1a5268',
+                            },
+                        }}
+                    >
+                        Save Condition
                     </Button>
                 </DialogActions>
             </Dialog>
