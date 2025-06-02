@@ -4,28 +4,29 @@ import React, { useState, useEffect } from 'react';
 import { Box, Typography, IconButton, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useThemeContext } from '../patient/Sidebar';
+import { useTheme } from '@mui/material/styles';
 
 // Define the days of the week
 const DAYS_OF_WEEK = ['MONDAY', 'TUESDAY', 'WEDNSDAY', 'THURSDAY', 'FRIDAY', 'SATRDAY', 'SUNDAY'];
 
 // Styled components
 const CalendarContainer = styled(Paper)(({ theme }) => ({
-    padding: theme.spacing(2),
-    borderRadius: '12px',
+    padding: theme.spacing(0.3),
+    borderRadius: '6px',
     backgroundColor: theme.palette.mode === 'light' ? '#ffffff' : '#2B2B2B',
     border: theme.palette.mode === 'light' ? '1px solid #EEF1F4' : '1px solid #333',
 }));
 
-const CalendarDay = styled(Box)<{ isToday?: boolean; isSelected?: boolean; isCurrentMonth?: boolean }>(
-    ({ theme, isToday, isSelected, isCurrentMonth }) => ({
-        height: '60px',
+const CalendarDay = styled(Box)<{ isToday?: boolean; isSelected?: boolean; isCurrentMonth?: boolean; mobileView?: boolean }>(
+    ({ theme, isToday, isSelected, isCurrentMonth, mobileView }) => ({
+        height: mobileView ? '20px' : '60px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         position: 'relative',
-        borderRadius: '8px',
+        borderRadius: '3px',
         cursor: 'pointer',
-        maxWidth: '120px',
+        maxWidth: mobileView ? '30px' : '120px',
         backgroundColor: isToday
             ? '#E16A8A'
             : isSelected
@@ -53,44 +54,41 @@ const CalendarDay = styled(Box)<{ isToday?: boolean; isSelected?: boolean; isCur
 );
 
 interface CalendarProps {
-    currentDate?: Date;
-    selectedDate?: Date | null;
-    onDateSelect?: (date: Date) => void;
-    appointments?: Array<{
+    currentDate: Date;
+    selectedDate: Date | null;
+    onDateSelect: (date: Date | null) => void;
+    appointments: Array<{
         date: Date;
         status: 'upcoming' | 'completed' | 'cancelled';
     }>;
+    mobileView?: boolean;
     showNavigation?: boolean;
     className?: string;
 }
 
 const Calendar: React.FC<CalendarProps> = ({
-    currentDate: initialDate,
-    selectedDate: initialSelectedDate,
+    currentDate,
+    selectedDate,
     onDateSelect,
     appointments = [],
     showNavigation = true,
-    className
+    className,
+    mobileView = false
 }) => {
     const { mode } = useThemeContext();
-    const [currentDate, setCurrentDate] = useState(initialDate || new Date());
-    const [selectedDate, setSelectedDate] = useState<Date | null>(initialSelectedDate || null);
+    const theme = useTheme();
+    const [currentMonth, setCurrentMonth] = useState(currentDate);
     const [calendarDays, setCalendarDays] = useState<Array<Date | null>>([]);
 
     // Initialize from props only once or when props explicitly change
     useEffect(() => {
-        if (initialDate) {
-            setCurrentDate(initialDate);
-        }
-        if (initialSelectedDate) {
-            setSelectedDate(initialSelectedDate);
-        }
-    }, [initialDate, initialSelectedDate]);
+        setCurrentMonth(currentDate);
+    }, [currentDate]);
 
     // Update calendar days when current date changes
     useEffect(() => {
-        setCalendarDays(generateCalendarDays(currentDate));
-    }, [currentDate]);
+        setCalendarDays(generateCalendarDays(currentMonth));
+    }, [currentMonth]);
 
     const generateCalendarDays = (date: Date): Array<Date | null> => {
         const year = date.getFullYear();
@@ -125,13 +123,13 @@ const Calendar: React.FC<CalendarProps> = ({
     };
 
     const changeMonth = (delta: number) => {
-        const newDate = new Date(currentDate);
+        const newDate = new Date(currentMonth);
         newDate.setMonth(newDate.getMonth() + delta);
-        setCurrentDate(newDate);
+        setCurrentMonth(newDate);
     };
 
     const getMonthName = (): string => {
-        return currentDate.toLocaleDateString('en-US', { month: 'long' });
+        return currentMonth.toLocaleDateString('en-US', { month: 'long' });
     };
 
     const isToday = (date: Date | null): boolean => {
@@ -146,12 +144,11 @@ const Calendar: React.FC<CalendarProps> = ({
 
     const isCurrentMonth = (date: Date | null): boolean => {
         if (!date) return false;
-        return date.getMonth() === currentDate.getMonth();
+        return date.getMonth() === currentMonth.getMonth();
     };
 
-    const handleDateSelect = (date: Date) => {
-        setSelectedDate(date);
-        onDateSelect?.(date);
+    const handleDateSelect = (date: Date | null) => {
+        onDateSelect(date);
     };
 
     const hasAppointment = (date: Date | null): boolean => {
@@ -166,17 +163,23 @@ const Calendar: React.FC<CalendarProps> = ({
     return (
         <CalendarContainer className={className}>
             {showNavigation && (
-                <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <Box sx={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    mb: mobileView ? 0.2 : 2,
+                    justifyContent: 'space-between'
+                }}>
                     <IconButton
                         onClick={() => changeMonth(-1)}
                         sx={{
                             color: mode === 'light' ? '#21647D' : '#B8C7CC',
+                            padding: mobileView ? '0px' : '8px',
                             '&:hover': {
                                 backgroundColor: mode === 'light' ? 'rgba(33, 100, 125, 0.08)' : 'rgba(184, 199, 204, 0.08)',
                             },
                         }}
                     >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width={mobileView ? "10" : "20"} height={mobileView ? "10" : "20"} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </IconButton>
@@ -184,10 +187,11 @@ const Calendar: React.FC<CalendarProps> = ({
                     <Typography
                         variant="h6"
                         sx={{
-                            mx: 2,
+                            mx: 0.5,
                             fontWeight: 600,
                             color: mode === 'light' ? '#454747' : '#FFFFFF',
                             fontFamily: '"Poppins", sans-serif',
+                            fontSize: mobileView ? '0.65rem' : '1.25rem',
                         }}
                     >
                         {getMonthName()}
@@ -197,12 +201,13 @@ const Calendar: React.FC<CalendarProps> = ({
                         onClick={() => changeMonth(1)}
                         sx={{
                             color: mode === 'light' ? '#21647D' : '#B8C7CC',
+                            padding: mobileView ? '0px' : '8px',
                             '&:hover': {
                                 backgroundColor: mode === 'light' ? 'rgba(33, 100, 125, 0.08)' : 'rgba(184, 199, 204, 0.08)',
                             },
                         }}
                     >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width={mobileView ? "10" : "20"} height={mobileView ? "10" : "20"} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </IconButton>
@@ -210,7 +215,7 @@ const Calendar: React.FC<CalendarProps> = ({
             )}
 
             {/* Days of the Week */}
-            <Grid container spacing={1} sx={{ mb: 1 }}>
+            <Grid container spacing={0.1} sx={{ mb: mobileView ? 0.1 : 1 }}>
                 {DAYS_OF_WEEK.map((day) => (
                     <Grid item xs={12 / 7} key={day}>
                         <Typography
@@ -218,7 +223,7 @@ const Calendar: React.FC<CalendarProps> = ({
                             sx={{
                                 fontFamily: '"Poppins", sans-serif',
                                 fontWeight: 500,
-                                fontSize: '0.75rem',
+                                fontSize: mobileView ? '0.45rem' : '0.75rem',
                                 color: mode === 'light' ? '#6C7A89' : '#888',
                             }}
                         >
@@ -231,12 +236,12 @@ const Calendar: React.FC<CalendarProps> = ({
             {/* Calendar Grid */}
             <Grid
                 container
-                spacing={0.6}
+                spacing={0.1}
                 sx={{
                     backgroundColor: 'transparent',
-                    px: 1,
-                    py: 2,
-                    borderRadius: '12px',
+                    px: mobileView ? 0.1 : 1,
+                    py: mobileView ? 0.2 : 2,
+                    borderRadius: '6px',
                     border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #333',
                 }}
             >
@@ -250,6 +255,7 @@ const Calendar: React.FC<CalendarProps> = ({
                                 date.getFullYear() === selectedDate.getFullYear()}
                             isCurrentMonth={isCurrentMonth(date)}
                             onClick={() => date && handleDateSelect(date)}
+                            mobileView={mobileView}
                         >
                             <Typography
                                 variant="body1"
@@ -259,7 +265,7 @@ const Calendar: React.FC<CalendarProps> = ({
                                         date.getDate() === selectedDate.getDate() &&
                                         date.getMonth() === selectedDate.getMonth() &&
                                         date.getFullYear() === selectedDate.getFullYear()) ? 600 : 400,
-                                    fontSize: '1rem',
+                                    fontSize: mobileView ? '0.55rem' : '1rem',
                                 }}
                             >
                                 {date?.getDate()}
@@ -269,15 +275,15 @@ const Calendar: React.FC<CalendarProps> = ({
                             {date && hasAppointment(date) && (
                                 <Box sx={{
                                     position: 'absolute',
-                                    bottom: '2px',
+                                    bottom: mobileView ? '0.2px' : '2px',
                                     display: 'flex',
-                                    gap: '3px',
+                                    gap: '0.2px',
                                     justifyContent: 'center'
                                 }}>
                                     <Box
                                         sx={{
-                                            width: '4px',
-                                            height: '4px',
+                                            width: mobileView ? '1px' : '4px',
+                                            height: mobileView ? '1px' : '4px',
                                             borderRadius: '50%',
                                             backgroundColor: '#E16A8A',
                                         }}
