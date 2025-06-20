@@ -8,6 +8,8 @@ import Image from 'next/image';
 import Calendar from '../../../../components/common/Calendar';
 import ScheduleVisitModal from '../../../../components/patient/ScheduleVisitModal';
 import AppointmentFilters from '../../../../components/patient/AppointmentFilters';
+import { useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 
 // Define the days of the week
 const DAYS_OF_WEEK = ['MONDAY', 'TUESDAY', 'WEDNSDAY', 'THURSDAY', 'FRIDAY', 'SATRDAY', 'SUNDAY'];
@@ -51,6 +53,12 @@ const ScheduleButton = styled(Button)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     gap: '8px',
+    [theme.breakpoints.down('sm')]: {
+        padding: '4px 8px',
+        fontSize: '0.65rem',
+        gap: '4px',
+        borderRadius: '4px',
+    },
 }));
 
 const ViewToggleButton = styled(Button)<{ active: boolean }>(({ theme, active }) => ({
@@ -65,18 +73,25 @@ const ViewToggleButton = styled(Button)<{ active: boolean }>(({ theme, active })
     '&:hover': {
         backgroundColor: active ? '#F0F8FB' : theme.palette.mode === 'light' ? 'rgba(240, 248, 251, 0.5)' : 'rgba(33, 100, 125, 0.1)',
     },
+    [theme.breakpoints.down('sm')]: {
+        padding: '2px 6px',
+        fontSize: '0.65rem',
+        minWidth: 'auto',
+    },
 }));
 
 // Simple AppointmentCard component
 const AppointmentCard = ({ appointment }: { appointment: any }) => {
     const { mode } = useThemeContext();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <Paper
             elevation={0}
             sx={{
-                p: 2,
-                borderRadius: '12px',
+                p: isMobile ? 0.8 : 2,
+                borderRadius: '6px',
                 backgroundColor: mode === 'light' ? '#ffffff' : '#2B2B2B',
                 border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #333',
                 transition: 'all 0.2s ease',
@@ -86,12 +101,16 @@ const AppointmentCard = ({ appointment }: { appointment: any }) => {
                 },
             }}
         >
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: isMobile ? 1 : 2 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: isMobile ? 1 : 2 }}>
                     <Avatar
                         src={appointment.avatar}
                         alt={appointment.doctorName}
-                        sx={{ width: 48, height: 48 }}
+                        sx={{ 
+                            width: isMobile ? 28 : 48, 
+                            height: isMobile ? 28 : 48,
+                            border: '1px solid #EEF1F4'
+                        }}
                     />
                     <Box>
                         <Typography
@@ -99,6 +118,8 @@ const AppointmentCard = ({ appointment }: { appointment: any }) => {
                             sx={{
                                 fontWeight: 600,
                                 color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                fontSize: isMobile ? '0.7rem' : '0.95rem',
+                                fontFamily: '"Poppins", sans-serif',
                             }}
                         >
                             {appointment.doctorName}
@@ -107,6 +128,8 @@ const AppointmentCard = ({ appointment }: { appointment: any }) => {
                             variant="body2"
                             sx={{
                                 color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                                fontSize: isMobile ? '0.6rem' : '0.8rem',
+                                fontFamily: '"Poppins", sans-serif',
                             }}
                         >
                             {appointment.doctorSpecialty}
@@ -126,17 +149,24 @@ const AppointmentCard = ({ appointment }: { appointment: any }) => {
                             : appointment.status === 'completed'
                                 ? '#4CAF50'
                                 : '#F44336',
+                        fontSize: isMobile ? '0.6rem' : '0.75rem',
+                        height: isMobile ? '18px' : '24px',
+                        '& .MuiChip-label': {
+                            padding: isMobile ? '0 4px' : '0 8px',
+                        },
                     }}
                     size="small"
                 />
             </Box>
 
-            <Box sx={{ mb: 2 }}>
+            <Box sx={{ mb: isMobile ? 0.5 : 2 }}>
                 <Typography
                     variant="body2"
                     sx={{
                         color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
-                        mb: 0.5,
+                        mb: isMobile ? 0.2 : 0.5,
+                        fontSize: isMobile ? '0.6rem' : '0.75rem',
+                        fontFamily: '"Poppins", sans-serif',
                     }}
                 >
                     Date & Time
@@ -146,6 +176,8 @@ const AppointmentCard = ({ appointment }: { appointment: any }) => {
                     sx={{
                         fontWeight: 500,
                         color: mode === 'light' ? '#454747' : '#FFFFFF',
+                        fontSize: isMobile ? '0.65rem' : '0.85rem',
+                        fontFamily: '"Poppins", sans-serif',
                     }}
                 >
                     {appointment.date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
@@ -154,6 +186,8 @@ const AppointmentCard = ({ appointment }: { appointment: any }) => {
                     variant="body2"
                     sx={{
                         color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                        fontSize: isMobile ? '0.6rem' : '0.75rem',
+                        fontFamily: '"Poppins", sans-serif',
                     }}
                 >
                     {appointment.time}
@@ -332,6 +366,8 @@ const AppointmentTooltip = styled(Box)(({ theme }) => ({
 
 const SchedulePage = () => {
     const { mode } = useThemeContext();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const [currentDate, setCurrentDate] = useState(new Date());
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -484,14 +520,13 @@ const SchedulePage = () => {
             height: 'calc(100vh - 64px)',
             backgroundColor: mode === 'light' ? '#F5F9FA' : '#1A1A1A'
         }}>
-            {/* Main scrollable section */}
             <Box
                 sx={{
                     flex: '1 1 auto',
                     overflowY: 'auto',
-                    p: 3,
+                    p: isMobile ? 0.3 : 3,
                     '&::-webkit-scrollbar': {
-                        width: '8px',
+                        width: '6px',
                     },
                     '&::-webkit-scrollbar-track': {
                         background: mode === 'light' ? '#F5F9FA' : '#1A1A1A',
@@ -507,19 +542,20 @@ const SchedulePage = () => {
                     sx={{
                         maxWidth: '1300px',
                         mx: 'auto',
-                        p: { xs: 2, md: 3 },
-                        mb: 3,
-                        borderRadius: '12px',
+                        p: isMobile ? 0.5 : 3,
+                        mb: isMobile ? 0.5 : 3,
+                        borderRadius: '6px',
                         backgroundColor: mode === 'light' ? '#ffffff' : '#2B2B2B',
                         border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #333',
                     }}
                 >
-                    {/* Consolidated header with title and controls */}
                     <Box sx={{
                         display: 'flex',
+                        flexDirection: isMobile ? 'column' : 'row',
                         justifyContent: 'space-between',
-                        alignItems: 'center',
-                        mb: 3
+                        alignItems: isMobile ? 'flex-start' : 'center',
+                        mb: isMobile ? 0.5 : 3,
+                        gap: isMobile ? 0.5 : 0
                     }}>
                         <Typography
                             variant="h5"
@@ -528,17 +564,25 @@ const SchedulePage = () => {
                                 fontWeight: 600,
                                 color: mode === 'light' ? '#454747' : '#FFFFFF',
                                 fontFamily: '"Poppins", sans-serif',
+                                fontSize: isMobile ? '0.8rem' : '1.5rem',
                             }}
                         >
                             Schedule
                         </Typography>
 
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <Box sx={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            gap: isMobile ? 0.3 : 2,
+                            width: isMobile ? '100%' : 'auto',
+                            justifyContent: isMobile ? 'space-between' : 'flex-end',
+                            mt: isMobile ? 0.5 : 0
+                        }}>
                             <Box sx={{
                                 display: 'flex',
                                 backgroundColor: mode === 'light' ? '#F5F5F5' : '#333',
                                 borderRadius: '4px',
-                                padding: '2px',
+                                padding: '1px',
                             }}>
                                 <ViewToggleButton
                                     onClick={() => setViewMode('grid')}
@@ -554,7 +598,9 @@ const SchedulePage = () => {
                                 </ViewToggleButton>
                             </Box>
 
-                            <ScheduleButton onClick={() => setIsScheduleModalOpen(true)}>
+                            <ScheduleButton 
+                                onClick={() => setIsScheduleModalOpen(true)}
+                            >
                                 <span>Schedule a Visit</span>
                                 <AddIcon />
                             </ScheduleButton>
@@ -568,7 +614,7 @@ const SchedulePage = () => {
                     />
 
                     {viewMode === 'grid' ? (
-                        <Grid container spacing={3}>
+                        <Grid container spacing={isMobile ? 1 : 3}>
                             {/* Calendar View */}
                             <Grid item xs={12} md={8}>
                                 <Calendar
@@ -579,6 +625,7 @@ const SchedulePage = () => {
                                         date: apt.date,
                                         status: apt.status,
                                     }))}
+                                    mobileView={isMobile ? true : undefined}
                                 />
                             </Grid>
 
@@ -587,8 +634,8 @@ const SchedulePage = () => {
                                 <Paper
                                     elevation={0}
                                     sx={{
-                                        p: 2,
-                                        borderRadius: '12px',
+                                        p: isMobile ? 0.8 : 2,
+                                        borderRadius: '6px',
                                         backgroundColor: mode === 'light' ? '#F0F8FB' : '#333',
                                         border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #444',
                                     }}
@@ -597,16 +644,17 @@ const SchedulePage = () => {
                                         variant="h6"
                                         sx={{
                                             fontWeight: 600,
-                                            mb: 2,
+                                            mb: isMobile ? 0.8 : 2,
                                             color: mode === 'light' ? '#454747' : '#FFFFFF',
                                             fontFamily: '"Poppins", sans-serif',
+                                            fontSize: isMobile ? '0.75rem' : '1.25rem',
                                         }}
                                     >
                                         Upcoming Appointments
                                     </Typography>
 
                                     {upcomingAppointments.length > 0 ? (
-                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: isMobile ? 0.8 : 2 }}>
                                             {upcomingAppointments.map(appointment => (
                                                 <AppointmentCard key={appointment.id} appointment={appointment} />
                                             ))}
@@ -616,7 +664,9 @@ const SchedulePage = () => {
                                             sx={{
                                                 color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
                                                 textAlign: 'center',
-                                                py: 4,
+                                                py: isMobile ? 1.5 : 4,
+                                                fontSize: isMobile ? '0.65rem' : '1rem',
+                                                fontFamily: '"Poppins", sans-serif',
                                             }}
                                         >
                                             No upcoming appointments
@@ -627,25 +677,26 @@ const SchedulePage = () => {
                         </Grid>
                     ) : (
                         /* List View */
-                        <Box sx={{ mt: 3 }}>
+                        <Box sx={{ mt: isMobile ? 1 : 3 }}>
                             {sortedAppointments.length > 0 ? (
                                 <Box sx={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    gap: 2,
+                                    gap: 1,
                                     backgroundColor: 'transparent',
-                                    borderRadius: '12px',
+                                    borderRadius: '8px',
                                     border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #333',
-                                    p: 2
+                                    p: isMobile ? 1 : 2
                                 }}>
                                     {sortedAppointments.map((appointment, index) => (
                                         <React.Fragment key={appointment.id}>
                                             <Box sx={{
                                                 display: 'flex',
+                                                flexDirection: isMobile ? 'column' : 'row',
                                                 justifyContent: 'space-between',
-                                                alignItems: 'center',
-                                                p: 2,
-                                                borderRadius: '10px',
+                                                alignItems: isMobile ? 'flex-start' : 'center',
+                                                p: isMobile ? 1 : 2,
+                                                borderRadius: '6px',
                                                 backgroundColor: mode === 'light' ? 'rgba(245, 249, 250, 0.5)' : 'rgba(26, 26, 26, 0.3)',
                                                 border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #444',
                                                 transition: 'transform 0.2s ease, box-shadow 0.2s ease',
@@ -656,13 +707,19 @@ const SchedulePage = () => {
                                                         : '0 4px 8px rgba(0, 0, 0, 0.2)',
                                                 }
                                             }}>
-                                                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                                <Box sx={{ 
+                                                    display: 'flex', 
+                                                    alignItems: 'center', 
+                                                    gap: 1,
+                                                    width: isMobile ? '100%' : 'auto',
+                                                    mb: isMobile ? 0.5 : 0
+                                                }}>
                                                     <Avatar
                                                         src={appointment.avatar}
                                                         alt={appointment.doctorName}
                                                         sx={{
-                                                            width: 50,
-                                                            height: 50,
+                                                            width: isMobile ? 32 : 50,
+                                                            height: isMobile ? 32 : 50,
                                                             border: '2px solid #EEF1F4'
                                                         }}
                                                     />
@@ -670,7 +727,7 @@ const SchedulePage = () => {
                                                         <Typography
                                                             sx={{
                                                                 fontWeight: 600,
-                                                                fontSize: '0.95rem',
+                                                                fontSize: isMobile ? '0.75rem' : '0.95rem',
                                                                 color: mode === 'light' ? '#454747' : '#FFFFFF',
                                                                 fontFamily: '"Poppins", sans-serif',
                                                             }}
@@ -679,7 +736,7 @@ const SchedulePage = () => {
                                                         </Typography>
                                                         <Typography
                                                             sx={{
-                                                                fontSize: '0.8rem',
+                                                                fontSize: isMobile ? '0.65rem' : '0.8rem',
                                                                 color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
                                                                 fontFamily: '"Poppins", sans-serif',
                                                             }}
@@ -689,23 +746,34 @@ const SchedulePage = () => {
                                                     </Box>
                                                 </Box>
 
-                                                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
+                                                <Box sx={{ 
+                                                    display: 'flex', 
+                                                    flexDirection: isMobile ? 'row' : 'column',
+                                                    alignItems: isMobile ? 'center' : 'flex-end',
+                                                    gap: isMobile ? 0.5 : 1,
+                                                    width: isMobile ? '100%' : 'auto',
+                                                    justifyContent: isMobile ? 'space-between' : 'flex-end'
+                                                }}>
                                                     <StatusChip
                                                         label={formatStatus(appointment.status)}
                                                         status={appointment.status}
                                                         size="small"
+                                                        sx={{
+                                                            fontSize: isMobile ? '0.65rem' : '0.75rem',
+                                                            height: isMobile ? '18px' : '24px'
+                                                        }}
                                                     />
                                                     <Typography
                                                         sx={{
                                                             display: 'flex',
                                                             alignItems: 'center',
-                                                            gap: 1,
-                                                            fontSize: '0.8rem',
+                                                            gap: 0.5,
+                                                            fontSize: isMobile ? '0.65rem' : '0.8rem',
                                                             color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
                                                             fontFamily: '"Poppins", sans-serif',
                                                         }}
                                                     >
-                                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                             <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                         </svg>
@@ -714,7 +782,7 @@ const SchedulePage = () => {
                                                 </Box>
                                             </Box>
                                             {index < sortedAppointments.length - 1 && (
-                                                <Box sx={{ px: 2 }}>
+                                                <Box sx={{ px: isMobile ? 1 : 2 }}>
                                                     <Divider />
                                                 </Box>
                                             )}
@@ -724,14 +792,14 @@ const SchedulePage = () => {
                             ) : (
                                 <Box sx={{
                                     textAlign: 'center',
-                                    py: 6,
+                                    py: isMobile ? 2 : 6,
                                     backgroundColor: 'transparent',
-                                    borderRadius: '12px',
+                                    borderRadius: '8px',
                                     border: mode === 'light' ? '1px solid #EEF1F4' : '1px solid #333',
                                 }}>
                                     <Typography
                                         sx={{
-                                            fontSize: '1rem',
+                                            fontSize: isMobile ? '0.75rem' : '1rem',
                                             color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
                                             fontFamily: '"Poppins", sans-serif',
                                         }}
@@ -742,11 +810,13 @@ const SchedulePage = () => {
                                         variant="contained"
                                         onClick={() => setIsScheduleModalOpen(true)}
                                         sx={{
-                                            mt: 2,
+                                            mt: 1,
                                             backgroundColor: '#267997',
                                             color: '#ffffff',
                                             fontFamily: '"Poppins", sans-serif',
                                             textTransform: 'none',
+                                            fontSize: isMobile ? '0.75rem' : '1rem',
+                                            padding: isMobile ? '4px 12px' : '8px 22px',
                                             '&:hover': {
                                                 backgroundColor: '#21647D',
                                             },

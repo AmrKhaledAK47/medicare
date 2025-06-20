@@ -10,6 +10,7 @@ import Sidebar from '../../../components/patient/Sidebar';
 import Logo from '../../../components/common/Logo';
 import { useThemeContext } from '../../../components/patient/Sidebar';
 import MenuIcon from '@mui/icons-material/Menu';
+import ShareProfileModal from '../../../components/patient/ShareProfileModal';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -73,6 +74,7 @@ export default function PatientDashboardLayout({
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const isTablet = useMediaQuery(theme.breakpoints.down('md'));
     const [mobileOpen, setMobileOpen] = useState(false);
+    const [shareProfileOpen, setShareProfileOpen] = useState(false);
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
@@ -80,6 +82,14 @@ export default function PatientDashboardLayout({
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
+    };
+
+    const handleOpenShareProfile = () => {
+        setShareProfileOpen(true);
+    };
+
+    const handleCloseShareProfile = () => {
+        setShareProfileOpen(false);
     };
 
     return (
@@ -97,8 +107,8 @@ export default function PatientDashboardLayout({
                     zIndex: (theme) => theme.zIndex.drawer + 1,
                 }}
             >
-                <Toolbar sx={{ 
-                    justifyContent: 'space-between', 
+                <Toolbar sx={{
+                    justifyContent: 'space-between',
                     height: { xs: '56px', sm: '64px' },
                     minHeight: { xs: 'auto', sm: '64px' },
                     px: { xs: 1, sm: 2 }
@@ -119,16 +129,16 @@ export default function PatientDashboardLayout({
                         <Link href="/">
                             <Logo color={mode === 'light' ? "blue" : "white"} position="relative" />
                         </Link>
-                        <Typography 
-                            variant="body2" 
-                            sx={{ 
-                                ml: -2, 
-                                marginTop: 1, 
-                                fontWeight: 500, 
-                                display: { xs: 'none', lg: 'block' }, 
-                                fontSize: '15px', 
-                                color: mode === 'light' ? "#97A4A9" : "#B8C7CC", 
-                                fontFamily: "poppins" 
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                ml: -2,
+                                marginTop: 1,
+                                fontWeight: 500,
+                                display: { xs: 'none', lg: 'block' },
+                                fontSize: '15px',
+                                color: mode === 'light' ? "#97A4A9" : "#B8C7CC",
+                                fontFamily: "poppins"
                             }}
                         >
                             Dashboard overview
@@ -137,22 +147,22 @@ export default function PatientDashboardLayout({
 
                     {/* Search bar - hide on very small screens */}
                     {!isMobile && (
-                        <Search sx={{ 
-                            mx: 'auto', 
-                            flexGrow: 1, 
+                        <Search sx={{
+                            mx: 'auto',
+                            flexGrow: 1,
                             ml: { xs: 1, sm: 2, md: 4 },
                             maxWidth: { xs: '200px', sm: '300px', md: '500px' }
                         }}>
                             <SearchIconWrapper>
-                                <Image 
-                                    src="/icons/search.svg" 
-                                    alt="Search" 
+                                <Image
+                                    src="/icons/search.svg"
+                                    alt="Search"
                                     width={20}
                                     height={20}
-                                    style={{ 
-                                        objectFit: 'contain', 
-                                        filter: mode === 'dark' ? 'invert(0.8)' : 'none' 
-                                    }} 
+                                    style={{
+                                        objectFit: 'contain',
+                                        filter: mode === 'dark' ? 'invert(0.8)' : 'none'
+                                    }}
                                 />
                             </SearchIconWrapper>
                             <StyledInputBase
@@ -162,23 +172,28 @@ export default function PatientDashboardLayout({
                         </Search>
                     )}
 
-                    {/* Share Profile link - hide on small screens */}
+                    {/* Share Profile button - hide on small screens */}
                     {!isTablet && (
-                        <MuiLink 
-                            href="/share-profile" 
-                            sx={{ 
-                                display: 'flex', 
-                                alignItems: 'center', 
-                                mr: { md: 1, lg: 2 }, 
-                                textDecoration: 'none', 
-                                color: mode === 'light' ? '#21647D' : '#B8C7CC', 
+                        <Button
+                            onClick={handleOpenShareProfile}
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                mr: { md: 1, lg: 2 },
+                                textDecoration: 'none',
+                                color: mode === 'light' ? '#21647D' : '#B8C7CC',
                                 fontSize: { md: '15px', lg: '17px' },
-                                fontWeight: 650, 
-                                whiteSpace: 'nowrap'
+                                fontWeight: 650,
+                                whiteSpace: 'nowrap',
+                                textTransform: 'none',
+                                '&:hover': {
+                                    backgroundColor: 'transparent',
+                                    opacity: 0.85,
+                                }
                             }}
                         >
                             Share Profile
-                        </MuiLink>
+                        </Button>
                     )}
 
                     {/* Right section: notifications and profile */}
@@ -257,9 +272,9 @@ export default function PatientDashboardLayout({
 
                 {/* Mobile search bar - visible only on small screens */}
                 {isMobile && (
-                    <Box sx={{ 
-                        position: 'sticky', 
-                        top: 0, 
+                    <Box sx={{
+                        position: 'sticky',
+                        top: 0,
                         backgroundColor: mode === 'light' ? '#F5F9FA' : '#1A1A1A',
                         zIndex: 10,
                         p: 1.5,
@@ -322,7 +337,7 @@ export default function PatientDashboardLayout({
                                 boxShadow: '0px -2px 10px rgba(0, 0, 0, 0.05)',
                             }}
                         >
-                            <IconButton 
+                            <IconButton
                                 size="medium"
                                 sx={{
                                     display: 'flex',
@@ -344,10 +359,10 @@ export default function PatientDashboardLayout({
                                         />
                                     </Box>
                                 </Badge>
-                                <Typography 
-                                    variant="caption" 
-                                    sx={{ 
-                                        mt: 0.5, 
+                                <Typography
+                                    variant="caption"
+                                    sx={{
+                                        mt: 0.5,
                                         fontSize: '10px',
                                         color: mode === 'light' ? '#21647D' : '#B8C7CC',
                                     }}
@@ -355,8 +370,8 @@ export default function PatientDashboardLayout({
                                     Chat
                                 </Typography>
                             </IconButton>
-                            
-                            <IconButton 
+
+                            <IconButton
                                 size="medium"
                                 sx={{
                                     display: 'flex',
@@ -378,10 +393,10 @@ export default function PatientDashboardLayout({
                                         />
                                     </Box>
                                 </Badge>
-                                <Typography 
-                                    variant="caption" 
-                                    sx={{ 
-                                        mt: 0.5, 
+                                <Typography
+                                    variant="caption"
+                                    sx={{
+                                        mt: 0.5,
                                         fontSize: '10px',
                                         color: mode === 'light' ? '#21647D' : '#B8C7CC',
                                     }}
@@ -389,9 +404,10 @@ export default function PatientDashboardLayout({
                                     Alerts
                                 </Typography>
                             </IconButton>
-                            
+
                             <Button
                                 variant="contained"
+                                onClick={handleOpenShareProfile}
                                 sx={{
                                     backgroundColor: '#21647D',
                                     color: 'white',
@@ -405,13 +421,14 @@ export default function PatientDashboardLayout({
                                     '&:hover': {
                                         backgroundColor: '#1A5369',
                                     },
+                                    textTransform: 'none',
                                 }}
                             >
                                 Share Profile
                             </Button>
-                            
-                            <IconButton 
-                                size="medium" 
+
+                            <IconButton
+                                size="medium"
                                 onClick={handleDrawerToggle}
                                 sx={{
                                     display: 'flex',
@@ -426,10 +443,10 @@ export default function PatientDashboardLayout({
                                 <Box sx={{ position: 'relative', width: 24, height: 24 }}>
                                     <MenuIcon sx={{ color: mode === 'light' ? '#21647D' : '#B8C7CC' }} />
                                 </Box>
-                                <Typography 
-                                    variant="caption" 
-                                    sx={{ 
-                                        mt: 0.5, 
+                                <Typography
+                                    variant="caption"
+                                    sx={{
+                                        mt: 0.5,
                                         fontSize: '10px',
                                         color: mode === 'light' ? '#21647D' : '#B8C7CC',
                                     }}
@@ -441,6 +458,12 @@ export default function PatientDashboardLayout({
                     )}
                 </Box>
             </Box>
+
+            {/* Share Profile Modal */}
+            <ShareProfileModal
+                open={shareProfileOpen}
+                onClose={handleCloseShareProfile}
+            />
         </Box>
     );
 } 

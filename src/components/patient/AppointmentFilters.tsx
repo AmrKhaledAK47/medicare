@@ -146,10 +146,10 @@ const AppointmentFilters: React.FC<AppointmentFiltersProps> = ({
                         Doctor
                     </InputLabel>
                     <StyledSelect
-                        value={filters.doctor}
-                        onChange={handleChange('doctor')}
+                value={filters.doctor}
+                onChange={handleChange('doctor')}
                         label="Doctor"
-                    >
+            >
                         <MenuItem value="">All Doctors</MenuItem>
                         <MenuItem value="1">Dr. Michael Williams</MenuItem>
                         <MenuItem value="2">Dr. Linda Carter</MenuItem>
@@ -164,15 +164,15 @@ const AppointmentFilters: React.FC<AppointmentFiltersProps> = ({
                         Date Range
                     </InputLabel>
                     <StyledSelect
-                        value={filters.dateRange}
-                        onChange={handleChange('dateRange')}
+                value={filters.dateRange}
+                onChange={handleChange('dateRange')}
                         label="Date Range"
-                    >
-                        <MenuItem value="">All Time</MenuItem>
-                        <MenuItem value="today">Today</MenuItem>
-                        <MenuItem value="week">This Week</MenuItem>
-                        <MenuItem value="month">This Month</MenuItem>
-                        <MenuItem value="year">This Year</MenuItem>
+            >
+                <MenuItem value="">All Time</MenuItem>
+                <MenuItem value="today">Today</MenuItem>
+                <MenuItem value="week">This Week</MenuItem>
+                <MenuItem value="month">This Month</MenuItem>
+                <MenuItem value="year">This Year</MenuItem>
                     </StyledSelect>
                 </FormControl>
             </Box>

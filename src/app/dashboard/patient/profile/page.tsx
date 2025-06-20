@@ -12,7 +12,7 @@ import {
     Divider,
     keyframes
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import { useThemeContext } from '../../../../components/patient/Sidebar';
 import Image from 'next/image';
 
@@ -31,6 +31,9 @@ const ProfileContainer = styled(Box)(({ theme }) => ({
     padding: theme.spacing(2),
     maxWidth: '1300px',
     margin: '0 auto',
+    [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(1.5),
+    },
 }));
 
 const ProfileSection = styled(Paper)(({ theme }) => ({
@@ -39,6 +42,10 @@ const ProfileSection = styled(Paper)(({ theme }) => ({
     borderRadius: '12px',
     boxShadow: 'none',
     border: `1.5px solid ${theme.palette.mode === 'light' ? '#EEF1F4' : '#333'}`,
+    [theme.breakpoints.down('sm')]: {
+        padding: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    },
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
@@ -47,9 +54,16 @@ const StyledButton = styled(Button)(({ theme }) => ({
     textTransform: 'none',
     fontWeight: 500,
     border: `1.5px solid ${theme.palette.mode === 'light' ? '#EEF1F4' : '#444'}`,
+    [theme.breakpoints.down('sm')]: {
+        padding: '4px 12px',
+        fontSize: '0.8rem',
+    },
     '&.edit-button': {
         color: theme.palette.primary.main,
         fontSize: '16px',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.8rem',
+        },
     },
     '&.change-button': {
         color: theme.palette.primary.main,
@@ -65,12 +79,18 @@ const LabelText = styled(Typography)(({ theme }) => ({
     color: theme.palette.mode === 'light' ? '#A3A0A0' : '#B8C7CC',
     fontSize: '14px',
     marginBottom: '4px',
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '0.75rem',
+    },
 }));
 
 const ValueText = styled(Typography)(({ theme }) => ({
     color: theme.palette.mode === 'light' ? '#434966' : '#FFFFFF',
     fontSize: '16px',
     fontWeight: 500,
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '0.875rem',
+    },
 }));
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
@@ -78,6 +98,10 @@ const SectionTitle = styled(Typography)(({ theme }) => ({
     fontSize: '20px',
     fontWeight: 600,
     marginBottom: theme.spacing(2.5),
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '1.125rem',
+        marginBottom: theme.spacing(2),
+    },
 }));
 
 // Create a styled component for the spinner
@@ -87,6 +111,7 @@ const Spinner = styled('svg')`
 
 const ProfilePage = () => {
     const { mode } = useThemeContext();
+    const theme = useTheme();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [avatarSrc, setAvatarSrc] = useState<string>('/avatars/patient.png');
     const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -170,6 +195,9 @@ const ProfilePage = () => {
                     flex: '1 1 auto',
                     overflowY: 'auto',
                     p: 3,
+                    [theme.breakpoints.down('sm')]: {
+                        p: 1.5,
+                    },
                     '&::-webkit-scrollbar': {
                         width: '8px',
                     },
@@ -190,7 +218,11 @@ const ProfilePage = () => {
                         sx={{
                             fontWeight: 700,
                             mb: 3,
-                            color: mode === 'light' ? '#000000' : '#FFFFFF'
+                            color: mode === 'light' ? '#000000' : '#FFFFFF',
+                            [theme.breakpoints.down('sm')]: {
+                                fontSize: '1.25rem',
+                                mb: 2,
+                            },
                         }}
                     >
                         My Profile
@@ -198,15 +230,27 @@ const ProfilePage = () => {
 
                     {/* Profile Header Section */}
                     <ProfileSection>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                <Box sx={{ position: 'relative' }}>
+                        <Box sx={{ 
+                            display: 'flex', 
+                            flexDirection: { xs: 'column', sm: 'row' },
+                            justifyContent: 'space-between', 
+                            alignItems: { xs: 'center', sm: 'center' }, 
+                            mb: { xs: 2, sm: 2.5, md: 3 },
+                            gap: { xs: 2, sm: 0 }
+                        }}>
+                            <Box sx={{ 
+                                display: 'flex', 
+                                alignItems: 'center',
+                                flexDirection: { xs: 'column', sm: 'row' },
+                                textAlign: { xs: 'center', sm: 'left' }
+                            }}>
+                                <Box sx={{ position: 'relative', mb: { xs: 1, sm: 0 } }}>
                                     <Avatar
                                         src={avatarSrc}
                                         alt="Noah Brown"
                                         sx={{
-                                            width: 72,
-                                            height: 72,
+                                            width: { xs: 64, sm: 72 },
+                                            height: { xs: 64, sm: 72 },
                                             border: `2px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`,
                                             cursor: 'pointer',
                                             transition: 'all 0.2s ease',
@@ -264,8 +308,8 @@ const ProfilePage = () => {
                                             bottom: -8,
                                             left: '50%',
                                             transform: 'translateX(-50%)',
-                                            width: 28,
-                                            height: 28,
+                                            width: { xs: 24, sm: 28 },
+                                            height: { xs: 24, sm: 28 },
                                             backgroundColor: '#267997',
                                             borderRadius: '50%',
                                             display: 'flex',
@@ -299,11 +343,15 @@ const ProfilePage = () => {
                                         </svg>
                                     </Box>
                                 </Box>
-                                <Box sx={{ ml: 2 }}>
+                                <Box sx={{ 
+                                    ml: { xs: 0, sm: 2 },
+                                    mt: { xs: 1, sm: 0 }
+                                }}>
                                     <Typography
                                         variant="h5"
                                         sx={{
                                             fontWeight: 600,
+                                            fontSize: { xs: '1.125rem', sm: '1.5rem' },
                                             color: mode === 'light' ? '#454747' : '#FFFFFF'
                                         }}
                                     >
@@ -315,7 +363,7 @@ const ProfilePage = () => {
                                         <Typography
                                             sx={{
                                                 color: 'error.main',
-                                                fontSize: '12px',
+                                                fontSize: { xs: '0.7rem', sm: '0.8rem' },
                                                 mt: 0.5
                                             }}
                                         >
@@ -326,24 +374,43 @@ const ProfilePage = () => {
                             </Box>
                             <StyledButton className="edit-button" variant="text">
                                 Edit
-                                <Image src="/icons/edit.svg" alt="Edit" width={16} height={16} style={{ marginLeft: '8px' }} />
+                                <Image 
+                                    src="/icons/edit.svg" 
+                                    alt="Edit" 
+                                    width={16} 
+                                    height={16} 
+                                    style={{ marginLeft: '8px' }} 
+                                />
                             </StyledButton>
                         </Box>
                     </ProfileSection>
 
                     {/* Personal Information Section */}
                     <ProfileSection>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                        <Box sx={{ 
+                            display: 'flex', 
+                            flexDirection: { xs: 'column', sm: 'row' },
+                            justifyContent: 'space-between', 
+                            alignItems: { xs: 'flex-start', sm: 'center' },
+                            mb: { xs: 2, sm: 2.5, md: 3 },
+                            gap: { xs: 1, sm: 0 }
+                        }}>
                             <SectionTitle>
                                 Personal Information
                             </SectionTitle>
                             <StyledButton className="edit-button" variant="text">
                                 Edit
-                                <Image src="/icons/edit.svg" alt="Edit" width={16} height={16} style={{ marginLeft: '8px' }} />
+                                <Image 
+                                    src="/icons/edit.svg" 
+                                    alt="Edit" 
+                                    width={16} 
+                                    height={16} 
+                                    style={{ marginLeft: '8px' }} 
+                                />
                             </StyledButton>
                         </Box>
 
-                        <Grid container spacing={3}>
+                        <Grid container spacing={{ xs: 2, sm: 3 }}>
                             <Grid item xs={12} sm={4}>
                                 <LabelText>Name</LabelText>
                                 <ValueText>Noah Brown</ValueText>
@@ -360,7 +427,7 @@ const ProfilePage = () => {
                                 <LabelText>Phone Number</LabelText>
                                 <ValueText>+ 1 2387428345</ValueText>
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12} sm={8}>
                                 <LabelText>Email Address</LabelText>
                                 <ValueText>Noah@gmail.com</ValueText>
                             </Grid>
@@ -373,7 +440,7 @@ const ProfilePage = () => {
                             Diseases
                         </SectionTitle>
 
-                        <Grid container spacing={3}>
+                        <Grid container spacing={{ xs: 2, sm: 3 }}>
                             <Grid item xs={12} sm={3}>
                                 <LabelText>Speech</LabelText>
                                 <ValueText>None</ValueText>
@@ -391,11 +458,19 @@ const ProfilePage = () => {
                             General
                         </SectionTitle>
 
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+                        <Box sx={{ 
+                            display: 'flex', 
+                            flexDirection: { xs: 'column', sm: 'row' },
+                            justifyContent: 'space-between', 
+                            alignItems: { xs: 'flex-start', sm: 'center' },
+                            mb: 3,
+                            gap: { xs: 1, sm: 0 }
+                        }}>
                             <Typography
                                 sx={{
                                     color: mode === 'light' ? '#454747' : '#FFFFFF',
-                                    fontWeight: 500
+                                    fontWeight: 500,
+                                    fontSize: { xs: '0.875rem', sm: '1rem' }
                                 }}
                             >
                                 Change Password
@@ -407,20 +482,34 @@ const ProfilePage = () => {
 
                         <Divider sx={{ my: 2 }} />
 
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 3 }}>
+                        <Box sx={{ 
+                            display: 'flex', 
+                            flexDirection: { xs: 'column', sm: 'row' },
+                            justifyContent: 'space-between', 
+                            alignItems: { xs: 'flex-start', sm: 'center' },
+                            mt: 3,
+                            gap: { xs: 1, sm: 0 }
+                        }}>
                             <Typography
                                 sx={{
                                     color: mode === 'light' ? '#454747' : '#FFFFFF',
-                                    fontWeight: 500
+                                    fontWeight: 500,
+                                    fontSize: { xs: '0.875rem', sm: '1rem' }
                                 }}
                             >
                                 Notifications
                             </Typography>
-                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Box sx={{ 
+                                display: 'flex', 
+                                alignItems: 'center',
+                                flexDirection: { xs: 'column', sm: 'row' },
+                                gap: { xs: 1, sm: 0 }
+                            }}>
                                 <Typography
                                     sx={{
                                         color: mode === 'light' ? '#454747' : '#FFFFFF',
-                                        mr: 1
+                                        mr: { xs: 0, sm: 1 },
+                                        fontSize: { xs: '0.875rem', sm: '1rem' }
                                     }}
                                 >
                                     Enable Notifications
