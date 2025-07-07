@@ -10,6 +10,7 @@ import Logo from '../../components/common/Logo';
 import { useAnimation } from '@/context/AnimationContext';
 import PageTransition from '@/components/common/PageTransition';
 import { motion } from 'framer-motion';
+import { useAuth } from '@/context/AuthContext';
 
 const PageContainer = styled('div')({
   width: '100%',
@@ -35,7 +36,7 @@ const WelcomeSection = styled('div')({
   zIndex: 2,
   '@media (max-width: 1200px)': {
     display: 'none',
-    },
+  },
   '@media (max-width: 900px)': {
     display: 'none',
   },
@@ -51,7 +52,7 @@ const FormSection = styled('div')({
   position: 'relative',
   zIndex: 2,
   '@media (max-width: 1400px)': {
-  
+
     padding: '40px 20px',
     display: 'flex',
     alignItems: 'center',
@@ -69,7 +70,7 @@ const FormSection = styled('div')({
     padding: '30px 20px',
   },
   '@media (max-width: 600px)': {
-  marginTop:'120px'
+    marginTop: '120px'
   },
 
 });
@@ -86,7 +87,7 @@ const WhiteCircle = styled(motion.div)({
   boxShadow: '0px 222px 89px rgba(0, 0, 0, 0.01), 0px 125px 75px rgba(0, 0, 0, 0.05), 0px 55px 55px rgba(0, 0, 0, 0.09), 0px 14px 30px rgba(0, 0, 0, 0.1)',
   zIndex: 1,
   '@media (max-width: 1400px)': {
-   marginLeft:'-50px'
+    marginLeft: '-50px'
   },
   '@media (max-width: 1200px)': {
     display: 'none',
@@ -120,8 +121,8 @@ const MobileLogoContainer = styled('div')({
     marginLeft: '-35px'
   },
   '@media (max-width: 600px)': {
-    marginTop:'-115px'
-    },
+    marginTop: '-115px'
+  },
 });
 
 const FormContainer = styled('div')({
@@ -181,7 +182,7 @@ const LoginTitle = styled(Typography)({
   '@media (max-width: 600px)': {
     fontSize: '30px',
   },
- 
+
 });
 
 const LoginSubtitle = styled(Typography)({
@@ -343,6 +344,31 @@ const LoginPage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const { setDirection } = useAnimation();
+  const { isAuthenticated, user } = useAuth();
+
+  // Redirect authenticated users to their appropriate dashboard
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      console.log('Login page: User already authenticated, redirecting to dashboard');
+
+      // Redirect based on user role
+      let redirectPath = '/dashboard';
+      switch (user.role) {
+        case 'admin':
+          redirectPath = '/dashboard/admin';
+          break;
+        case 'practitioner':
+          redirectPath = '/dashboard/practitioner';
+          break;
+        case 'patient':
+          redirectPath = '/dashboard/patient';
+          break;
+      }
+
+      console.log('Login page: Redirecting to', redirectPath);
+      router.push(redirectPath);
+    }
+  }, [isAuthenticated, user, router]);
 
   const handleSignUpClick = () => {
     setDirection('left'); // Set animation direction

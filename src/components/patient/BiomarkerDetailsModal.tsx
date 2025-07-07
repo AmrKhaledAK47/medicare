@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
     Dialog,
     DialogTitle,
@@ -175,9 +175,36 @@ interface BiomarkerDetailsModalProps {
     open: boolean;
     onClose: () => void;
     biomarker?: {
-        name: string;
-        icon: string;
-        color: string;
+        id?: string;
+        name?: string;
+        type?: string;
+        icon?: string;
+        color?: string;
+        value?: string;
+        unit?: string;
+        referenceRange?: string;
+        status?: 'normal' | 'high' | 'low' | 'critical' | 'unknown';
+        date?: string;
+        trend?: {
+            direction: 'up' | 'down' | 'stable';
+            percentage?: number;
+        };
+        performer?: string;
+        relatedBiomarkers?: Array<{
+            id?: string;
+            name?: string;
+            type?: string;
+            value?: string;
+            unit?: string;
+            referenceRange?: string;
+            status?: 'normal' | 'high' | 'low' | 'critical' | 'unknown';
+            date?: string;
+            trend?: {
+                direction: 'up' | 'down' | 'stable';
+                percentage?: number;
+            };
+            performer?: string;
+        }>;
     } | null;
 }
 
@@ -207,34 +234,156 @@ function TabPanel(props: TabPanelProps) {
 const BiomarkerDetailsModal: React.FC<BiomarkerDetailsModalProps> = ({ open, onClose, biomarker }) => {
     const { mode } = useThemeContext();
     const [tabValue, setTabValue] = useState(0);
+    const [selectedBiomarkerDetail, setSelectedBiomarkerDetail] = useState<any>(null);
+    const [iconError, setIconError] = useState(false);
 
     const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
         setTabValue(newValue);
     };
 
-    // Sample data for history tab
-    const historyData = [
-        { date: '2023-09-15', value: '120', unit: 'mg/dL', status: 'Normal' },
-        { date: '2023-06-21', value: '132', unit: 'mg/dL', status: 'Elevated' },
-        { date: '2023-03-05', value: '125', unit: 'mg/dL', status: 'Normal' },
-        { date: '2022-12-18', value: '142', unit: 'mg/dL', status: 'Elevated' },
-        { date: '2022-09-27', value: '118', unit: 'mg/dL', status: 'Normal' },
-    ];
+    // Reset icon error state when modal opens or biomarker changes
+    React.useEffect(() => {
+        if (open) {
+            setIconError(false);
+        }
+    }, [open, biomarker]);
+
+    // Get the most recent biomarker detail from the related biomarkers
+    const latestBiomarkerDetail = useMemo(() => {
+        if (!biomarker?.relatedBiomarkers || biomarker.relatedBiomarkers.length === 0) {
+            return biomarker; // Use the main biomarker if no related ones
+        }
+
+        return biomarker.relatedBiomarkers.reduce((latest, current) => {
+            if (!latest) return current;
+            if (!current.date) return latest;
+            if (!latest.date) return current;
+
+            return new Date(current.date) > new Date(latest.date) ? current : latest;
+        }, null);
+    }, [biomarker]);
+
+    // Use the selected biomarker detail or the latest one
+    const activeBiomarkerDetail = selectedBiomarkerDetail || latestBiomarkerDetail || biomarker;
+
+    // Format date for display
+    const formatDate = (dateString?: string) => {
+        if (!dateString) return 'N/A';
+
+        try {
+            return new Date(dateString).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        } catch (error) {
+            return 'Invalid Date';
+        }
+    };
 
     // Get status color
-    const getStatusColor = (status: string) => {
+    const getStatusColor = (status?: string) => {
+        if (!status) return '#6C7A89';
+
         switch (status.toLowerCase()) {
             case 'normal':
                 return '#4CAF50';
             case 'elevated':
-                return '#FF9800';
             case 'high':
+                return '#FF9800';
+            case 'critical':
                 return '#F44336';
             case 'low':
                 return '#2196F3';
             default:
                 return '#6C7A89';
         }
+    };
+
+    // Parse reference range to get min and max values
+    const parseReferenceRange = (range?: string) => {
+        if (!range) return { min: 0, max: 100 };
+
+        // Try to extract numeric values from the range string
+        const numbers = range.match(/\d+(\.\d+)?/g);
+        if (numbers && numbers.length >= 2) {
+            return {
+                min: parseFloat(numbers[0]),
+                max: parseFloat(numbers[1])
+            };
+        }
+
+        return { min: 0, max: 100 };
+    };
+
+    // Calculate position percentage for the current value in the range
+    const calculateValuePosition = (value?: string, range?: string) => {
+        if (!value || !range) return 50;
+
+        const numValue = parseFloat(value);
+        const { min, max } = parseReferenceRange(range);
+
+        if (isNaN(numValue)) return 50;
+
+        // Calculate percentage position
+        let position = ((numValue - min) / (max - min)) * 100;
+
+        // Clamp between 0 and 100
+        position = Math.max(0, Math.min(100, position));
+
+        return position;
+    };
+
+    // Get default icon based on biomarker type
+    const getDefaultIcon = (biomarkerType?: string) => {
+        if (!biomarkerType) return '/icons/biomarker.svg';
+
+        const type = biomarkerType.toLowerCase();
+
+        if (type.includes('cholesterol') || type.includes('hdl') || type.includes('ldl') ||
+            type.includes('triglycerides') || type.includes('blood-pressure')) {
+            return '/icons/heart.svg';
+        }
+
+        if (type.includes('creatinine') || type.includes('bun') || type.includes('egfr') ||
+            type.includes('urine-albumin')) {
+            return '/icons/kidney.svg';
+        }
+
+        if (type.includes('alt') || type.includes('ast') || type.includes('alp') ||
+            type.includes('bilirubin')) {
+            return '/icons/liver.svg';
+        }
+
+        if (type.includes('glucose') || type.includes('a1c') || type.includes('insulin')) {
+            return '/images/sugar-icon.png';
+        }
+
+        if (type.includes('hemoglobin') || type.includes('hematocrit') || type.includes('platelets') ||
+            type.includes('wbc') || type.includes('rbc')) {
+            return '/icons/blood.svg';
+        }
+
+        if (type.includes('tsh') || type.includes('t3') || type.includes('t4')) {
+            return '/icons/thyroid.svg';
+        }
+
+        if (type.includes('calcium') || type.includes('vitamin-d') || type.includes('phosphorus')) {
+            return '/icons/bone.svg';
+        }
+
+        return '/icons/biomarker.svg';
+    };
+
+    // Get biomarker color based on type or status
+    const getBiomarkerColor = () => {
+        if (biomarker?.color) return biomarker.color;
+
+        if (activeBiomarkerDetail?.status) {
+            return getStatusColor(activeBiomarkerDetail.status);
+        }
+
+        return '#21647D'; // Default color
     };
 
     if (!biomarker) return null;
@@ -256,19 +405,30 @@ const BiomarkerDetailsModal: React.FC<BiomarkerDetailsModalProps> = ({ open, onC
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        backgroundColor: iconError ? (mode === 'light' ? '#F5F9FA' : '#262626') : 'transparent',
+                        borderRadius: '50%',
                     }}>
-                        <Image
-                            src={biomarker.icon}
-                            alt={biomarker.name}
-                            width={36}
-                            height={36}
-                            style={{
-                                filter: mode === 'dark' ? 'brightness(0.8) invert(0.8)' : 'none',
-                                objectFit: 'contain'
-                            }}
-                        />
+                        {!iconError ? (
+                            <Image
+                                src={biomarker.icon || getDefaultIcon(biomarker.type)}
+                                alt={biomarker.name || biomarker.type || 'Biomarker'}
+                                width={36}
+                                height={36}
+                                onError={() => setIconError(true)}
+                                style={{
+                                    filter: mode === 'dark' ? 'brightness(0.8) invert(0.8)' : 'none',
+                                    objectFit: 'contain'
+                                }}
+                            />
+                        ) : (
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M12 8V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M12 16H12.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        )}
                     </Box>
-                    {biomarker.name} Biomarkers
+                    {biomarker.name || biomarker.type || 'Biomarker'} Details
                 </Box>
                 <IconButton
                     aria-label="close"
@@ -292,94 +452,144 @@ const BiomarkerDetailsModal: React.FC<BiomarkerDetailsModalProps> = ({ open, onC
                 </StyledTabs>
 
                 <TabPanel value={tabValue} index={0}>
-                    <InfoCard>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                            <Box>
-                                <Typography variant="h6" sx={{
-                                    fontWeight: 600,
-                                    color: mode === 'light' ? '#454747' : '#FFFFFF',
-                                    mb: 1,
-                                }}>
-                                    Latest Result
-                                </Typography>
-                                <Typography variant="body2" sx={{
-                                    color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
-                                }}>
-                                    September 15, 2023
-                                </Typography>
-                            </Box>
-                            <Box sx={{ textAlign: 'right' }}>
-                                <Typography variant="h4" sx={{
-                                    fontWeight: 700,
-                                    color: biomarker.color,
-                                    mb: 0.5,
-                                    fontFamily: 'poppins',
-                                }}>
-                                    120
-                                    <Typography component="span" sx={{
-                                        fontSize: '1rem',
-                                        ml: 0.5,
-                                        fontWeight: 400,
+                    {activeBiomarkerDetail ? (
+                        <InfoCard>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                <Box>
+                                    <Typography variant="h6" sx={{
+                                        fontWeight: 600,
+                                        color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                        mb: 1,
                                     }}>
-                                        mg/dL
+                                        {activeBiomarkerDetail.name || activeBiomarkerDetail.type || 'Latest Result'}
                                     </Typography>
-                                </Typography>
-                                <Chip
-                                    label="Normal"
-                                    size="small"
-                                    sx={{
-                                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                                        color: '#4CAF50',
-                                        fontWeight: 500,
-                                    }}
-                                />
+                                    <Typography variant="body2" sx={{
+                                        color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                                    }}>
+                                        {formatDate(activeBiomarkerDetail.date)}
+                                    </Typography>
+                                </Box>
+                                <Box sx={{ textAlign: 'right' }}>
+                                    <Typography variant="h4" sx={{
+                                        fontWeight: 700,
+                                        color: getBiomarkerColor(),
+                                        mb: 0.5,
+                                        fontFamily: 'poppins',
+                                    }}>
+                                        {activeBiomarkerDetail.value || 'N/A'}
+                                        <Typography component="span" sx={{
+                                            fontSize: '1rem',
+                                            ml: 0.5,
+                                            fontWeight: 400,
+                                        }}>
+                                            {activeBiomarkerDetail.unit || ''}
+                                        </Typography>
+                                    </Typography>
+                                    <Chip
+                                        label={activeBiomarkerDetail.status || 'Unknown'}
+                                        size="small"
+                                        sx={{
+                                            backgroundColor: `${getStatusColor(activeBiomarkerDetail.status)}22`,
+                                            color: getStatusColor(activeBiomarkerDetail.status),
+                                            fontWeight: 500,
+                                        }}
+                                    />
+                                </Box>
                             </Box>
-                        </Box>
 
-                        <Divider sx={{ my: 2 }} />
+                            {activeBiomarkerDetail.referenceRange && (
+                                <>
+                                    <Divider sx={{ my: 2 }} />
 
-                        <Typography variant="subtitle2" sx={{
-                            fontWeight: 600,
-                            mb: 1,
-                            color: mode === 'light' ? '#454747' : '#FFFFFF',
-                        }}>
-                            Reference Range
-                        </Typography>
+                                    <Typography variant="subtitle2" sx={{
+                                        fontWeight: 600,
+                                        mb: 1,
+                                        color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                    }}>
+                                        Reference Range: {activeBiomarkerDetail.referenceRange}
+                                    </Typography>
 
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                            <Typography variant="body2" sx={{ color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                Low: &lt;100 mg/dL
+                                    <RangeIndicator>
+                                        <RangeMarker position={35} />
+                                        <RangeMarker position={75} />
+                                        <RangeMarker
+                                            position={calculateValuePosition(
+                                                activeBiomarkerDetail.value,
+                                                activeBiomarkerDetail.referenceRange
+                                            )}
+                                            isValue
+                                        />
+
+                                        <LinearProgress
+                                            variant="determinate"
+                                            value={35}
+                                            sx={{
+                                                position: 'absolute',
+                                                top: 0,
+                                                left: 0,
+                                                height: '8px',
+                                                borderRadius: '4px',
+                                                backgroundColor: 'transparent',
+                                                '& .MuiLinearProgress-bar': {
+                                                    backgroundColor: getBiomarkerColor(),
+                                                }
+                                            }}
+                                        />
+                                    </RangeIndicator>
+                                </>
+                            )}
+
+                            {activeBiomarkerDetail.trend && (
+                                <Box sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
+                                    <Typography variant="body2" sx={{
+                                        fontWeight: 500,
+                                        color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                        mr: 1,
+                                    }}>
+                                        Trend:
+                                    </Typography>
+                                    <Box sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        color: activeBiomarkerDetail.trend.direction === 'up'
+                                            ? '#F44336'
+                                            : activeBiomarkerDetail.trend.direction === 'down'
+                                                ? '#4CAF50'
+                                                : '#FFC107'
+                                    }}>
+                                        {activeBiomarkerDetail.trend.direction === 'up' && (
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 19V5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M5 12L12 5L19 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        )}
+                                        {activeBiomarkerDetail.trend.direction === 'down' && (
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 5V19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M19 12L12 19L5 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        )}
+                                        {activeBiomarkerDetail.trend.direction === 'stable' && (
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        )}
+                                        <Typography variant="body2" sx={{ ml: 0.5, fontWeight: 500 }}>
+                                            {activeBiomarkerDetail.trend.percentage
+                                                ? `${activeBiomarkerDetail.trend.percentage}%`
+                                                : activeBiomarkerDetail.trend.direction}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            )}
+                        </InfoCard>
+                    ) : (
+                        <InfoCard>
+                            <Typography variant="body1" sx={{ textAlign: 'center', color: '#6C7A89' }}>
+                                No biomarker data available
                             </Typography>
-                            <Typography variant="body2" sx={{ color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                Normal: 100-140 mg/dL
-                            </Typography>
-                            <Typography variant="body2" sx={{ color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                High: &gt;140 mg/dL
-                            </Typography>
-                        </Box>
-
-                        <RangeIndicator>
-                            <RangeMarker position={35} />
-                            <RangeMarker position={75} />
-                            <RangeMarker position={50} isValue />
-
-                            <LinearProgress
-                                variant="determinate"
-                                value={35}
-                                sx={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    height: '8px',
-                                    borderRadius: '4px',
-                                    backgroundColor: 'transparent',
-                                    '& .MuiLinearProgress-bar': {
-                                        backgroundColor: '#21647D',
-                                    }
-                                }}
-                            />
-                        </RangeIndicator>
-                    </InfoCard>
+                        </InfoCard>
+                    )}
 
                     <ChartContainer>
                         <Typography
@@ -452,6 +662,13 @@ const BiomarkerDetailsModal: React.FC<BiomarkerDetailsModalProps> = ({ open, onC
                                         color: mode === 'light' ? '#454747' : '#FFFFFF',
                                         borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`,
                                     }}>
+                                        Type
+                                    </TableCell>
+                                    <TableCell sx={{
+                                        fontWeight: 600,
+                                        color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                        borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`,
+                                    }}>
                                         Date
                                     </TableCell>
                                     <TableCell align="right" sx={{
@@ -478,71 +695,87 @@ const BiomarkerDetailsModal: React.FC<BiomarkerDetailsModalProps> = ({ open, onC
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {historyData.map((row, index) => (
-                                    <TableRow
-                                        key={index}
-                                        sx={{
-                                            '&:last-child td, &:last-child th': { border: 0 },
-                                            backgroundColor: index % 2 === 0
-                                                ? (mode === 'light' ? '#F8FBFC' : '#262626')
-                                                : 'transparent',
-                                            transition: 'background-color 0.2s',
-                                            '&:hover': {
-                                                backgroundColor: mode === 'light' ? '#EEF6FA' : '#1E2A30',
-                                            },
-                                        }}
-                                    >
-                                        <TableCell
-                                            component="th"
-                                            scope="row"
+                                {biomarker.relatedBiomarkers && biomarker.relatedBiomarkers.length > 0 ? (
+                                    biomarker.relatedBiomarkers.map((biomarkerDetail, index) => (
+                                        <TableRow
+                                            key={index}
                                             sx={{
-                                                borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
-                                                color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                                '&:last-child td, &:last-child th': { border: 0 },
+                                                backgroundColor: index % 2 === 0
+                                                    ? (mode === 'light' ? '#F8FBFC' : '#262626')
+                                                    : 'transparent',
+                                                transition: 'background-color 0.2s',
+                                                '&:hover': {
+                                                    backgroundColor: mode === 'light' ? '#EEF6FA' : '#1E2A30',
+                                                    cursor: 'pointer',
+                                                },
                                             }}
+                                            onClick={() => setSelectedBiomarkerDetail(biomarkerDetail)}
                                         >
-                                            {new Date(row.date).toLocaleDateString('en-US', {
-                                                year: 'numeric',
-                                                month: 'short',
-                                                day: 'numeric'
-                                            })}
-                                        </TableCell>
-                                        <TableCell
-                                            align="right"
-                                            sx={{
-                                                fontWeight: 600,
-                                                borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
-                                                color: biomarker.color,
-                                            }}
-                                        >
-                                            {row.value}
-                                        </TableCell>
-                                        <TableCell
-                                            align="right"
-                                            sx={{
-                                                borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
-                                                color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
-                                            }}
-                                        >
-                                            {row.unit}
-                                        </TableCell>
-                                        <TableCell
-                                            align="right"
-                                            sx={{
-                                                borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
-                                            }}
-                                        >
-                                            <Chip
-                                                label={row.status}
-                                                size="small"
+                                            <TableCell
+                                                component="th"
+                                                scope="row"
                                                 sx={{
-                                                    backgroundColor: `${getStatusColor(row.status)}22`,
-                                                    color: getStatusColor(row.status),
-                                                    fontWeight: 500,
+                                                    borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
+                                                    color: mode === 'light' ? '#454747' : '#FFFFFF',
                                                 }}
-                                            />
+                                            >
+                                                {biomarkerDetail.type || biomarkerDetail.name || 'Unknown'}
+                                            </TableCell>
+                                            <TableCell
+                                                sx={{
+                                                    borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
+                                                    color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                                }}
+                                            >
+                                                {formatDate(biomarkerDetail.date)}
+                                            </TableCell>
+                                            <TableCell
+                                                align="right"
+                                                sx={{
+                                                    fontWeight: 600,
+                                                    borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
+                                                    color: getBiomarkerColor(),
+                                                }}
+                                            >
+                                                {biomarkerDetail.value || 'N/A'}
+                                            </TableCell>
+                                            <TableCell
+                                                align="right"
+                                                sx={{
+                                                    borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
+                                                    color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                                                }}
+                                            >
+                                                {biomarkerDetail.unit || '-'}
+                                            </TableCell>
+                                            <TableCell
+                                                align="right"
+                                                sx={{
+                                                    borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#333'}`,
+                                                }}
+                                            >
+                                                <Chip
+                                                    label={biomarkerDetail.status || 'Unknown'}
+                                                    size="small"
+                                                    sx={{
+                                                        backgroundColor: `${getStatusColor(biomarkerDetail.status)}22`,
+                                                        color: getStatusColor(biomarkerDetail.status),
+                                                        fontWeight: 500,
+                                                    }}
+                                                />
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
+                                ) : (
+                                    <TableRow>
+                                        <TableCell colSpan={5} align="center" sx={{ py: 3 }}>
+                                            <Typography variant="body1" sx={{ color: '#6C7A89' }}>
+                                                No history data available
+                                            </Typography>
                                         </TableCell>
                                     </TableRow>
-                                ))}
+                                )}
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -583,51 +816,39 @@ const BiomarkerDetailsModal: React.FC<BiomarkerDetailsModalProps> = ({ open, onC
                         </Typography>
 
                         <Typography variant="body1" sx={{ mb: 2, color: mode === 'light' ? '#454747' : '#FFFFFF' }}>
-                            This biomarker provides important information about your {biomarker.name.toLowerCase()} health and function. Regular monitoring helps detect early signs of potential health issues.
+                            This biomarker provides important information about your {biomarker.name?.toLowerCase() || biomarker.type?.toLowerCase()} health and function. Regular monitoring helps detect early signs of potential health issues.
                         </Typography>
 
-                        <Typography variant="subtitle2" sx={{
-                            fontWeight: 600,
-                            mb: 1,
-                            color: mode === 'light' ? '#454747' : '#FFFFFF',
-                            mt: 3,
-                        }}>
-                            Reference Ranges
-                        </Typography>
+                        {latestBiomarkerDetail?.referenceRange && (
+                            <>
+                                <Typography variant="subtitle2" sx={{
+                                    fontWeight: 600,
+                                    mb: 1,
+                                    color: mode === 'light' ? '#454747' : '#FFFFFF',
+                                    mt: 3,
+                                }}>
+                                    Reference Ranges
+                                </Typography>
 
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: 1,
-                                mb: 2,
-                            }}
-                        >
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography variant="body2" sx={{ fontWeight: 500, color: mode === 'light' ? '#454747' : '#FFFFFF' }}>
-                                    Normal Range:
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                    100-140 mg/dL
-                                </Typography>
-                            </Box>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography variant="body2" sx={{ fontWeight: 500, color: mode === 'light' ? '#454747' : '#FFFFFF' }}>
-                                    Low Range:
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                    &lt;100 mg/dL
-                                </Typography>
-                            </Box>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography variant="body2" sx={{ fontWeight: 500, color: mode === 'light' ? '#454747' : '#FFFFFF' }}>
-                                    High Range:
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                    &gt;140 mg/dL
-                                </Typography>
-                            </Box>
-                        </Box>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 1,
+                                        mb: 2,
+                                    }}
+                                >
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                        <Typography variant="body2" sx={{ fontWeight: 500, color: mode === 'light' ? '#454747' : '#FFFFFF' }}>
+                                            Reference Range:
+                                        </Typography>
+                                        <Typography variant="body2" sx={{ color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
+                                            {latestBiomarkerDetail.referenceRange}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </>
+                        )}
 
                         <Typography variant="subtitle2" sx={{
                             fontWeight: 600,
@@ -647,7 +868,7 @@ const BiomarkerDetailsModal: React.FC<BiomarkerDetailsModalProps> = ({ open, onC
                                 Your values are consistently outside the normal range
                             </Typography>
                             <Typography component="li" variant="body2" sx={{ mb: 1, color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                You experience unexplained symptoms related to {biomarker.name.toLowerCase()} function
+                                You experience unexplained symptoms related to {biomarker.name?.toLowerCase() || biomarker.type?.toLowerCase()} function
                             </Typography>
                             <Typography component="li" variant="body2" sx={{ mb: 1, color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
                                 Your values show a sudden or significant change

@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "npm run copy-fatma-styles && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "copy-fatma-styles": "node scripts/copy-fatma-styles.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -24,6 +25,8 @@
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.54.2",
+    "react-icons": "^5.5.0",
+    "uuid": "^11.1.0",
     "yup": "^1.6.1"
   },
   "devDependencies": {
@@ -32,6 +35,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/uuid": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.2.0",
     "tailwindcss": "^4",

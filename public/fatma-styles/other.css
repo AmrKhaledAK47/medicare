@@ -1,0 +1,891 @@
+.headerd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px; /* تكبير التباعد */
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* للتأكد من أنه فوق بقية العناصر */
+  height: 40px; /* زيادة الارتفاع */
+}
+
+.cards-title2-doctor {
+  display: flex;
+  justify-content: flex-start;  /* 👈 أو ممكن "center" لو حابة يكونوا في النص */
+  align-items: flex-start;
+  gap: 0px;                      /* 👈 اتحكمي في المسافة بينهم، ممكن تخليها 4px لو لازقين */
+  padding: 0;
+  margin: 0;
+
+}
+
+.card-box-title2-doctor{
+  background-color: #BBE9F8;
+  color: #000;
+  padding: 13px;
+  border-radius: 16px;
+  width: 160px;
+  height: 90px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  margin-top: -140px;
+  margin-left: 450px;
+
+
+
+}
+
+.card-title-box2-doctor{
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0px;
+  margin-top: -5px;
+  
+  
+}
+
+.card-number-box2-doctor{
+  font-size: 26px;
+  font-weight: bold;
+ 
+}
+
+.card-box2-doctor {
+  background-color: #BBE9F8;
+  color: #000;
+  padding: 13px;
+  border-radius: 16px;
+  width: 160px;
+  height: 70px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  margin-top: -130px;
+  margin-left: 40px;
+  
+  
+}
+
+
+
+.card-title2-doctor {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0px;
+  margin-top: -5px;
+}
+
+
+.card-number2-doctor {
+  font-size: 26px;
+  font-weight: bold;
+ margin-top: 20px;
+}
+
+
+.badge-group2-doctor {
+  display: flex;
+  flex-direction: column;
+  /*gap: 8px;*/
+  margin-top: -75px;
+  margin-left: 80px;
+  
+}
+
+.pink-badge2-doctor {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ffe5e5;
+  color: #D30404;
+  font-weight: bold;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 0;
+}
+
+.green-badge2-doctor {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #DFFDDD;
+  color: #008000;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin: 0;
+}
+
+.badges-group2-doctor {
+  display: flex;
+  flex-direction: column;
+  /*gap: 8px;*/
+  margin-top: -60px;
+  margin-left: 60px;
+  
+}
+.main-section-flex-doctor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  height: 30px;
+  margin-left: 20px;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #21647D;
+  margin-left: 0px;
+  margin-top: 11px;
+
+}
+
+.subtitle {
+  color: gray;
+}
+
+.icons-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 60px;
+  
+}
+
+.iconx {
+  height: 24px !important;
+  width: 32px;
+}
+
+.profile-iconx {
+  height: 32px;
+  border-radius: 50%;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: 2px;
+  background-color:#21647D;
+  color: white;
+  font-size: 12px;
+  /*font-weight: bold;*/
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* === Sidebar Container === */
+.containetr {
+display: flex;
+}
+
+/* === Sidebar Styling === */
+.sidebars {
+position: fixed;
+left: 0;
+top: 0;
+height: 85vh;
+background-color: white;
+box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+transition: width 0.3s ease-in-out;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: 16px 0;
+margin-top: 75px;
+ z-index: 2;
+}
+
+.sidebars.collapsed {
+width: 70px;
+}
+
+.sidebars.expanded {
+width: 220px;
+
+
+
+}
+
+.sidebars.expanded ul {
+display: flex;
+flex-direction: column;
+gap: 3.5px; /* زيادة المسافة بين العناصر */
+}
+
+
+
+
+
+
+/* === Sidebar Menu Styling === */
+.menuu {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.menuu li {
+display: flex;
+align-items: center;
+padding: 12px 16px;
+cursor: pointer;
+transition: background 0.2s;
+
+}
+
+.menuu li:hover {
+background-color: #ffffff;
+}
+
+/* === Sidebar Icons Styling === */
+.iconu {
+width: 20px;
+height: 20px;
+margin-left:-35px;
+margin-bottom:35px; /* زيادة المسافة بين الأيقونات */
+margin-top: -30px;
+
+}
+
+/* === Text Styling === */
+.texts {
+font-size: 16px;
+color: #003f5c;
+font-weight: 500;
+margin-left: 17px !important;
+transform: translateY(-33px ); /* يحرّك العنصر للأسفل */
+
+}
+
+.practitioner-container-doctor {
+  margin: 20px;
+  margin-top: 100px;
+  margin-left: 120px;
+}
+
+.section-title-doctor {
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.practitioner-card-doctor {
+  position: relative;
+  width: 900px;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: -8px;
+  
+}
+
+.background-image-doctor {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.overlay-doctor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /*background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 20%, rgba(0, 0, 0, 0) 80%);*/
+}
+
+.content-doctor {
+  position: absolute;
+  top: 0;
+  left: 40%;
+  height: 100%;
+  width: 60%;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-doctor h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  margin-top: -30px;
+}
+
+.specialty-doctor {
+  font-size: 1.5rem;
+  color: white;
+  margin-top: -160px;
+  margin-left: 80px;
+
+}
+
+.stars-doctor {
+  margin: 5px 0;
+}
+
+.bio-doctor {
+  font-size: 1.5rem;
+  color:white;
+  margin: 10px 0;
+  max-width: 90%;
+  margin-left: 80px;
+}
+
+.time-doctor {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #e0e0e0;
+}
+
+.icons-doctor {
+  margin-top: -50px;
+  margin-left: 400px;
+  
+}
+
+.icons-doctor button {
+  background: white;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.icons-doctor button:hover {
+  background: #e0e7ff;
+}
+
+
+.calendar-container-doctor {
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 390px;
+  height: 265px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  margin-left: 950px;
+  margin-top:-750px;
+
+}
+
+.calendar-title-doctor {
+  font-weight: 600;
+  color: #1e1e1e;
+  margin-bottom: -2px;
+  margin-top: -10px;
+}
+
+.calendar-header-doctor {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.calendar-grid-doctor {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  font-size: 13px;
+  color: #333;
+  margin-bottom:px;
+}
+
+.calendar-day-doctor {
+  font-weight: bold;
+  text-align: center;
+  color: #999;
+}
+
+.calendar-date-doctor {
+  position: relative;
+  text-align: center;
+  padding: 4px 0;
+  margin-bottom: -15px;
+}
+
+.dot-doctor {
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+  margin: 4px auto 0;
+  display: block;
+}
+
+.upcoming-section-doctor {
+  margin-top: 20px;
+ 
+}
+
+.upcoming-header-doctor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -8px;
+}
+
+.upcoming-header-doctor h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.upcoming-header-doctor a {
+  font-size: 12px;
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.upcoming-card-doctor {
+  display: flex;
+  align-items: center;
+  background:#F0F9FD;
+  color: black;
+  padding: 3px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.circle-icon-doctor {
+  background-color: #57B4DE;
+  color: white;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  margin-right: 10px;
+}
+
+.event-details-doctor .event-title-doctor {
+  margin: 0;
+  font-weight: 600;
+}
+
+.event-details-doctor .event-time-doctor {
+  margin: 2px 0 0;
+  font-size: 12px;
+}
+
+.records-container-doctor {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  margin: 20px;
+  width: 850px;
+  height: 240px;
+  margin-left: 0px;
+  z-index: 1; /* أقل من الـ sidebar */
+  margin-top:-340px;
+}
+
+.records-title-doctor {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  margin-top: -10px;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.records-header-doctor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 16px 20px;
+  background-color: #f9f9f9; /* خلفية فاتحة */
+  border-radius: 12px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  height: 20px;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.records-header-doctor::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0%;
+  background-color: #E0E0E0;
+  z-index: 0;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.records-title-doctor {
+  position: relative;
+  z-index: 2;
+  color: #1A1B3C;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.nav-buttons-doctor {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.nav-circle-doctor {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.nav-circle-doctor:hover {
+  background-color: #f0f0f0;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+
+.patient-images-doctor {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  
+}
+
+.patient-avatar-doctor {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+}
+
+.stats-cards-doctor {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card-doctor {
+  display: flex;
+  align-items: center;
+  background: #f9fbfc;
+  border-radius: 16px;
+  padding: 16px;
+  min-width: 280px;
+  height: 100px;
+  flex: 1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-top: -20px;
+}
+
+.icon-container-doctor {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+  margin-top: -50px;
+}
+
+.icon-container-doctor img {
+  width: 45px;
+  height: 45px;
+  margin-top: 2px;
+}
+
+.purple-doctor {
+  background: #eee5ff;
+}
+
+.pink-doctor {
+  background: #ffe6ea;
+}
+
+.stat-number-doctor {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 4px 0;
+  margin-left: -70px;
+}
+
+.stat-change-doctor {
+  font-size: 14px;
+  margin-top: -22px;
+
+}
+
+.stat-change-doctor.green {
+  color: green;
+}
+
+.card-container-doctor {
+  position: relative;
+  width: 320px;
+  height: auto;
+  margin: 20px;
+  margin-left: 1000px;
+}
+
+.card-doctor {
+  background-color: white;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 2;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.card-doctor::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  z-index: -1;
+  transform: rotate(4deg);
+}
+
+.card-tag-doctor {
+  color: gray;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.card-title-doctor {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.card-image-doctor {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+
+.appointments-section-doctor {
+  background-color: #ffffff; /* لون خلفية المربع */
+  border-radius: 10px; /* زوايا دائرية */
+  padding: 20px; /* تباعد داخلي */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل */
+  margin-bottom: 20px; /* تباعد عن الأقسام الأخرى */
+  margin-top: -450px;
+  max-width: 850px; /* تحديد العرض الأقصى */
+  margin-left: -15px;
+  border: 1px solid #ddd;
+}
+
+.appointments-title-doctor {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-right: 5%;  /* لتحريكه قليلاً لليمين */
+  text-align: right;  /* لجعل النص "Appointments" يذهب لليمين */
+  color: #44BC8E;
+}
+.appointments-title-doctor span {
+  padding-left: 50%;  /* حركة النص نحو اليسار */
+  margin-right: 65%;  /* لتحريكه قليلاً لليمين */
+}
+
+.viewAll-doctor {
+  background-color: #ffffff;
+  color: #217C99;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  
+
+}
+
+
+/* تصميم الجدول */
+.appointments-table-doctor99 {
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-left: 11%; /* توسيط الجدول */
+  margin-right: 30%; /* اجعل الجدول يتحرك نحو اليمين */
+
+  
+  
+}
+
+.appointments-table-doctor99 th, .appointments-table-doctor99 td {
+  /*border: 1px solid #ddd;*/
+   padding: 10px 14px; /* تحكمي هنا في المسافات داخل الخلية */
+   text-align: left;
+  
+}
+
+.appointments-table-doctor99 th {
+  background-color: white !important;
+  color: #217C99; /* لون النص أزرق */
+
+  
+}
+
+.appointments-table-doctor99 tbody tr:hover {
+  background-color: white !important;
+}
+
+
+
+.appointments-notifications-container-doctor {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.appointments-section-doctor {
+  flex: 3;
+  margin-right: 20px;
+}
+
+
+.notifications-section-doctor {
+  width: 400px;  /* تأكد من أن العنصر لا يتجاوز عرض الشاشة */
+  background-color: #F5F9FA !important;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;  /* إذا كانت العناصر أكثر من المساحة المتاحة سيتم إضافة شريط تمرير عمودي */
+  box-sizing: border-box;  /* لتحديد المسافات بدقة */
+  margin-left: 970px;
+  margin-top: 25px;
+  padding: 20px;
+  
+}
+
+.notifications-title-doctor {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+
+}
+
+.notifications-list-doctor {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  
+}
+
+.notifications-list-doctor li {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+
+}
+
+
+.notification-item-doctor {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+.notification-image-doctor {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.notification-image-doctor img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.notification-item-doctor span {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+  
+

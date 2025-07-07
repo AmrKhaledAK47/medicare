@@ -64,13 +64,13 @@ const ProgressBarContainer = styled(Box)(({ theme }) => ({
     marginBottom: theme.spacing(3),
 }));
 
-const ProgressBar = styled(LinearProgress)(({ theme, active }: { theme?: any, active: boolean }) => ({
+const ProgressBar = styled(LinearProgress)(({ theme, isActive }: { theme?: any, isActive: boolean }) => ({
     height: '8px',
     borderRadius: '10px',
     width: '120px',
     backgroundColor: theme.palette.mode === 'light' ? '#E0E0E0' : '#444',
     '& .MuiLinearProgress-bar': {
-        backgroundColor: active ? '#217C99' : 'transparent',
+        backgroundColor: isActive ? '#217C99' : 'transparent',
     },
     [theme.breakpoints.down('sm')]: {
         width: '28%',
@@ -156,6 +156,7 @@ const GoButton = styled(Button)(({ theme }) => ({
     fontWeight: 500,
     textTransform: 'none',
     boxShadow: '0px 4px 10px rgba(33, 124, 153, 0.25)',
+    color: '#FFFFFF',
     transition: 'all 0.2s ease',
     '&:hover': {
         backgroundColor: '#1A5369',
@@ -217,9 +218,9 @@ const SetupMedicare: React.FC = () => {
 
                 {/* Step Progress Indicators */}
                 <ProgressBarContainer>
-                    <ProgressBar variant="determinate" value={100} active={true} />
-                    <ProgressBar variant="determinate" value={0} active={false} />
-                    <ProgressBar variant="determinate" value={0} active={false} />
+                    <ProgressBar variant="determinate" value={100} isActive={true} />
+                    <ProgressBar variant="determinate" value={0} isActive={false} />
+                    <ProgressBar variant="determinate" value={0} isActive={false} />
                 </ProgressBarContainer>
 
                 {/* Current step content - Connect Devices & Apps */}

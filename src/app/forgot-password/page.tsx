@@ -15,6 +15,7 @@ import Logo from '../../components/common/Logo';
 import { useAnimation } from '@/context/AnimationContext';
 import PageTransition from '@/components/common/PageTransition';
 import Input from '@/components/common/Input';
+import apiService from '@/services/api.service';
 
 interface ForgotPasswordValues {
     email: string;
@@ -33,12 +34,12 @@ const PageContainer = styled('div')({
         margin: '0 auto',
     },
     '@media (max-width: 480px)': {
-        paddingTop :'80px',
+        paddingTop: '80px',
         flexDirection: 'column',
         minHeight: '100vh',
         height: 'auto',
         overflow: 'hidden',
-       
+
     }
 });
 
@@ -52,7 +53,7 @@ const FormSection = styled('div')({
     position: 'relative',
     zIndex: 2,
     overflow: 'hidden',
-  
+
     '@media (min-width: 2000px)': {
         width: '50%',
     },
@@ -91,7 +92,7 @@ const ImageSection = styled('div')({
     '@media (max-width: 480px)': {
         width: '100%',
         height: '40%',
-        display:'none',
+        display: 'none',
     }
 });
 
@@ -352,7 +353,7 @@ const PatternBackground = styled('div')({
     overflow: 'hidden',
     zIndex: 0,
     opacity: 0.07
-  
+
 });
 
 const SuccessOverlay = styled(motion.div)({
@@ -450,6 +451,8 @@ const ForgotPasswordPage = () => {
         isTyping: false,
         isValid: false
     });
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     // Fix for mobile viewport height issues
     useEffect(() => {
@@ -573,22 +576,31 @@ const ForgotPasswordPage = () => {
         }
     };
 
-    const handleSubmit = (values: ForgotPasswordValues, { setSubmitting }: FormikHelpers<ForgotPasswordValues>) => {
-        // Handle submission logic here
-        console.log('Form values', values);
+    const handleSubmit = async (values: ForgotPasswordValues, { setSubmitting }: FormikHelpers<ForgotPasswordValues>) => {
+        setIsLoading(true);
+        setError(null);
 
-        // Simulate API call
-        setTimeout(() => {
-            setSubmitting(false);
+        try {
+            // Call the API service
+            await apiService.forgotPassword({ email: values.email });
+
             // Show success animation
             setShowSuccess(true);
+
+            // Store email in sessionStorage for the verify code page
+            sessionStorage.setItem('resetEmail', values.email);
 
             // Navigate to verification code page after success animation
             setTimeout(() => {
                 setDirection('left');
                 router.push('/verify-code');
             }, 2000);
-        }, 1000);
+        } catch (err: any) {
+            setError(err.message);
+            setSubmitting(false);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     // Animation variants for content
@@ -761,6 +773,12 @@ const ForgotPasswordPage = () => {
                         >
                             {({ isSubmitting, handleChange, handleBlur, values, errors, touched }) => (
                                 <Form style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    {error && (
+                                        <ErrorAlert severity="error" onClose={() => setError(null)}>
+                                            {error}
+                                        </ErrorAlert>
+                                    )}
+
                                     <EmailInputAnimated
                                         variants={inputVariants}
                                         initial="initial"
@@ -800,7 +818,7 @@ const ForgotPasswordPage = () => {
 
                                     <SubmitButton
                                         type="submit"
-                                        disabled={isSubmitting}
+                                        disabled={isSubmitting || isLoading}
                                         disableRipple
                                         initial="initial"
                                         animate="animate"
@@ -808,7 +826,7 @@ const ForgotPasswordPage = () => {
                                         whileTap="tap"
                                         variants={buttonVariants}
                                     >
-                                        Send Reset Code
+                                        {isLoading ? 'Sending...' : 'Send Reset Code'}
                                     </SubmitButton>
 
                                     <LoginPrompt

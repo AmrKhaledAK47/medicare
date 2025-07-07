@@ -1,0 +1,333 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f4f6f8;
+    }
+    
+    /* === Sidebar Container === */
+.containetr {
+  display: flex;
+}
+
+/* === Sidebar Styling === */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 85vh;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 1px;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.expanded {
+  width: 220px;
+  
+  
+  
+}
+
+.sidebar.expanded ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px; /* زيادة المسافة بين العناصر */
+}
+
+
+
+
+
+
+/* === Sidebar Menu Styling === */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+ 
+}
+
+.menu li:hover {
+  background-color: #ffffff;
+}
+
+/* === Sidebar Icons Styling === */
+.icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-left:20px !important;
+  margin-bottom:40px !important; /* زيادة المسافة بين الأيقونات */
+  margin-top: -32px !important;
+  
+}
+
+/* === Text Styling === */
+.text {
+  font-size: 16px;
+  color: #003f5c;
+  font-weight: 500;
+  margin-right: 60px !important;
+  transform: translateY(-36px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+/* === Dashboard Item (With Arrow) === */
+.dashboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-right: 60px;
+  
+  
+  
+
+}
+
+.dashboard-item:hover {
+  background-color: #e0f7fa;
+  
+}
+
+/* === Toggle Arrow Styling === */
+.toggle-icon {
+  width: 16px; /* حجم مناسب */
+  height: 16px;
+  color: #21647D; /* لون السهم */
+  transition: transform 0.3s ease-in-out;
+  background-color: white; /* لون الدائرة */
+  border-radius: 50%; /* جعلها دائرية */
+  padding: 5px; /* مساحة داخلية لتوسيع الدائرة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  position: absolute;
+  right: -1px; /* يحرك السهم لليمين */
+  
+}
+
+
+.toggle-icon.rotated {
+  transform: rotate(90deg);
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+ 
+  
+}
+
+/* الأيقونة الثانية التي تظهر بجانبها عند التوسيع */
+.theme-texxt-icon {
+  width: 150px; /* ضبط العرض ليشبه النص */
+  height: auto;
+  margin-left: -4px; /* إزاحة جهة اليمين */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+    /* Main Content Styling */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f6f8;
+      width: 100%; /* اجعل الهيدر يغطي عرض الصفحة بالكامل */
+      position: fixed; /* تثبيت العنصر في المكان */
+      top: 0; /* من أعلى الصفحة */
+      right: 0; /* من الجهة اليمنى */
+      left: 0; /* من الجهة اليسرى */
+      height: 100vh; /* ملء كامل ارتفاع الصفحة */
+      overflow-y: auto; /* السماح بالتمرير داخل المحتوى */
+      
+      
+    }
+    
+    .header {
+      background-color: white;
+      /*padding: 15px 20px;*/
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      
+      
+    }
+    
+    .header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #217C99;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .header .logo img {
+      width: 40px;
+      height: 40px;
+    
+    }
+    
+   /* الحاوية الكلية */
+  .search-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 100px !important; /* تحريك شريط البحث إلى اليسار */
+    gap: 20px !important; /* المسافة بين العناصر */
+  }
+  
+  /* تصميم شريط البحث */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* مسافة أكبر بين الأيقونة والنص */
+    padding: 12px 20px; /* زيادة المسافة الداخلية */
+    border: 1px solid hwb(0 87% 13% / 0.625);
+    border-radius: 0px; /* حواف مستديرة أكثر */
+    background-color: #f9f9f9; /* لون خلفية هادئ */
+    width: fit-content;
+    /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* ظل أكثر وضوحًا */
+    width: 300px !important; /* تحديد طول المربع */
+  }
+  
+  /* الأيقونة */
+  .search-icon {
+    color: #888;
+    font-size: 18px; /* تكبير الأيقونة */
+  }
+  
+  /* النص */
+  .search-text {
+    font-size: 15px; /* تكبير النص */
+    color: #333;
+    font-weight: 500;
+  }
+
+  .profile {
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+
+  .medications-container {
+    width: 90%; /* يجعل العنصر يمتد بنسبة 80% من عرض الصفحة */
+    max-width: 1300px; /* يحدد أقصى عرض حتى لا يصبح كبيرًا جدًا */
+    margin: 80px auto 60px auto; /* زودنا المسافة من الأعلى *//* يضيف مسافة من الأعلى ويجعله في المنتصف أفقيًا */
+    background: white;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    padding: 12px;
+    margin-left: 130px;
+}
+
+
+  .iccon {
+    width: 35px;
+    height: 35px;
+    margin-left: 5px !important;
+  }
+  
+  .titttle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #21647D;
+    margin-bottom: 4px;
+    margin-top: -40px;
+    margin-left: 45px;
+  }
+  
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .person-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .name {
+    font-weight: bold;
+    color: #333;
+    font-size: 13px;
+    margin-top: 20px;
+  }
+  
+  .count {
+    font-size: 11px;
+    color: #666;
+    margin-top: -10px;
+  }
+  
+  .medications-link {
+    color: #21647D;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    
+  }
+
+  .medications-link span:first-child {
+    margin-right: 8px; /* يمكنك زيادة أو تقليل القيمة حسب الحاجة */
+  }
+  
+  
+  .arrow {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+
+  .med-link {
+    color: #168BD9; /* لون النص والسهم */
+    text-decoration: none; /* إزالة الخط السفلي */
+    font-weight: bold; /* لجعل الخط أكثر وضوحًا */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* مسافة بين النص والسهم */
+  }
+  
+  .med-link .arrow {
+    color: #168BD9; /* لون السهم */
+  }
+  

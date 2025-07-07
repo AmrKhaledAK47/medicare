@@ -1,0 +1,511 @@
+.headerd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px; /* تكبير التباعد */
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* للتأكد من أنه فوق بقية العناصر */
+    height: 40px; /* زيادة الارتفاع */
+  }
+  
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo {
+    height: 30px;
+    margin-left: 20px;
+  }
+  
+  .title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #21647D;
+    margin-left: 0px;
+    margin-top: 11px;
+
+  }
+  
+  .subtitle {
+    color: gray;
+  }
+  
+  .icons-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 60px;
+    
+  }
+  
+  .iconx {
+    height: 24px !important;
+    width: 32px;
+  }
+  
+  .profile-iconx {
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .icon-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .badge {
+    position: absolute;
+    top: -5px;
+    right: 2px;
+    background-color:#21647D;
+    color: white;
+    font-size: 12px;
+    /*font-weight: bold;*/
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* === Sidebar Container === */
+.containetr {
+  display: flex;
+}
+
+/* === Sidebar Styling === */
+.sidebars {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 85vh;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 75px;
+}
+
+.sidebars.collapsed {
+  width: 70px;
+}
+
+.sidebars.expanded {
+  width: 220px;
+  
+  
+  
+}
+
+.sidebars.expanded ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px; /* زيادة المسافة بين العناصر */
+}
+
+
+
+
+
+
+/* === Sidebar Menu Styling === */
+.menuu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+ 
+}
+
+.menuu li:hover {
+  background-color: #ffffff;
+}
+
+/* === Sidebar Icons Styling === */
+.iconu {
+  width: 20px;
+  height: 20px;
+  margin-left:-35px;
+  margin-bottom:35px; /* زيادة المسافة بين الأيقونات */
+  margin-top: -30px;
+  
+}
+
+/* === Text Styling === */
+.texts {
+  font-size: 16px;
+  color: #003f5c;
+  font-weight: 500;
+  margin-left: 17px !important;
+  transform: translateY(-33px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+/* === Dashboard Item (With Arrow) === */
+/*.dashboarrd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-right: 60px;
+  
+}*/
+.dashboarrd-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+.dash-text {
+  background-color: #267997; /* لون المربع الأزرق الفاتح */
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: -55px;
+}
+
+
+
+
+
+.dashboarrd-item:hover {
+  background-color: #e0f7fa;
+  
+}
+
+/* === Toggle Arrow Styling === */
+.toggley-icon {
+  width: 16px; /* حجم مناسب */
+  height: 16px;
+  color: #21647D; /* لون السهم */
+  transition: transform 0.3s ease-in-out;
+  background-color: white; /* لون الدائرة */
+  border-radius: 50%; /* جعلها دائرية */
+  padding: 5px; /* مساحة داخلية لتوسيع الدائرة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  position: absolute;
+  right: -1px; /* يحرك السهم لليمين */
+  
+}
+
+
+.toggley-icon.rotated {
+  transform: rotate(90deg);
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+ 
+  
+}
+
+/* الأيقونة الثانية التي تظهر بجانبها عند التوسيع */
+.theme-text-icon {
+  width: 170px; /* ضبط العرض ليشبه النص */
+  height: auto;
+  margin-left: 5px; /* إزاحة جهة اليمين */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+body {
+  background: white !important;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.header-container {
+  background: linear-gradient(to right, #267C9C, #267C9C);
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 120px;
+  margin-top: 100px;
+  height: 200px;
+  width: 1300px;
+}
+
+
+.boxtt-container {
+  border: 1px solid #21647D;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #21647D;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  height: 20px;
+  /* زيادة العرض */
+  width: 82%; /* اجعليه يأخذ نسبة أكبر من الشاشة */
+  max-width: 1600px; /* تحديد الحد الأقصى للعرض */
+  /* تحريكه إلى اليسار */
+  margin-left: -80px; /* تأكدي أنه لا يوجد هامش من اليسار */
+  margin-right: auto; /* يدفعه بالكامل إلى اليسار */
+}
+
+
+.tablex-container {
+    width: 84%;
+    overflow-x: auto;
+    padding: 20px;
+    margin-left:-1330px;
+    margin-top: 270px;
+  
+  }
+  
+  
+  .practitioners-tablxxe {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    
+  }
+  
+  .practitioners-tablxe th,
+  .practitioners-tablxe td {
+    padding: 12px 70px;
+    text-align: left;
+    border: none;
+    background-color: white !important;
+    
+  }
+  
+  .practitioners-tablxe thead th {
+    background-color: white !important;
+    color:#267997 !important;
+    font-weight: bold;
+  }
+  
+  .practitioners-tablxe tbody tr {
+    background-color: white !important;
+  }
+  
+  .practitioners-tablxe tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  
+  .phone-column {
+    display: flex;
+    flex-direction: row; /* يخلي العناصر فوق بعض */
+    align-items: center; /* توسيط المحتوى */
+    gap: 40px; /* مسافة صغيرة بين الرقم والأيقونات */
+    white-space: nowrap; /* يمنع كسر السطر */
+  }
+  
+  .icons-container {
+    display: flex;
+    gap: 10px; /* مسافة بين أيقونتي التعديل والحذف */
+  }
+  
+  
+  .action-icon {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+  
+  
+
+
+
+.add-button {
+  position: absolute;
+  right: 240px; /* التحكم في مكانه */
+  top: 41%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  color: #21647D;
+  padding: 8px 16px;
+  border-radius: 6px;
+  /*font-weight: bold;*/
+  width: 220px !important;
+  background: white !important;
+  color:#267997;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-right: -70px;
+  
+
+}
+
+.add-button {
+  color: #21647D;
+  /*font-weight: bold;*/
+  margin-top: -140px;
+  font-size: 17px;
+  margin-left: 170px !important;
+  border-radius: 10px;
+  width: 250px;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap; /* يمنع النص من النزول لسطر جديد */
+
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: -140px;
+  margin-left: 20px;
+}
+
+.action-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+  height: 25px;
+  width: 280px;
+  
+}
+
+.search-wrapper input {
+  border: none;
+  padding: 8px;
+  background: transparent;
+  outline: none;
+  color: black;
+  flex: 1;
+}
+
+.search-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+
+.export-button img {
+  width: 16px;
+}
+
+
+
+.add-button span {
+  color: red;
+}
+
+.export-button{
+  background: white !important;
+  color:#267997;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px !important;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  font-size: 17px;
+  margin-left: 570px;
+}
+
+.reset-button{
+  font-size: 17px;
+  background: white !important;
+  color:#267997;
+  border: none;
+  padding: 10px 15px;
+  border-radius:10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-right: 570px !important;
+}
+
+
+
+  
+.statuts-boxie {
+    display: inline-block !important;
+    width: 120px !important; /* جعل جميع المربعات بنفس العرض */
+  height: 20px !important; /* جعل جميع المربعات بنفس الارتفاع */
+    padding: 5px 16px !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    /*font-weight: bold;*/
+    text-align: center !important;
+    min-width: 60px !important;
+    color: white !important;
+    margin-left: -50px !important; /* تحريك العنصر بالكامل لليمين */
+    
+    
+  }
+
+  
+  
+  /* لون "In Progress" */
+  .statuts-boxie.requested  {
+    background-color: #52C69A !important; /* اللون البرتقالي */
+   
+  }
+  
+  /* لون "Completed" */
+  .statuts-boxie.completed {
+    background-color: #20788f !important; /* اللون الأزرق */
+    
+  }
+
+  .statuts-boxie.in-progress {
+    background-color: #FA8C16 !important; /* اللون الأزرق */
+    
+  }
+
+  .statuts-boxie.cancelled{
+    background-color: gray !important; /* اللون الأزرق */
+    
+  }
+
+
+  
+
+  

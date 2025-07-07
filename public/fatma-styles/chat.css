@@ -1,0 +1,558 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f4f6f8;
+    }
+    
+    /* === Sidebar Container === */
+.containetr {
+  display: flex;
+}
+
+/* === Sidebar Styling === */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 85vh;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 1px;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.expanded {
+  width: 220px;
+  
+  
+  
+}
+
+.sidebar.expanded ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px; /* زيادة المسافة بين العناصر */
+}
+
+
+
+
+
+
+/* === Sidebar Menu Styling === */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+ 
+}
+
+.menu li:hover {
+  background-color: #ffffff;
+}
+
+/* === Sidebar Icons Styling === */
+.icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-left:20px !important;
+  margin-bottom:40px !important; /* زيادة المسافة بين الأيقونات */
+  margin-top: -32px !important;
+  
+}
+
+/* === Text Styling === */
+.text {
+  font-size: 16px;
+  color: #003f5c;
+  font-weight: 500;
+  margin-right: 60px !important;
+  transform: translateY(-36px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+/* === Dashboard Item (With Arrow) === */
+.dashboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-right: 60px;
+  
+  
+  
+
+}
+
+.dashboard-item:hover {
+  background-color: #e0f7fa;
+  
+}
+
+/* === Toggle Arrow Styling === */
+.toggle-icon {
+  width: 16px; /* حجم مناسب */
+  height: 16px;
+  color: #21647D; /* لون السهم */
+  transition: transform 0.3s ease-in-out;
+  background-color: white; /* لون الدائرة */
+  border-radius: 50%; /* جعلها دائرية */
+  padding: 5px; /* مساحة داخلية لتوسيع الدائرة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  position: absolute;
+  right: -1px; /* يحرك السهم لليمين */
+  
+}
+
+
+.toggle-icon.rotated {
+  transform: rotate(90deg);
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+ 
+  
+}
+
+/* الأيقونة الثانية التي تظهر بجانبها عند التوسيع */
+.theme-texxt-icon {
+  width: 150px; /* ضبط العرض ليشبه النص */
+  height: auto;
+  margin-left: -4px; /* إزاحة جهة اليمين */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  
+}
+    
+    /* Main Content Styling */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f6f8;
+      width: 100%; /* اجعل الهيدر يغطي عرض الصفحة بالكامل */
+      position: fixed; /* تثبيت العنصر في المكان */
+      top: 0; /* من أعلى الصفحة */
+      right: 0; /* من الجهة اليمنى */
+      left: 0; /* من الجهة اليسرى */
+      height: 100vh; /* ملء كامل ارتفاع الصفحة */
+      overflow-y: auto; /* السماح بالتمرير داخل المحتوى */
+      
+      
+    }
+    
+    .header {
+      background-color: white;
+      /*padding: 15px 20px;*/
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      
+      
+    }
+    
+    .header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #217C99;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .header .logo img {
+      width: 40px;
+      height: 40px;
+    
+    }
+    
+    .profile {
+        font-weight: bold;
+        color: black;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .profile img {
+        width: 40px ;
+        height: 40px ;
+        border-radius: 50%;
+      }
+      
+
+      .messaging-container {
+        display: flex;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+      }
+      
+      .chat-sidebar {
+        width: 30%;
+        background: #f8f9fa;
+        padding: 10px;
+        border-right: 1px solid #ddd;
+        margin-left: 70px;
+      }
+      
+      .chat-sidebar h2 {
+        margin-bottom:10px;
+        color: #217C99;
+        margin-top: 60px;
+        margin-left: 20px;
+      }
+      
+      .chat-search-bar {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 3px;
+        border-radius: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 0px;
+      }
+      
+      .chat-search-bar input {
+        border: none;
+        outline: none;
+        flex: 1;
+        margin-left: 8px;
+      }
+      .chat-search-icon{
+        margin-left: 20px;
+      }
+
+      
+      .unnread-count {
+        background: red;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: absolute;
+        right: 1150px;
+        top: 30% !important;
+        transform: translateY(-50%);
+      } 
+
+      .unnrread-count {
+        background: red;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: absolute;
+        right: 1150px;
+        top: 64% !important;
+        transform: translateY(-50%);
+      } 
+      
+      .unnnread-count {
+        background: red;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        width: 15px;
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        position: absolute;
+        right: 1150px;
+        top: 72% !important;
+        transform: translateY(-50%);
+      } 
+      
+      .message-list {
+        overflow-y: auto;
+        height: calc(100vh - 120px);
+      }
+      
+      .message-item {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background 0.3s;
+        cursor: pointer;
+      }
+      
+      .message-item:hover {
+        background: #e0f2f1;
+      }
+      
+      .avatar {
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      
+      .message-info {
+        flex: 1;
+      }
+      
+      .message-info h4 {
+        margin: 0;
+        font-size: 14px;
+        color: #333;
+      }
+      
+      .message-info p {
+        margin: 0;
+        font-size: 12px;
+        color: #777;
+      }
+
+      .typing-text {
+        color: #258C60 !important;
+        font-weight: bold;
+      }
+      
+      
+      
+      .message-time {
+        font-size: 12px;
+        color: #aaa;
+      }
+      
+      .message-content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #bbb;
+        font-size: 18px;
+      }
+      
+
+     /* Chat Container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  width: 100%;
+  padding: 75px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Chat Header */
+.chat-header-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.chat-header {
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+}
+
+.chat-typing {
+  font-size: 14px;
+  color: gray;
+}
+
+/* Chat Messages */
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+  gap: 12px;
+  scrollbar-width: thin;
+}
+
+
+
+/* Message Bubble */
+.message {
+  display: flex;
+  align-items: flex-start;
+  max-width: 80%; 
+}
+
+.message-options {
+  right: -20px; /* يحافظ على مكان النقاط بجانب الرسالة */
+  top: 50%;
+  transform: translateY(120%);
+  cursor: pointer;
+}
+
+
+
+
+.message.user {
+  align-self: flex-start;
+}
+
+.message.doctor {
+  align-self: flex-end;
+  /*flex-direction: row-reverse;*/
+  
+ 
+}
+
+
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 0 8px;
+}
+
+.message-bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.user-bubble {
+  background-color: #f0f0f0;
+  color: black;
+  border-top-left-radius: 4px;
+}
+
+.doctor-bubble {
+  background-color: #4f46e5;
+  color: white;
+  border-top-right-radius: 4px;
+  
+}
+
+.msg-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  
+}
+ 
+
+
+.user {
+  flex-direction: row;
+}
+
+.doctor {
+  flex-direction: row; /* جعل الرسائل تظهر على اليسار */
+  justify-content: flex-start;
+}
+
+.msg-time {
+  font-size: 10px;
+  color: gray;
+  margin-top: 4px;
+}
+
+
+/* Chat Input */
+.chat-input {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 12px;
+  /*border-radius: 8px;*/
+  margin: 8px;
+  border: 1px solid #ddd;
+  width: 117%;
+  margin-left:-75px;
+  transform: translateY(35px); /* نزليه تحت 20px */
+  
+  
+}
+
+.input-field {
+  flex-grow: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+}
+
+.iconi {
+  margin: 0 8px;
+  color: gray;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.iconi.send {
+  color: gray;
+}
+
+.iconi:hover {
+  color: gray;
+}
+
+/* ✅ إضافة تنسيق لرسالة الكتابة */
+.typing-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.typing-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+}
+
+.dots {
+    font-size: 18px;
+    color: gray;
+}

@@ -1,0 +1,626 @@
+.headerd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px; /* تكبير التباعد */
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* للتأكد من أنه فوق بقية العناصر */
+  height: 40px; /* زيادة الارتفاع */
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  height: 30px;
+  margin-left: 20px;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #21647D;
+  margin-left: 0px;
+  margin-top: 11px;
+
+}
+
+.subtitle {
+  color: gray;
+}
+
+.icons-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 60px;
+  
+}
+
+.iconx {
+  height: 24px !important;
+  width: 32px;
+}
+
+.profile-iconx {
+  height: 32px;
+  border-radius: 50%;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: 2px;
+  background-color:#21647D;
+  color: white;
+  font-size: 12px;
+  /*font-weight: bold;*/
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* === Sidebar Container === */
+.containetr {
+display: flex;
+}
+
+/* === Sidebar Styling === */
+.sidebars {
+position: fixed;
+left: 0;
+top: 0;
+height: 85vh;
+background-color: white;
+box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+transition: width 0.3s ease-in-out;
+overflow: hidden;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: 16px 0;
+margin-top: 75px;
+ z-index: 2;
+}
+
+.sidebars.collapsed {
+width: 70px;
+}
+
+.sidebars.expanded {
+width: 220px;
+
+
+
+}
+
+.sidebars.expanded ul {
+display: flex;
+flex-direction: column;
+gap: 3.5px; /* زيادة المسافة بين العناصر */
+}
+
+
+
+
+
+
+/* === Sidebar Menu Styling === */
+.menuu {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.menuu li {
+display: flex;
+align-items: center;
+padding: 12px 16px;
+cursor: pointer;
+transition: background 0.2s;
+
+}
+
+.menuu li:hover {
+background-color: #ffffff;
+}
+
+/* === Sidebar Icons Styling === */
+.iconu {
+width: 20px;
+height: 20px;
+margin-left:-35px;
+margin-bottom:35px; /* زيادة المسافة بين الأيقونات */
+margin-top: -30px;
+
+}
+
+/* === Text Styling === */
+.texts {
+font-size: 16px;
+color: #003f5c;
+font-weight: 500;
+margin-left: 17px !important;
+transform: translateY(-33px ); /* يحرّك العنصر للأسفل */
+
+}
+
+.practitioner-container-doc {
+  margin: 20px;
+  margin-top: 80px;
+  margin-left: 120px;
+}
+
+.section-title-doc {
+  color: #1e3a8a;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.practitioner-card-doc {
+  position: relative;
+  width: 900px;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: -8px;
+  
+}
+
+.background-image-doc {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.overlay-doc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /*background: linear-gradient(to right, rgba(0, 0, 0, 0.4) 20%, rgba(0, 0, 0, 0) 80%);*/
+}
+
+.content-doc {
+  position: absolute;
+  top: 0;
+  left: 40%;
+  height: 100%;
+  width: 60%;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-doc h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  margin-top: -30px;
+}
+
+.specialty-doc {
+  font-size: 1rem;
+  color: #d1d5db;
+}
+
+.stars-doc {
+  margin: 5px 0;
+}
+
+.bio-doc {
+  font-size: 0.9rem;
+  color: #f3f4f6;
+  margin: 10px 0;
+  max-width: 90%;
+}
+
+.time-doc {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #e0e0e0;
+}
+
+.icons-doc {
+  margin-top: -50px;
+  margin-left: 400px;
+  
+}
+
+.icons-doc button {
+  background: white;
+  color: #1e3a8a;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: background 0.3s;
+}
+
+.icons-doc button:hover {
+  background: #e0e7ff;
+}
+
+
+.calendar-container-doc {
+  background-color: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 390px;
+  height: 265px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  margin-left: 950px;
+  margin-top:-600px;
+
+}
+
+.calendar-title-doc {
+  font-weight: 600;
+  color: #1e1e1e;
+  margin-bottom: -2px;
+  margin-top: -10px;
+}
+
+.calendar-header-doc {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.calendar-grid-doc {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  font-size: 13px;
+  color: #333;
+  margin-bottom:px;
+}
+
+.calendar-day-doc {
+  font-weight: bold;
+  text-align: center;
+  color: #999;
+}
+
+.calendar-date-doc {
+  position: relative;
+  text-align: center;
+  padding: 4px 0;
+  margin-bottom: -15px;
+}
+
+.dot-doc {
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+  margin: 4px auto 0;
+  display: block;
+}
+
+.upcoming-section-doc {
+  margin-top: 20px;
+ 
+}
+
+.upcoming-header-doc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -8px;
+}
+
+.upcoming-header-doc h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.upcoming-header-doc a {
+  font-size: 12px;
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.upcoming-card-doc {
+  display: flex;
+  align-items: center;
+  background:#F0F9FD;
+  color: black;
+  padding: 3px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.circle-icon-doc {
+  background-color: #57B4DE;
+  color: white;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  margin-right: 10px;
+}
+
+.event-details-doc .event-title-doc {
+  margin: 0;
+  font-weight: 600;
+}
+
+.event-details-doc .event-time-doc {
+  margin: 2px 0 0;
+  font-size: 12px;
+}
+
+.records-container-doc {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  margin: 20px;
+  width: 850px;
+  height: 240px;
+  margin-left: 0px;
+  z-index: 1; /* أقل من الـ sidebar */
+  margin-top:-340px;
+}
+
+.records-title-doc {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  margin-top: -10px;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.records-header-doc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding: 16px 20px;
+  background-color: #f9f9f9; /* خلفية فاتحة */
+  border-radius: 12px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  height: 20px;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.records-header-doc::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 0%;
+  background-color: #E0E0E0;
+  z-index: 0;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.records-title-doc {
+  position: relative;
+  z-index: 2;
+  color: #1A1B3C;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.nav-buttons-doc {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.nav-circle-doc {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+.nav-circle-doc:hover {
+  background-color: #f0f0f0;
+  z-index: 1; /* أقل من الـ sidebar */
+}
+
+
+.patient-images-doc {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  
+}
+
+.patient-avatar-doc {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+}
+
+.stats-cards-doc {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-card-doc {
+  display: flex;
+  position: relative;
+  align-items: center;
+  background: #f9fbfc;
+  border-radius: 16px;
+  padding: 16px;
+  min-width: 280px;
+  height: 100px;
+  flex: 1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  margin-top: -20px;
+  
+}
+
+.icon-container-doc {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+  margin-top: -50px;
+}
+
+.icon-container-doc img {
+  width: 45px;
+  height: 45px;
+  margin-top: 2px;
+}
+
+.purple {
+  background: #eee5ff;
+  
+}
+
+
+
+.pink {
+  background: #ffe6ea;
+}
+
+.stat-number-doc {
+  position: absolute;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 4px 0;
+  margin-left: -70px;
+  margin-top: 20px;
+
+}
+
+.stat-change-doc {
+  position: absolute;
+  font-size: 14px;
+ 
+
+
+}
+
+.encounters-title-doc{
+ position: absolute;
+ margin-top: -35px;
+}
+
+.stat-change-doc.green {
+  position: absolute;
+  color: green;
+  margin-top: 30px;
+}
+
+.card-container-doc {
+  position: relative;
+  width: 320px;
+  height: auto;
+  margin: 20px;
+  margin-left: 1000px;
+}
+
+.card-doc {
+  background-color: white;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 2;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.card-doc::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  z-index: -1;
+  transform: rotate(4deg);
+}
+
+.card-tag-doc {
+  color: gray;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.card-title-doc {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #111;
+}
+
+.card-image-doc {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+

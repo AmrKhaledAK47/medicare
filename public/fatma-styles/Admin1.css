@@ -1,0 +1,577 @@
+.headerd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px; /* تكبير التباعد */
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* للتأكد من أنه فوق بقية العناصر */
+    height: 40px; /* زيادة الارتفاع */
+  }
+  
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo {
+    height: 30px;
+    margin-left: 20px;
+  }
+  
+  .title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #21647D;
+    margin-left: 0px;
+    margin-top: 11px;
+
+  }
+  
+  .subtitle {
+    color: gray;
+  }
+  
+  .icons-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-right: 60px;
+    
+    
+  }
+  
+  .iconx {
+    height: 25px !important;
+    width: 32px;
+
+  }
+  
+  .profile-iconx {
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .icon-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .badge {
+    position: absolute;
+    top: -5px;
+    right: 2px;
+    background-color:#21647D;
+    color: white;
+    font-size: 12px;
+    /*font-weight: bold;*/
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  /* === Sidebar Container === */
+.containetr {
+  display: flex;
+}
+
+/* === Sidebar Styling === */
+.sidebars {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 85vh;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 75px;
+}
+
+.sidebars.collapsed {
+  width: 70px;
+}
+
+.sidebars.expanded {
+  width: 220px;
+  
+  
+  
+}
+
+.sidebars.expanded ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px; /* زيادة المسافة بين العناصر */
+}
+
+
+
+
+
+
+/* === Sidebar Menu Styling === */
+.menuu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+ 
+}
+
+.menuu li:hover {
+  background-color: #ffffff;
+}
+
+/* === Sidebar Icons Styling === */
+.iconu {
+  width: 20px;
+  height: 20px;
+  margin-left:-35px;
+  margin-bottom:35px; /* زيادة المسافة بين الأيقونات */
+  margin-top: -30px;
+  
+}
+
+/* === Text Styling === */
+.texts {
+  font-size: 16px;
+  color: #003f5c;
+  font-weight: 500;
+  margin-left: 17px !important;
+  transform: translateY(-33px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+/* === Dashboard Item (With Arrow) === */
+/*.dashboarrd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-right: 60px;
+  
+}*/
+.dashboarrd-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+.dash-text {
+  background-color: #267997; /* لون المربع الأزرق الفاتح */
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-top: -55px;
+}
+
+
+
+
+
+.dashboarrd-item:hover {
+  background-color: #e0f7fa;
+  
+}
+
+/* === Toggle Arrow Styling === */
+.toggley-icon {
+  width: 16px; /* حجم مناسب */
+  height: 16px;
+  color: #21647D; /* لون السهم */
+  transition: transform 0.3s ease-in-out;
+  background-color: white; /* لون الدائرة */
+  border-radius: 50%; /* جعلها دائرية */
+  padding: 5px; /* مساحة داخلية لتوسيع الدائرة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  position: absolute;
+  right: -1px; /* يحرك السهم لليمين */
+  
+}
+
+
+.toggley-icon.rotated {
+  transform: rotate(90deg);
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+ 
+  
+}
+
+/* الأيقونة الثانية التي تظهر بجانبها عند التوسيع */
+.theme-text-icon {
+  width: 170px; /* ضبط العرض ليشبه النص */
+  height: auto;
+  margin-left: 5px; /* إزاحة جهة اليمين */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+.header-container {
+    background: linear-gradient(to right, #267C9C, #267C9C);
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 120px;
+    margin-top: 100px;
+    height: 200px;
+    width: 1300px;
+  }
+  
+  
+  
+
+body {
+  background: white !important;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.settings-tiitle {
+  margin-top: 60px; /* رفع الكلمة للأعلى */
+  margin-bottom: 20px; /* لضبط المسافة بين كلمة Settings والمحتوى */
+  margin-left: 130px;
+  
+}
+
+.settings-tiitle h1 {
+  font-size: 22px;
+  color: #217C99;
+}
+
+.profile-photo {
+  display: flex;
+  align-items: center;
+}
+
+.photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.patient-containerria {
+  margin-top: -20px;
+  display: flex;
+  justify-content: left;
+  width: 21.27% !important; /* أو يمكنك تحديد عرض آخر يناسب التصميم */
+  max-width: 1200px;
+  background-color: #ffffff !important;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  margin-left: -280px;
+  height: 40%;
+  margin-top: 120px;
+}
+
+
+.patient-cardia {
+  background-color: #ffffff !important;
+  padding: 40px; /* Add padding inside the card */
+  border-radius: 15px;
+  box-shadow: none !important; /* إزالة تأثير الظل */
+  transition: box-shadow 0.3s ease-in-out;
+  border: none !important; /* إلغاء الإطار */
+  outline: none !important; /* إلغاء الخط المحيط */
+  width: 100%; /* يجعل الكارد بنفس عرض الـ patient-container */
+  
+  
+}
+
+
+
+.patient-cardia:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.patient-infoi {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.patient-photoi {
+  width: 120px; /* Adjust the size of the photo */
+  height: 120px;
+  border-radius: 0;
+  margin-left: 10px; /* Add space between image and text */
+  margin-top: -5px !important;
+}
+
+.patient-text-infoi {
+  display: flex;
+  flex-direction: column;
+}
+
+.patient-namei {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 40px;
+}
+
+.patient-detailsi {
+  font-size: 1rem;
+  color: gray;
+  margin-left: 40px;
+  margin-top: 0px;
+}
+
+.contact-inufoi {
+  margin-top: 20px; /* Add some space between contact info and image */
+  font-size: 1rem;
+  color: gray;
+  flex-direction: column;
+  gap:-0px;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.contact-inufoi p {
+  margin: 5px 0; /* Add space between each contact detail */
+}
+
+.vitalws-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* المسافة بين العنوان والصورة */
+  background-color: #F8F8F8; /* خلفية رمادية فاتحة للعناصر داخل الرأس */
+  padding: 8px;
+  border-radius: 10px; /* حواف دائرية داخل العنوان */
+  width: fit-content; /* جعل العرض يناسب المحتوى داخل الـ div */
+}
+
+
+
+.vitalws-icon {
+  width: 20px; /* حجم الصورة، يمكنك تغييره حسب الحاجة */
+  height: 20px; /* حجم الصورة */
+  order: -1;  /* يجعل الصورة تظهر أولاً (على اليسار) */
+}
+
+
+.vitalws-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.vitalws-box {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  width: 900px;
+  height:235px !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 40px !important;
+  margin-left: 50px;
+}
+
+.vitalws-title {
+  font-size: 18px;
+  margin: 0;
+  font-weight: bold;
+  color: #217C99
+}
+
+.vitalws-line {
+  width: 100%;
+  height: 2px;
+  background-color: gray;
+  margin: 10px 0;
+}
+
+.vitalws-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.vitalws-label {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0;
+}
+
+
+.weightw-info {
+  display: flex;
+  justify-content: space-between;
+  position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+}
+
+.weightw-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 300px;
+  margin-top: -50px;
+}
+
+.weightw-label {
+  font-size: 14px;
+  color: #555;
+  position: absolute; /* تحديد الموضع بشكل مطلق */
+  left: 300px;  /* تحريك العنصر إلى اليسار */
+  margin-top: -20px;
+}
+
+.Heartw-info {
+  display: flex;
+  justify-content: space-between;
+  position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+}
+
+.Heartw-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 600px;
+  margin-top: -50px;
+}
+
+.Heartw-label {
+  font-size: 14px;
+  color: #555;
+  position: absolute; /* تحديد الموضع بشكل مطلق */
+  left: 600px;  /* تحريك العنصر إلى اليسار */
+  margin-top: -20px;
+}
+
+.Oxygenw-info {
+  display: flex;
+  justify-content: space-between;
+  position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+}
+
+.Oxygenw-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.Oxygenw-label {
+  font-size: 14px;
+  color: #555;
+  position: absolute; /* تحديد الموضع بشكل مطلق */
+  left: 10px;  /* تحريك العنصر إلى اليسار */
+  margin-top: 40px;
+}
+
+.Bodyw-info {
+  display: flex;
+  justify-content: space-between;
+  position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+}
+
+.Bodyw-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 300px;
+  margin-top: -40px;
+}
+
+.Bodyw-label {
+  font-size: 14px;
+  color: #555;
+  position: absolute; /* تحديد الموضع بشكل مطلق */
+  left: 300px;  /* تحريك العنصر إلى اليسار */
+  margin-top: -10px;
+}
+
+.Bloodw-info {
+  display: flex;
+  justify-content: space-between;
+  position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+}
+
+.Bloodw-value {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 600px;
+  margin-top: -40px;
+}
+
+.Bloodw-label {
+  font-size: 14px;
+  color: #555;
+  position: absolute; /* تحديد الموضع بشكل مطلق */
+  left: 600px;  /* تحريك العنصر إلى اليسار */
+  margin-top: -10px;
+}
+
+
+.navx-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  margin-left:-1380px;
+  margin-top: 430px;
+}
+
+
+.navx-links li {
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative; /* مهم لإنشاء الخط أسفل العنصر */
+ 
+
+}
+
+.navx-links li a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.navx-links li:hover {
+  color: #217C99; /* تغيير اللون إلى الأزرق عند التمرير */
+}
+
+.navx-links li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px; /* المسافة بين النص والخط */
+  width: 100%;
+  height: 2px;
+  background-color: #217C99;
+  transform: scaleX(0); /* يبدأ الخط غير مرئي */
+  transition: transform 0.3s ease-in-out;
+}
+
+.navx-links li:hover::after {
+  transform: scaleX(1); /* يظهر الخط عند التمرير */
+}
+

@@ -183,8 +183,35 @@ const NotificationBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
-const biomarkerCategories = [
+// Define the biomarker interface
+export interface Biomarker {
+    id?: string;
+    name: string;
+    icon?: string;
+    indicators?: number[];
+    color?: string;
+    hasUpdate?: boolean;
+    // Fields from BiomarkerDto
+    type?: string;
+    value?: string;
+    unit?: string;
+    referenceRange?: string;
+    status?: 'normal' | 'high' | 'low' | 'critical' | 'unknown';
+    date?: string;
+    trend?: {
+        direction: 'up' | 'down' | 'stable';
+        percentage?: number;
+    };
+    performer?: string;
+}
+
+interface BiomarkersProps {
+    biomarkerData?: Biomarker[];
+}
+
+const defaultBiomarkers = [
     {
+        id: 'heart',
         name: 'Heart',
         icon: '/icons/heart.svg',
         indicators: [1, 2, 3, 4, 5], // Indicators shown as dots
@@ -192,6 +219,7 @@ const biomarkerCategories = [
         hasUpdate: true,
     },
     {
+        id: 'kidney',
         name: 'Kidney',
         icon: '/icons/kidney.svg',
         indicators: [1, 2, 3, 4, 5],
@@ -199,6 +227,7 @@ const biomarkerCategories = [
         hasUpdate: false,
     },
     {
+        id: 'liver',
         name: 'Liver',
         icon: '/icons/liver.svg',
         indicators: [1, 2, 3, 4],
@@ -206,6 +235,7 @@ const biomarkerCategories = [
         hasUpdate: false,
     },
     {
+        id: 'sugar',
         name: 'Sugar',
         icon: '/images/sugar-icon.png',
         indicators: [1, 2, 3],
@@ -213,6 +243,7 @@ const biomarkerCategories = [
         hasUpdate: true,
     },
     {
+        id: 'blood',
         name: 'Blood',
         icon: '/icons/blood.svg',
         indicators: [1, 2, 3, 4, 5],
@@ -220,6 +251,7 @@ const biomarkerCategories = [
         hasUpdate: false,
     },
     {
+        id: 'thyroid',
         name: 'Thyroid',
         icon: '/icons/thyroid.svg',
         indicators: [1, 2, 3, 4, 5],
@@ -227,6 +259,7 @@ const biomarkerCategories = [
         hasUpdate: false,
     },
     {
+        id: 'bone',
         name: 'Bone',
         icon: '/icons/bone.svg',
         indicators: [1, 2, 3, 4, 5],
@@ -235,14 +268,17 @@ const biomarkerCategories = [
     },
 ];
 
-const Biomarkers: React.FC = () => {
+const Biomarkers: React.FC<BiomarkersProps> = ({ biomarkerData }) => {
     const { mode } = useThemeContext();
-    const [selectedBiomarker, setSelectedBiomarker] = useState<typeof biomarkerCategories[0] | null>(null);
+    const [selectedBiomarker, setSelectedBiomarker] = useState<Biomarker | null>(null);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [showAddResultModal, setShowAddResultModal] = useState(false);
     const [hoveredBiomarker, setHoveredBiomarker] = useState<string | null>(null);
 
-    const handleBiomarkerClick = (biomarker: typeof biomarkerCategories[0]) => {
+    // Use provided biomarker data or fall back to default data
+    const biomarkers = biomarkerData || defaultBiomarkers;
+
+    const handleBiomarkerClick = (biomarker: Biomarker) => {
         setSelectedBiomarker(biomarker);
         setShowDetailsModal(true);
     };
@@ -335,7 +371,7 @@ const Biomarkers: React.FC = () => {
 
                 {/* Biomarker Grid */}
                 <BiomarkersGrid>
-                    {biomarkerCategories.map((category, index) => (
+                    {biomarkers.map((category, index) => (
                         <BiomarkerItem
                             key={category.name}
                             onClick={() => handleBiomarkerClick(category)}
@@ -395,7 +431,7 @@ const Biomarkers: React.FC = () => {
                                     pl: 0.5,
                                     animation: hoveredBiomarker === category.name ? `${slideUp} 0.5s ease-out` : 'none',
                                 }}>
-                                    {category.indicators.map((_, i) => (
+                                    {category.indicators?.map((_, i) => (
                                         <IndicatorDot
                                             key={i}
                                             active={i < 3} // First 3 indicators are active

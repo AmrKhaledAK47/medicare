@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState, SVGProps } from 'react';
+import ImagingComponent from "./components/imaging";
+import { imagingStudies as initialImagingStudies } from "./components/imaging/testData";
+import { Imaging } from "./components/imaging/types"; // Import Imaging interface from types
 import {
     Box,
     Typography,
@@ -1334,27 +1337,27 @@ const procedures: Procedure[] = [
 ];
 
 // Add after the Procedure interface
-interface Imaging {
-    id: string;
-    name: string;
-    modality: 'MRI' | 'CT' | 'X-Ray' | 'Ultrasound' | 'PET' | 'Angiography';
-    bodyPart: string;
-    date: string;
-    physician: string;
-    facility: string;
-    status: 'Completed' | 'Pending' | 'Scheduled';
-    findings?: string;
-    impression?: string;
-    images: {
-        thumbnail: string;
-        fullSize: string;
-        dicom?: string;
-    }[];
-    notes?: string;
-    urgency?: 'Routine' | 'Urgent' | 'STAT';
-    followUpRequired?: boolean;
-    followUpDate?: string;
-}
+// interface Imaging {
+//     id: string;
+//     name: string;
+//     modality: 'MRI' | 'CT' | 'X-Ray' | 'Ultrasound' | 'PET' | 'Angiography';
+//     bodyPart: string;
+//     date: string;
+//     physician: string;
+//     facility: string;
+//     status: 'Completed' | 'Pending' | 'Scheduled';
+//     findings?: string;
+//     impression?: string;
+//     images: {
+//         thumbnail: string;
+//         fullSize: string;
+//         dicom?: string;
+//     }[];
+// notes ?: string;
+// urgency ?: 'Routine' | 'Urgent' | 'STAT';
+// followUpRequired ?: boolean;
+// followUpDate ?: string;
+// }
 
 const MedicalRecordsPage = () => {
     const { mode } = useThemeContext();
@@ -2282,40 +2285,6 @@ const MedicalRecordsPage = () => {
         setOpenAddProcedureDialog(false);
     };
 
-    // Add after other styled components like StatusBadge
-    const ProcedureStatusBadge = styled(Box)<{ status: 'Successful' | 'Unsuccessful' | 'Pending' | 'Completed' | 'In Progress' | 'Scheduled' | 'Cancelled' }>(({ theme, status }) => {
-        let backgroundColor = '';
-        let textColor = '';
-
-        if (status === 'Successful' || status === 'Completed') {
-            backgroundColor = theme.palette.mode === 'light' ? '#E6F4EA' : '#0F3D1F';
-            textColor = theme.palette.mode === 'light' ? '#1D8649' : '#81C995';
-        } else if (status === 'Unsuccessful') {
-            backgroundColor = theme.palette.mode === 'light' ? '#FCE7E7' : '#4D1414';
-            textColor = theme.palette.mode === 'light' ? '#D83232' : '#E67C73';
-        } else if (status === 'Pending' || status === 'In Progress') {
-            backgroundColor = theme.palette.mode === 'light' ? '#FFF7E6' : '#4D3A14';
-            textColor = theme.palette.mode === 'light' ? '#F29D38' : '#FDBE60';
-        } else if (status === 'Scheduled') {
-            backgroundColor = theme.palette.mode === 'light' ? '#E3F2FD' : '#0D3B66';
-            textColor = theme.palette.mode === 'light' ? '#1A73E8' : '#90CAF9';
-        } else if (status === 'Cancelled') {
-            backgroundColor = theme.palette.mode === 'light' ? '#F5F5F5' : '#333333';
-            textColor = theme.palette.mode === 'light' ? '#757575' : '#9E9E9E';
-        }
-
-        return {
-            display: 'inline-flex',
-            alignItems: 'center',
-            padding: '2px 8px',
-            borderRadius: '16px',
-            fontSize: '12px',
-            fontWeight: 500,
-            backgroundColor,
-            color: textColor,
-        };
-    });
-
     // Add a new handler function for procedure filtering
     const handleFilterProcedureOutcome = (outcome: 'Successful' | 'Unsuccessful' | 'Pending' | null) => {
         setProcedureOutcomeFilter(outcome);
@@ -2573,8 +2542,8 @@ const MedicalRecordsPage = () => {
             impression: 'Normal chest X-ray.',
             images: [
                 {
-                    thumbnail: '/images/chest-xray-thumb.png',
-                    fullSize: '/images/chest-xray.png',
+                    thumbnail: '/images/Chest X-Ray.jpg',
+                    fullSize: '/images/Chest X-Ray.jpg',
                     dicom: '/dicom/chest-xray.dcm'
                 }
             ],
@@ -2595,8 +2564,8 @@ const MedicalRecordsPage = () => {
             impression: 'Unremarkable CT of the abdomen.',
             images: [
                 {
-                    thumbnail: '/images/abdominal-ct-thumb.png',
-                    fullSize: '/images/abdominal-ct.png',
+                    thumbnail: '/images/CT Scan.jpg',
+                    fullSize: '/images/CT Scan.jpg',
                     dicom: '/dicom/abdominal-ct.dcm'
                 }
             ],
@@ -2675,6 +2644,40 @@ const MedicalRecordsPage = () => {
         // For now, we'll just close the dialog
         handleCloseConditionDialog();
     };
+
+    // Add after other styled components like StatusBadge
+    const ProcedureStatusBadge = styled(Box)<{ status: 'Successful' | 'Unsuccessful' | 'Pending' | 'Completed' | 'In Progress' | 'Scheduled' | 'Cancelled' }>(({ theme, status }) => {
+        let backgroundColor = '';
+        let textColor = '';
+
+        if (status === 'Successful' || status === 'Completed') {
+            backgroundColor = theme.palette.mode === 'light' ? '#E6F4EA' : '#0F3D1F';
+            textColor = theme.palette.mode === 'light' ? '#1D8649' : '#81C995';
+        } else if (status === 'Unsuccessful') {
+            backgroundColor = theme.palette.mode === 'light' ? '#FCE7E7' : '#4D1414';
+            textColor = theme.palette.mode === 'light' ? '#D83232' : '#E67C73';
+        } else if (status === 'Pending' || status === 'In Progress') {
+            backgroundColor = theme.palette.mode === 'light' ? '#FFF7E6' : '#4D3A14';
+            textColor = theme.palette.mode === 'light' ? '#F29D38' : '#FDBE60';
+        } else if (status === 'Scheduled') {
+            backgroundColor = theme.palette.mode === 'light' ? '#E3F2FD' : '#0D3B66';
+            textColor = theme.palette.mode === 'light' ? '#1A73E8' : '#90CAF9';
+        } else if (status === 'Cancelled') {
+            backgroundColor = theme.palette.mode === 'light' ? '#F5F5F5' : '#333333';
+            textColor = theme.palette.mode === 'light' ? '#757575' : '#9E9E9E';
+        }
+
+        return {
+            display: 'inline-flex',
+            alignItems: 'center',
+            padding: '2px 8px',
+            borderRadius: '16px',
+            fontSize: '12px',
+            fontWeight: 500,
+            backgroundColor,
+            color: textColor,
+        };
+    });
 
     return (
         <Box
@@ -3377,272 +3380,6 @@ const MedicalRecordsPage = () => {
                                         </Box>
                                     </>
                                 )}
-                            </Box>
-                        ) : selectedSection === 'conditions' ? (
-                            // Conditions detail view
-                            <Box sx={{ mb: 3 }}>
-                                {/* Header with back button */}
-                                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-                                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        <BackButton onClick={handleBackToRecords} startIcon={<BackIcon />}>
-                                            Medical Records
-                                        </BackButton>
-                                    </Box>
-                                    {!selectedCondition && (
-                                        <Box sx={{ display: 'flex', gap: 2 }}>
-                                            <SearchInput
-                                                placeholder="Search conditions..."
-                                                variant="outlined"
-                                                size="small"
-                                                value={searchQuery}
-                                                onChange={handleSearchChange}
-                                                InputProps={{
-                                                    startAdornment: (
-                                                        <Box sx={{ mr: 1, color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                                <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                                            </svg>
-                                                        </Box>
-                                                    ),
-                                                }}
-                                            />
-                                            <FilterButton
-                                                startIcon={<FilterIcon />}
-                                                onClick={() => handleFilterClick(filterActive === true ? null : true)}
-                                                sx={{
-                                                    backgroundColor: filterActive === true ? '#E3F2FD' : 'transparent',
-                                                }}
-                                            >
-                                                Active
-                                            </FilterButton>
-                                            <FilterButton
-                                                startIcon={<FilterIcon />}
-                                                onClick={() => handleFilterClick(filterActive === false ? null : false)}
-                                                sx={{
-                                                    backgroundColor: filterActive === false ? '#E3F2FD' : 'transparent',
-                                                }}
-                                            >
-                                                Inactive
-                                            </FilterButton>
-                                            <AddButton
-                                                startIcon={<PlusIcon />}
-                                                onClick={handleAddCondition}
-                                            >
-                                                Add Condition
-                                            </AddButton>
-                                        </Box>
-                                    )}
-                                </Box>
-
-                                {/* Conditions header */}
-                                <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                                    <ConditionsIcon />
-                                    <Typography variant="h6" sx={{ fontWeight: 600, ml: 1.5, color: mode === 'light' ? '#454747' : '#FFFFFF' }}>
-                                        {selectedCondition ? selectedCondition.name : 'Conditions'}
-                                    </Typography>
-                                </Box>
-
-                                {selectedCondition ? (
-                                    // Condition detail view
-                                    <Box>
-                                        <InfoCard>
-                                            <InfoCardTitle>Condition Details</InfoCardTitle>
-                                            <InfoItem>
-                                                <InfoLabel>Name:</InfoLabel>
-                                                <InfoValue>{selectedCondition.name}</InfoValue>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <InfoLabel>Clinical Status:</InfoLabel>
-                                                <InfoValue>
-                                                    <StatusBadge status={selectedCondition.clinicalStatus}>
-                                                        {selectedCondition.clinicalStatus}
-                                                    </StatusBadge>
-                                                </InfoValue>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <InfoLabel>Category:</InfoLabel>
-                                                <InfoValue>{selectedCondition.category}</InfoValue>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <InfoLabel>Verification Status:</InfoLabel>
-                                                <InfoValue>
-                                                    <StatusBadge status={selectedCondition.verificationStatus}>
-                                                        {selectedCondition.verificationStatus}
-                                                    </StatusBadge>
-                                                </InfoValue>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <InfoLabel>Body Site:</InfoLabel>
-                                                <InfoValue>{selectedCondition.bodySite}</InfoValue>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <InfoLabel>Severity:</InfoLabel>
-                                                <InfoValue sx={{ display: 'flex', alignItems: 'center' }}>
-                                                    <SeverityIndicator severity={selectedCondition.severity} />
-                                                    {selectedCondition.severity}
-                                                </InfoValue>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <InfoLabel>Recorded Date:</InfoLabel>
-                                                <InfoValue>{selectedCondition.recordedDate}</InfoValue>
-                                            </InfoItem>
-                                        </InfoCard>
-
-                                        <InfoCard>
-                                            <InfoCardTitle>Additional Information</InfoCardTitle>
-                                            <InfoItem>
-                                                <InfoLabel>Risk Level:</InfoLabel>
-                                                <InfoValue>{selectedCondition.riskLevel || 'Not specified'}</InfoValue>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <InfoLabel>Treating Physician:</InfoLabel>
-                                                <InfoValue>{selectedCondition.treatingPhysician || 'Not assigned'}</InfoValue>
-                                            </InfoItem>
-                                            <InfoItem>
-                                                <InfoLabel>Last Updated:</InfoLabel>
-                                                <InfoValue>{selectedCondition.lastUpdated || 'Not available'}</InfoValue>
-                                            </InfoItem>
-                                        </InfoCard>
-
-                                        <InfoCard>
-                                            <InfoCardTitle>Clinical Notes</InfoCardTitle>
-                                            <Typography sx={{
-                                                fontSize: '14px',
-                                                color: mode === 'light' ? '#333333' : '#FFFFFF',
-                                                lineHeight: 1.6
-                                            }}>
-                                                {selectedCondition.notes || 'No clinical notes available.'}
-                                            </Typography>
-                                        </InfoCard>
-
-                                        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-                                            <Button
-                                                variant="outlined"
-                                                sx={{
-                                                    borderColor: '#E16A6A',
-                                                    color: '#E16A6A',
-                                                    textTransform: 'none',
-                                                    mr: 2,
-                                                    '&:hover': {
-                                                        borderColor: '#d32f2f',
-                                                        backgroundColor: 'rgba(225, 106, 106, 0.08)',
-                                                    },
-                                                }}
-                                            >
-                                                Archive Condition
-                                            </Button>
-                                            <Button
-                                                variant="contained"
-                                                sx={{
-                                                    backgroundColor: '#21647D',
-                                                    color: '#FFFFFF',
-                                                    textTransform: 'none',
-                                                    '&:hover': {
-                                                        backgroundColor: '#1a5268',
-                                                    },
-                                                }}
-                                            >
-                                                Edit Condition
-                                            </Button>
-                                        </Box>
-                                    </Box>
-                                ) : (
-                                    // Conditions list view (table)
-                                    <ConditionsTableContainer>
-                                        <TableHead>
-                                            <TableHeadCell>Name <SortIcon style={{ marginLeft: '4px' }} /></TableHeadCell>
-                                            <TableHeadCell>Clinical Status</TableHeadCell>
-                                            <TableHeadCell>Category</TableHeadCell>
-                                            <TableHeadCell>Verification Status</TableHeadCell>
-                                            <TableHeadCell>Body Site</TableHeadCell>
-                                            <TableHeadCell>Severity</TableHeadCell>
-                                            <TableHeadCell>Recorded Date</TableHeadCell>
-                                        </TableHead>
-
-                                        {filteredConditions.length > 0 ? (
-                                            filteredConditions.map((condition) => (
-                                                <TableRow
-                                                    key={condition.id}
-                                                    onClick={() => handleConditionClick(condition)}
-                                                    sx={{ cursor: 'pointer' }}
-                                                >
-                                                    <TableCell sx={{ fontWeight: 500 }}>{condition.name}</TableCell>
-                                                    <TableCell>
-                                                        <StatusBadge status={condition.clinicalStatus}>
-                                                            {condition.clinicalStatus}
-                                                        </StatusBadge>
-                                                    </TableCell>
-                                                    <TableCell>{condition.category}</TableCell>
-                                                    <TableCell>
-                                                        <StatusBadge status={condition.verificationStatus}>
-                                                            {condition.verificationStatus}
-                                                        </StatusBadge>
-                                                    </TableCell>
-                                                    <TableCell>{condition.bodySite}</TableCell>
-                                                    <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
-                                                        <SeverityIndicator severity={condition.severity} />
-                                                        {condition.severity}
-                                                    </TableCell>
-                                                    <TableCell>{condition.recordedDate}</TableCell>
-                                                </TableRow>
-                                            ))
-                                        ) : (
-                                            <Box sx={{ p: 3, textAlign: 'center' }}>
-                                                <Typography sx={{ color: mode === 'light' ? '#6C7A89' : '#B8C7CC' }}>
-                                                    No conditions found matching your search criteria.
-                                                </Typography>
-                                            </Box>
-                                        )}
-                                    </ConditionsTableContainer>
-                                )}
-
-                                {/* About Conditions Section */}
-                                <Box sx={{
-                                    mt: 4,
-                                    p: 3,
-                                    backgroundColor: mode === 'light' ? '#F8FBFC' : '#2B2B2B',
-                                    border: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`,
-                                    borderRadius: '12px',
-                                }}>
-                                    <Typography variant="subtitle1" sx={{
-                                        fontWeight: 600,
-                                        color: mode === 'light' ? '#454747' : '#FFFFFF',
-                                        mb: 1
-                                    }}>
-                                        About Conditions
-                                    </Typography>
-                                    <Typography sx={{
-                                        color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
-                                        fontSize: '14px',
-                                        lineHeight: 1.7
-                                    }}>
-                                        Medical conditions are health problems or diseases that affect your health.
-                                        Keeping track of your conditions helps your healthcare providers maintain a complete
-                                        picture of your health and provide appropriate care. It's important to document
-                                        both active and inactive conditions, as past medical history can be relevant to
-                                        future treatment decisions.
-                                    </Typography>
-                                    <Box sx={{ mt: 2 }}>
-                                        <Typography sx={{
-                                            color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
-                                            fontSize: '14px',
-                                            fontWeight: 600,
-                                            mb: 0.5
-                                        }}>
-                                            Condition Statuses:
-                                        </Typography>
-                                        <Box component="ul" sx={{
-                                            pl: 2,
-                                            m: 0,
-                                            color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
-                                            fontSize: '14px',
-                                        }}>
-                                            <li><strong>Active:</strong> Current health problems requiring attention or monitoring.</li>
-                                            <li><strong>Inactive:</strong> Previous conditions that are resolved or in remission.</li>
-                                        </Box>
-                                    </Box>
-                                </Box>
                             </Box>
                         ) : selectedSection === 'allergies' ? (
                             // Allergies detail view
@@ -4480,7 +4217,12 @@ const MedicalRecordsPage = () => {
                                     </Box>
                                 )}
                             </Box>
-                        ) : selectedSection === 'imaging' ? (
+                        ) : selectedSection === "imaging" ? (
+                            <ImagingComponent
+                                initialImaging={imagingStudies}
+                                onBackClick={handleBackToRecords}
+                            />
+                        ) : selectedSection === "procedures" ? (
                             // Imaging detail view
                             <Box sx={{ mb: 3 }}>
                                 {/* Header with back button */}
@@ -6397,204 +6139,6 @@ const MedicalRecordsPage = () => {
                 </DialogActions>
             </Dialog>
 
-            {/* Add Imaging Dialog */}
-            <Dialog
-                open={openAddImagingDialog}
-                onClose={handleCloseImagingDialog}
-                maxWidth="md"
-                fullWidth
-                PaperProps={{
-                    style: {
-                        borderRadius: '12px',
-                        backgroundColor: mode === 'light' ? '#FFFFFF' : '#2D2D2D',
-                        boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)',
-                    },
-                }}
-            >
-                <DialogTitle sx={{
-                    p: 2.5,
-                    fontWeight: 600,
-                    color: mode === 'light' ? '#333333' : '#FFFFFF',
-                    borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`
-                }}>
-                    Add New Imaging Study
-                </DialogTitle>
-                <DialogContent sx={{ p: 3, mt: 1 }}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} md={6}>
-                            <TextField
-                                name="name"
-                                label="Imaging Study Name"
-                                variant="outlined"
-                                fullWidth
-                                required
-                                value={newImaging.name}
-                                onChange={handleImagingInputChange}
-                                sx={{
-                                    mt: 1,
-                                    mb: 2,
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
-                                    }
-                                }}
-                            />
-                            <FormControl fullWidth sx={{ mb: 2 }}>
-                                <InputLabel id="modality-label">Modality</InputLabel>
-                                <Select
-                                    labelId="modality-label"
-                                    id="modality"
-                                    name="modality"
-                                    value={newImaging.modality}
-                                    label="Modality"
-                                    onChange={handleImagingModalityChange}
-                                    sx={{
-                                        borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
-                                    }}
-                                >
-                                    <MenuItem value="MRI">MRI</MenuItem>
-                                    <MenuItem value="CT">CT</MenuItem>
-                                    <MenuItem value="X-Ray">X-Ray</MenuItem>
-                                    <MenuItem value="Ultrasound">Ultrasound</MenuItem>
-                                    <MenuItem value="PET">PET</MenuItem>
-                                    <MenuItem value="Angiography">Angiography</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <TextField
-                                name="bodyPart"
-                                label="Body Part"
-                                variant="outlined"
-                                fullWidth
-                                value={newImaging.bodyPart}
-                                onChange={handleImagingInputChange}
-                                sx={{
-                                    mb: 2,
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
-                                    }
-                                }}
-                            />
-                            <TextField
-                                name="physician"
-                                label="Physician"
-                                variant="outlined"
-                                fullWidth
-                                value={newImaging.physician}
-                                onChange={handleImagingInputChange}
-                                sx={{
-                                    mb: 2,
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
-                                    }
-                                }}
-                            />
-                            <TextField
-                                name="facility"
-                                label="Facility"
-                                variant="outlined"
-                                fullWidth
-                                value={newImaging.facility}
-                                onChange={handleImagingInputChange}
-                                sx={{
-                                    mb: 2,
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
-                                    }
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControl fullWidth sx={{ mb: 2, mt: 1 }}>
-                                <InputLabel id="status-label">Status</InputLabel>
-                                <Select
-                                    labelId="status-label"
-                                    id="status"
-                                    name="status"
-                                    value={newImaging.status}
-                                    label="Status"
-                                    onChange={handleImagingStatusChange}
-                                    sx={{
-                                        borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
-                                    }}
-                                >
-                                    <MenuItem value="Completed">Completed</MenuItem>
-                                    <MenuItem value="Pending">Pending</MenuItem>
-                                    <MenuItem value="Scheduled">Scheduled</MenuItem>
-                                </Select>
-                            </FormControl>
-                            <TextField
-                                name="date"
-                                label="Date"
-                                type="date"
-                                variant="outlined"
-                                fullWidth
-                                required
-                                value={newImaging.date}
-                                onChange={handleImagingInputChange}
-                                InputLabelProps={{ shrink: true }}
-                                sx={{
-                                    mb: 2,
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
-                                    }
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                name="notes"
-                                label="Notes"
-                                variant="outlined"
-                                fullWidth
-                                multiline
-                                rows={4}
-                                value={newImaging.notes || ''}
-                                onChange={handleImagingInputChange}
-                                sx={{
-                                    '& .MuiOutlinedInput-root': {
-                                        borderRadius: '8px',
-                                        backgroundColor: mode === 'light' ? '#F9FAFB' : '#333',
-                                    }
-                                }}
-                            />
-                        </Grid>
-                    </Grid>
-                </DialogContent>
-                <DialogActions sx={{
-                    p: 2.5,
-                    borderTop: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`
-                }}>
-                    <Button
-                        onClick={handleCloseImagingDialog}
-                        sx={{
-                            color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
-                            textTransform: 'none',
-                        }}
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        onClick={handleSaveImaging}
-                        variant="contained"
-                        sx={{
-                            backgroundColor: '#21647D',
-                            textTransform: 'none',
-                            '&:hover': {
-                                backgroundColor: '#1a5268',
-                            },
-                        }}
-                    >
-                        Save Imaging Study
-                    </Button>
-                </DialogActions>
-            </Dialog>
-
             {/* Add Condition Dialog */}
             <Dialog
                 open={openAddConditionDialog}
@@ -6790,6 +6334,62 @@ const MedicalRecordsPage = () => {
                         }}
                     >
                         Save Condition
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Add Imaging Dialog */}
+            <Dialog
+                open={openAddImagingDialog}
+                onClose={handleCloseImagingDialog}
+                maxWidth="md"
+                fullWidth
+                PaperProps={{
+                    style: {
+                        borderRadius: '12px',
+                        backgroundColor: mode === 'light' ? '#FFFFFF' : '#2D2D2D',
+                        boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.15)',
+                    },
+                }}
+            >
+                <DialogTitle sx={{
+                    p: 2.5,
+                    fontWeight: 600,
+                    color: mode === 'light' ? '#333333' : '#FFFFFF',
+                    borderBottom: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`
+                }}>
+                    Add New Imaging Study
+                </DialogTitle>
+                <DialogContent sx={{ p: 3, mt: 1 }}>
+                    <Grid container spacing={3}>
+                        {/* Dialog content */}
+                    </Grid>
+                </DialogContent>
+                <DialogActions sx={{
+                    p: 2.5,
+                    borderTop: `1px solid ${mode === 'light' ? '#EEF1F4' : '#444'}`
+                }}>
+                    <Button
+                        onClick={handleCloseImagingDialog}
+                        sx={{
+                            color: mode === 'light' ? '#6C7A89' : '#B8C7CC',
+                            textTransform: 'none',
+                        }}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={handleSaveImaging}
+                        variant="contained"
+                        sx={{
+                            backgroundColor: '#21647D',
+                            textTransform: 'none',
+                            '&:hover': {
+                                backgroundColor: '#1a5268',
+                            },
+                        }}
+                    >
+                        Save Imaging Study
                     </Button>
                 </DialogActions>
             </Dialog>

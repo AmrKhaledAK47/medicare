@@ -1,0 +1,278 @@
+.profile-page-edit {
+  padding: 40px;
+  background: #f9f9f9;
+  font-family: sans-serif;
+}
+
+.breadcrumb-edit {
+  font-size: 18px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.breadcrumb-edit .separator-edit {
+  margin: 0 5px;
+}
+
+.breadcrumb-edit .current-edit {
+  color: #21647D;
+  font-weight: bold;
+}
+
+.top-section-edit {
+  display: flex;
+  gap: 30px;
+}
+
+.left-panel-edit {
+  
+  padding: 30px 20px;
+  width: 450px;
+  text-align: center;
+  
+}
+
+.page-container-edit {
+  padding: 30px;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.breadcrumb-edit {
+  color: #8f8f8f;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 1080px;
+}
+
+.breadcrumb-edit .highlight-edit {
+  color: #21759b;
+  font-weight: bold;
+}
+
+.profile-wrapper-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+}
+/*دا اللى جواه الصوره*/
+.profile-box-edit {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 30px;
+  text-align: center;
+  width: 350px;
+  margin-bottom: 40px;
+}
+
+.image-wrapper-edit {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 10px;
+}
+
+.profile-pic-edit {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.edit-icon-edit {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  width: 32px;
+  height: 32px;
+}
+
+.profile-name-edit {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.update-btn-edit-doc {
+  background-color: #26a269 !important;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 40px;
+}
+
+.fields-grid-edit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 20px;
+  max-width: 1080px;
+  width: 100%;
+}
+
+.field-edit {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.field-edit label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: white;
+  font-size: 14px;
+  padding: 0 4px;
+  color: black;
+  font-weight: 500;
+}
+
+.field-edit input {
+  padding: 16px 12px 10px;
+  font-size: 16px;
+  border: 1px solid #217C99 !important;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  color: #777;
+  text-align: left;
+}
+.payment-section-edit{
+  margin-top: 15px;
+}
+.right-panel-edit {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.two-columns-edit {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 22px;
+}
+
+.form-group-edit {
+   display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 20px;
+}
+
+.form-group-edit label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: white;
+  font-size: 14px;
+  padding: 0 4px;
+  color: black;
+  font-weight: 500;
+}
+
+.form-group-edit input {
+  padding: 16px 12px 10px;
+  font-size: 16px;
+  border: 1px solid #217C99 !important;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  color: #777;
+  text-align: left;
+}
+
+.full-width-edit {
+  margin-top: 10px;
+}
+
+.payment-options-edit {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.payment-card-edit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  flex: 1;
+  margin-top: 10px;
+  
+}
+
+.payment-icon-edit {
+  width: 70px;
+  height: 50px;
+  margin-top: -25px;
+}
+
+.payment-info-edit .card-label-edit {
+  font-size: 14px;
+  font-weight: 500;
+
+}
+
+.payment-info-edit .card-type-edit {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.remove-edit {
+  margin-left:300px;
+  color: red;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.divider-line-edit {
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  margin: 4px 0;
+}
+
+.add-payment-edit-doc {
+  margin-top: 30px;
+  background: transparent;
+  border: 1px solid #28a47a !important;
+  padding: 10px 20px;
+  color: #28a47a;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 430px;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.save-section-edit {
+  text-align: right;
+  margin-top: -680px;
+}
+
+.save-button-edit {
+  background-color: #217C99 !important;
+  color: white;
+  padding: 12px 40px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}

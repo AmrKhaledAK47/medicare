@@ -1,0 +1,542 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f4f6f8;
+    }
+    
+    .container {
+      display: flex;
+      height: 100vh;
+    
+    }
+    
+    /* Sidebar Styling */
+    .sidebar {
+      position: fixed; /* تثبيت الشريط الجانبي */
+      top: 70px !important; /* المسافة من أعلى الصفحة */
+      left: 0; /* بداية من الجهة اليسرى */
+      width: 80px;
+      background-color:white;
+      color: #21647D;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      height: 100vh; /* طول الشريط الجانبي ليشمل كامل الصفحة */
+      z-index: 1000; /* تأكيد ظهور العنصر فوق العناصر الأخرى */
+      position: fixed;
+      overflow-y: auto; /* في حال القائمة طويلة */
+    }
+    
+    .sidebar .logo {
+      font-size: 20px;
+      margin: 20px 0;
+      font-weight: bold;
+      color: #ffffff;
+      text-align: center;
+    }
+    
+    .menu ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+    
+    .menu li {
+      padding: 15px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      color: white;
+      transition: background-color 0.3s;
+    }
+    
+    .menu li:hover {
+      background-color: #217C99;
+    }
+    
+    .icon {
+      font-size: 24px;
+    }
+    
+    /* Main Content Styling */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f6f8;
+      width: 100%; /* اجعل الهيدر يغطي عرض الصفحة بالكامل */
+      position: fixed; /* تثبيت العنصر في المكان */
+      top: 0; /* من أعلى الصفحة */
+      right: 0; /* من الجهة اليمنى */
+      left: 0; /* من الجهة اليسرى */
+      height: 100vh; /* ملء كامل ارتفاع الصفحة */
+      overflow-y: auto; /* السماح بالتمرير داخل المحتوى */
+      
+      
+    }
+    
+    .header {
+      background-color: white;
+      /*padding: 15px 20px;*/
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      
+      
+    }
+    
+    .header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #217C99;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .header .logo img {
+      width: 40px;
+      height: 40px;
+    
+    }
+
+    .profile {
+        font-weight: bold;
+        color: black;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      .profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .settings-tiitle {
+        margin-top: 60px; /* رفع الكلمة للأعلى */
+        margin-bottom: 20px; /* لضبط المسافة بين كلمة Settings والمحتوى */
+        margin-left: 130px;
+        
+      }
+      
+      .settings-tiitle h1 {
+        font-size: 22px;
+        color: #217C99;
+      }
+
+      .profile-photo {
+        display: flex;
+        align-items: center;
+      }
+      
+      .photo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      
+      .patieint-containerr {
+        margin-top: -20px;
+        display: flex;
+        justify-content: left;
+        width: 22.13% !important; /* أو يمكنك تحديد عرض آخر يناسب التصميم */
+        max-width: 1200px;
+        background-color: #ffffff !important;
+        border-radius: 15px;
+        border: 1px solid #ccc;
+        margin-left: 120px;
+        height: 40%;
+      }
+      
+      
+      .patient-card {
+        background-color: #ffffff !important;
+        padding: 40px; /* Add padding inside the card */
+        border-radius: 15px;
+        box-shadow: none !important; /* إزالة تأثير الظل */
+        transition: box-shadow 0.3s ease-in-out;
+        border: none !important; /* إلغاء الإطار */
+        outline: none !important; /* إلغاء الخط المحيط */
+        width: 100%; /* يجعل الكارد بنفس عرض الـ patient-container */
+        
+        
+      }
+      
+      
+      
+      .patient-card:hover {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      .patient-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      
+      .patient-photo {
+        width: 120px; /* Adjust the size of the photo */
+        height: 120px;
+        border-radius: 0;
+        margin-left: 20px; /* Add space between image and text */
+        margin-top: 5px;
+      }
+      
+      .patient-text-info {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .patient-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-left: 40px;
+      }
+      
+      .patient-details {
+        font-size: 1rem;
+        color: gray;
+        margin-left: 40px;
+        margin-top: 0px;
+      }
+      
+      .contact-inufo {
+        margin-top: 20px; /* Add some space between contact info and image */
+        font-size: 1rem;
+        color: gray;
+        flex-direction: column;
+        gap:-0px;
+        margin-left: 20px;
+        margin-top: 5px;
+      }
+      
+      .contact-inufo p {
+        margin: 5px 0; /* Add space between each contact detail */
+      }
+
+      .vitals-header {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* المسافة بين العنوان والصورة */
+        background-color: #F8F8F8; /* خلفية رمادية فاتحة للعناصر داخل الرأس */
+        padding: 8px;
+        border-radius: 10px; /* حواف دائرية داخل العنوان */
+        width: fit-content; /* جعل العرض يناسب المحتوى داخل الـ div */
+      }
+      
+      
+      
+      .vitals-icon {
+        width: 20px; /* حجم الصورة، يمكنك تغييره حسب الحاجة */
+        height: 20px; /* حجم الصورة */
+        order: -1;  /* يجعل الصورة تظهر أولاً (على اليسار) */
+      }
+      
+      
+      .vitals-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+      
+      .vitals-box {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        padding: 15px;
+        width: 900px;
+        height:243px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-top: -330px;
+        margin-left: 500px;
+      }
+      
+      .vitals-title {
+        font-size: 18px;
+        margin: 0;
+        font-weight: bold;
+        color: #217C99
+      }
+      
+      .vitals-line {
+        width: 100%;
+        height: 2px;
+        background-color: gray;
+        margin: 10px 0;
+      }
+      
+      .vitals-value {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 5px 0;
+      }
+      
+      .vitals-label {
+        font-size: 14px;
+        color: #555;
+        margin: 5px 0;
+      }
+      
+      
+      .weight-info {
+        display: flex;
+        justify-content: space-between;
+        position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+      }
+      
+      .weight-value {
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 300px;
+        margin-top: -50px;
+      }
+      
+      .weight-label {
+        font-size: 14px;
+        color: #555;
+        position: absolute; /* تحديد الموضع بشكل مطلق */
+        left: 300px;  /* تحريك العنصر إلى اليسار */
+        margin-top: -20px;
+      }
+      
+      .Heart-info {
+        display: flex;
+        justify-content: space-between;
+        position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+      }
+      
+      .Heart-value {
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 600px;
+        margin-top: -50px;
+      }
+      
+      .Heart-label {
+        font-size: 14px;
+        color: #555;
+        position: absolute; /* تحديد الموضع بشكل مطلق */
+        left: 600px;  /* تحريك العنصر إلى اليسار */
+        margin-top: -20px;
+      }
+      
+      .Oxygen-info {
+        display: flex;
+        justify-content: space-between;
+        position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+      }
+      
+      .Oxygen-value {
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 10px;
+        margin-top: 10px;
+      }
+      
+      .Oxygen-label {
+        font-size: 14px;
+        color: #555;
+        position: absolute; /* تحديد الموضع بشكل مطلق */
+        left: 10px;  /* تحريك العنصر إلى اليسار */
+        margin-top: 40px;
+      }
+      
+      .Body-info {
+        display: flex;
+        justify-content: space-between;
+        position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+      }
+      
+      .Body-value {
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 300px;
+        margin-top: -40px;
+      }
+      
+      .Body-label {
+        font-size: 14px;
+        color: #555;
+        position: absolute; /* تحديد الموضع بشكل مطلق */
+        left: 300px;  /* تحريك العنصر إلى اليسار */
+        margin-top: -10px;
+      }
+      
+      .Blood-info {
+        display: flex;
+        justify-content: space-between;
+        position: relative;  /* جعل العنصر الحاوي يحتوي على موقع نسبي */
+      }
+      
+      .Blood-value {
+        font-size: 16px;
+        font-weight: bold;
+        margin-left: 600px;
+        margin-top: -40px;
+      }
+      
+      .Blood-label {
+        font-size: 14px;
+        color: #555;
+        position: absolute; /* تحديد الموضع بشكل مطلق */
+        left: 600px;  /* تحريك العنصر إلى اليسار */
+        margin-top: -10px;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+        margin-left: 90px;
+        margin-top: -10px;
+      }
+      
+      
+      .nav-links li {
+        font-size: 1rem;
+        cursor: pointer;
+        position: relative; /* مهم لإنشاء الخط أسفل العنصر */
+      }
+      
+      .nav-links li:hover {
+        color: #217C99; /* تغيير اللون إلى الأزرق عند التمرير */
+      }
+      
+      .nav-links li::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -3px; /* المسافة بين النص والخط */
+        width: 100%;
+        height: 2px;
+        background-color: #217C99;
+        transform: scaleX(0); /* يبدأ الخط غير مرئي */
+        transition: transform 0.3s ease-in-out;
+      }
+      
+      .nav-links li:hover::after {
+        transform: scaleX(1); /* يظهر الخط عند التمرير */
+      }
+
+
+      .contaiiner {
+        width: 95% !important; /* اجعل العرض أكبر */
+        max-width: 1345px !important; /* زيادة الحد الأقصى */
+        margin: 0 auto !important;
+        padding: 16px !important;
+        display: block !important;
+        margin-left: 110px !important;
+    }
+
+    
+    
+    
+    .carddd {
+      background: #FFFFFF;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid #ccc;
+      height: 950px !important;
+    }
+    
+    
+    .card-header {
+      display: flex;
+      align-items: center;
+      color: #217C99;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    
+    .icon {
+      margin-right: 10px;
+      
+    }
+
+    .mediciiations-container {
+      background-color: #f0f0f0; /* لون رمادي */
+      padding: 10px;
+      border-radius: 8px; /* حواف دائرية */
+      display: inline-block; /* يناسب المحتوى فقط */
+      margin-left: -60px;
+      margin-top: 10px; /* تحريك العنصر إلى اليمين */
+      width: 20%;
+    }
+    
+    .mediciiations-header {
+      display: flex;
+      align-items: center;
+      gap: 8px; /* مسافة بين الأيقونة والنص */
+    }
+    
+    .mediciiations-image {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .mediciiations-text {
+      color: #2B6878; /* نفس لون النص في الصورة */
+      font-weight: 500;
+      font-size: 14px;
+    }
+    
+    
+    .cardd-content {
+        margin-top: 0px !important;
+        
+      }
+      
+    .mediccation-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      
+    .med-naaame {
+        font-weight: bold;
+      }
+      
+    .med-tiiime {
+        color: #4b5563;
+        margin-top: -15px !important;
+      }
+    
+      /* الخط الفاصل */
+    .dividerr {
+        border-bottom: 1px solid #ddd;
+        margin: 8px 0;
+        margin-top: -20px;
+      }
+      
+      .carddd-content {
+        margin-top: 16px;
+      }
+      
+    .medicccation-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      
+    .med-naaaame {
+        font-weight: bold;
+        margin-top: -15px;
+      }
+      
+    .med-tiiiime {
+        color: #4b5563;
+        margin-top: -15px !important;
+      }
+      
+    
+    

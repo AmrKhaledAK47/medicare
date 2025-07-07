@@ -1,0 +1,370 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #f4f6f8;
+  }
+  
+
+  button {
+    border: none !important; /* إزالة الحدود */
+    outline: none !important; /* إزالة الإطار */
+    background: none !important; /* إزالة الخلفية */
+    cursor: pointer !important; /* تغيير المؤشر */
+  }
+  
+  /* === Sidebar Container === */
+.containetr {
+  display: flex;
+}
+
+/* === Sidebar Styling === */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 85vh;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 1px;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.expanded {
+  width: 220px;
+  
+  
+  
+}
+
+.sidebar.expanded ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px; /* زيادة المسافة بين العناصر */
+}
+
+
+
+
+
+
+/* === Sidebar Menu Styling === */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+ 
+}
+
+.menu li:hover {
+  background-color: #ffffff;
+}
+
+/* === Sidebar Icons Styling === */
+.icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-left:20px !important;
+  margin-bottom:40px !important; /* زيادة المسافة بين الأيقونات */
+  margin-top: -32px !important;
+  
+}
+
+/* === Text Styling === */
+.text {
+  font-size: 16px;
+  color: #003f5c;
+  font-weight: 500;
+  margin-right: 60px !important;
+  transform: translateY(-36px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+/* === Dashboard Item (With Arrow) === */
+.dashboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-right: 60px;
+  
+  
+  
+
+}
+
+.dashboard-item:hover {
+  background-color: #e0f7fa;
+  
+}
+
+/* === Toggle Arrow Styling === */
+.toggle-icon {
+  width: 16px; /* حجم مناسب */
+  height: 16px;
+  color: #21647D; /* لون السهم */
+  transition: transform 0.3s ease-in-out;
+  background-color: white; /* لون الدائرة */
+  border-radius: 50%; /* جعلها دائرية */
+  padding: 5px; /* مساحة داخلية لتوسيع الدائرة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  position: absolute;
+  right: -1px; /* يحرك السهم لليمين */
+  
+}
+
+
+.toggle-icon.rotated {
+  transform: rotate(90deg);
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+ 
+  
+}
+
+/* الأيقونة الثانية التي تظهر بجانبها عند التوسيع */
+.theme-texxt-icon {
+  width: 150px; /* ضبط العرض ليشبه النص */
+  height: auto;
+  margin-left: -4px; /* إزاحة جهة اليمين */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  
+}
+  /* Main Content Styling */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f6f8;
+    width: 100%; /* اجعل الهيدر يغطي عرض الصفحة بالكامل */
+    position: fixed; /* تثبيت العنصر في المكان */
+    top: 0; /* من أعلى الصفحة */
+    right: 0; /* من الجهة اليمنى */
+    left: 0; /* من الجهة اليسرى */
+    height: 100vh; /* ملء كامل ارتفاع الصفحة */
+    
+  }
+  
+  .header {
+    background-color: white;
+    /*padding: 15px 20px;*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    
+  }
+  
+  .header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #217C99;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .header .logo img {
+    width: 40px;
+    height: 40px;
+  
+  }
+  
+  /* الحاوية الكلية */
+.search-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 50px !important; /* تحريك شريط البحث إلى اليسار */
+}
+
+/* تصميم شريط البحث */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* مسافة أكبر بين الأيقونة والنص */
+  padding: 12px 20px; /* زيادة المسافة الداخلية */
+  border: 1px solid hwb(0 87% 13% / 0.625);
+  border-radius: 0px; /* حواف مستديرة أكثر */
+  background-color: #f9f9f9; /* لون خلفية هادئ */
+  width: fit-content;
+  /*box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* ظل أكثر وضوحًا */
+  width: 300px !important; /* تحديد طول المربع */
+}
+
+/* الأيقونة */
+.search-icon {
+  color: #888;
+  font-size: 18px; /* تكبير الأيقونة */
+}
+
+/* النص */
+.search-text {
+  font-size: 15px; /* تكبير النص */
+  color: #333;
+  font-weight: 500;
+}
+  
+  .profile {
+    font-weight: bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  /* Table Section Styling */
+  .table-section {
+    padding: 10px ; /* تقليل المسافة بين حدود الكونتر والجدول */
+    background-color: white ;
+    margin: 15px auto ; /* تقليل المسافة بين الكونتر والصفحة */
+    border-radius: 8px ;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) ;
+    max-width: 80% ; /* أقصى عرض للكونتر */
+    width: 100% ; /* عرض الكونتر 100% لكن مع تحديد أقصى عرض */
+    box-sizing: border-box ; /* لضمان أن padding لا يؤثر على عرض الكونتر */
+    margin-top:120px !important;
+    margin-left:150px !important ;
+  }
+  
+  .table-section h1 {
+    margin-bottom: 10px ; /* تقليل المسافة بين العنوان والجدول */
+    font-size: 18px ;
+    color: #217C99 ;
+    margin-top: 15px ;
+  
+  
+  }
+  
+  table {
+    width: 100% ; /* عرض الجدول 100% */
+    border-collapse: collapse ;
+    background-color: white ;
+    border-radius: 8px ;
+    overflow: hidden ;
+  }
+  
+  th, td {
+    border: none ;
+    text-align: left ;
+    padding: 13px ; /* تقليل المسافات داخل الخلايا */
+    font-size: 12px ; /* تصغير حجم الخط داخل الخلايا */
+  }
+  
+  th {
+    background-color: #217C99 ;
+   /* background: linear-gradient(45deg, #27A0C6 ,#21647D); /* تدرج لوني بين اللونين */
+    color: white ;
+    text-align: left ;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #eef3fb;
+  }
+  
+  
+  .status {
+    margin-top: 7px; /* إضافة المسافة من الأعلى */
+    text-transform: capitalize;
+    font-weight: bold;
+    color: white; /* تحديد لون النص إلى الأبيض */
+    padding: 5px 10px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 10px;  /* تقليل حجم الخط */
+    display: inline-block;  /* تأكد من أن العنصر ليس ملء المساحة */
+    width: 100px; /* تحديد العرض الثابت للمربع */
+    height: 13px; /* تحديد الارتفاع الثابت */
+  }
+  
+  .status-registered {
+    background-color: #217C99; /* اللون لحالة Registered */
+  }
+  
+  .status-partial {
+    background-color: #5CAFD0; /* اللون لحالة Partial */
+  }
+  
+  .status-preliminary {
+    background-color: #71BDCB; /* اللون لحالة Preliminary */
+  }
+  
+  .status-final {
+    background-color: #3CB5CF; /* اللون لحالة Final */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 60px;
+    }
+  
+    .icon {
+      font-size: 20px;
+    }
+  
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  
+    .search-bar {
+      margin-top: 10px;
+      width: 100%;
+    }
+  
+    .profile img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* لجعل العناصر في الوسط */
+  }
+  
+  .logo i, .logo .fa-stethoscope {
+    margin-left: 8px; /* مسافة بين كلمة MediCare والأيقونة */
+    font-size: 20px; /* تغيير حجم الأيقونة */
+  }
+
+  .search-bar {
+    position: relative;
+    width: 100%;
+  }
+  
+  

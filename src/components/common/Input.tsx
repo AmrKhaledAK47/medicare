@@ -1,9 +1,11 @@
 import React from 'react';
 import { TextField, TextFieldProps, InputAdornment } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useField } from 'formik';
 
 interface InputProps extends Omit<TextFieldProps, 'variant'> {
     endAdornment?: React.ReactNode;
+    name: string;
 }
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -45,8 +47,8 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
             },
 
             '&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active': {
-                WebkitBoxShadow: 'none !important',
-                boxShadow: 'none !important',
+                WebkitBoxShadow: '0 0 0 30px transparent inset !important',
+                boxShadow: '0 0 0 30px transparent inset !important',
                 WebkitTextFillColor: '#FFFFFF !important',
                 backgroundColor: 'transparent !important',
                 background: 'transparent !important',
@@ -74,6 +76,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
         marginLeft: '0',
         textAlign: 'left',
         width: '100%',
+        color: '#ff6b6b',
     },
 
     '& .MuiInputAdornment-root': {
@@ -92,8 +95,8 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
         backgroundColor: 'transparent !important',
         background: 'transparent !important',
         appearance: 'none',
-        WebkitBoxShadow: 'none !important',
-        boxShadow: 'none !important',
+        WebkitBoxShadow: '0 0 0 30px transparent inset !important',
+        boxShadow: '0 0 0 30px transparent inset !important',
     },
 
     '@media (max-width: 1400px)': {
@@ -160,6 +163,11 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const Input: React.FC<InputProps> = ({ endAdornment, ...props }) => {
+    // Use Formik's useField hook to get field props and meta
+    const [field, meta] = useField(props.name);
+
+    const hasError = meta.touched && !!meta.error;
+
     const inputProps = endAdornment
         ? {
             endAdornment: (
@@ -167,10 +175,10 @@ const Input: React.FC<InputProps> = ({ endAdornment, ...props }) => {
                     {endAdornment}
                 </InputAdornment>
             ),
-            autoComplete: "new-password"
+            autoComplete: "off"
         }
         : {
-            autoComplete: "new-password"
+            autoComplete: "off"
         };
 
     return (
@@ -184,6 +192,9 @@ const Input: React.FC<InputProps> = ({ endAdornment, ...props }) => {
                     boxShadow: 'none'
                 }
             }}
+            error={hasError}
+            helperText={hasError ? meta.error : ''}
+            {...field}
             {...props}
         />
     );

@@ -1,0 +1,781 @@
+/* التصاميم العامة (الافتراضية) */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+/*Responsive*/
+.item {
+  flex: 1 1 30%; /* العناصر تأخذ 30% من العرض */
+  margin: 10px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+}
+
+/* للهواتف */
+@media (max-width: 768px) {
+  .item {
+    flex: 1 1 100%; /* العناصر تأخذ العرض بالكامل */
+  }
+}
+
+/* للتابلت */
+@media (max-width: 1024px) {
+  .item {
+    flex: 1 1 45%; /* العناصر تأخذ 45% من العرض */
+  }
+}
+
+.logo-section-home {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-home {
+  height: 30px;
+  margin-left: 0px;
+  color: white;
+}
+
+.title-home {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  margin-left: 0px;
+  margin-top: 11px;
+
+}
+/* إعدادات عامة */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  overflow-y: scroll; /* السماح بالتمرير العمودي */
+}
+
+.logo {
+  font-size: 20px !important;
+}
+
+.App {
+  overflow-y: auto; /* ضمان التمرير العمودي داخل التطبيق */
+  padding-top: -40px; /* إضافة مسافة في الأعلى */
+  margin-left: -2%; /* حرك المحتوى نحو الجهة اليسرى */
+}
+
+/* شريط التنقل */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  position: absolute;
+  width: 90%;
+  z-index: 10;
+  background-color: transparent;
+  color: white;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* أزرار التسجيل وتسجيل الدخول */
+.auth-buttons {
+  display: flex;
+  gap: 30px; /* المسافة بين الأزرار */
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -10px; /* رفع الأزرار للأعلى قليلاً */
+}
+
+.auth-buttons .login,
+.auth-buttons .signup {
+  width: 150px; /* عرض الأزرار */
+  height: 45px; /* ارتفاع الأزرار */
+  padding: 0 25px; /* padding الجانبي */
+  border: none;
+  border-radius: 30px; /* زاوية مستديرة */
+  font-size: 1.1rem; /* حجم الخط */
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* تأثير الظل */
+}
+
+/* زر تسجيل الدخول */
+.auth-buttons .login {
+  background-color: white !important;
+  color: #21647d !important;
+  border: 1px solid #21647d;
+}
+
+/* زر التسجيل */
+.auth-buttons .signup {
+  background: linear-gradient(
+    to right,
+    #3cb6e3,
+    #21647d
+  ) !important; /* تدرج لوني */
+  color: white !important;
+}
+
+/* تأثير التمرير */
+.auth-buttons .login:hover,
+.auth-buttons .signup:hover {
+  transform: scale(1.05); /* تصغير تأثير التكبير عند التمرير */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15); /* تأثير الظل عند التمرير */
+  background-color: #21647d !important; /* تغيير اللون الخلفي عند التمرير */
+  color: white !important; /* تغيير لون النص */
+}
+
+/* تنسيق الهيدر والخلفية */
+.custom-header {
+  height: 130vh; /* طول الهيدر */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 100px;
+  position: relative;
+  background: linear-gradient(
+      to right,
+      rgba(33, 100, 125, 0.9),
+      rgba(33, 100, 125, 0.7),
+      rgba(255, 255, 255, 0) /* تدرج لوني ينتهي باللون الأبيض */
+    ),
+    url("../Images/photo10.jpg"); /* استخدام الصورة الخلفية */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.text-content {
+  max-width: 450px;
+  z-index: 2;
+  position: relative;
+  color: white;
+  margin-top: -190px; /* رفع النص للأعلى */
+}
+
+.text-content h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 1.3;
+  margin-bottom: 15px;
+}
+
+.text-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.header-buttons .btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.header-buttons .signup {
+  background: linear-gradient(to right, #3cb6e3, #21647d) !important;
+  color: white !important;
+  border-radius: 30px; /* زاوية مستديرة */
+  border: 1px solid #21647d !important;
+  width: 40%;
+  margin-right: 55px;
+}
+
+.header-buttons .get-started {
+  background-color: white !important;
+  color: #21647d !important;
+  border: 1px solid #21647d !important;
+  border-radius: 30px; /* زاوية مستديرة */
+  width: 40%;
+  margin-right: 35px;
+}
+
+/* ضبط إضافي للعنوان */
+.text-content h1 span {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: #dfeef5;
+  margin-top: 5px;
+}
+
+/*.logo {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}*/
+
+/*.logo .fa-stethoscope {
+  margin-right: 10px; /* مسافة بين الأيقونة والكلمة */
+  /*font-size: 1.5rem; /* حجم الأيقونة */
+
+
+/* تنسيق قسم About Us */
+.about-us-section {
+  height: 100vh; /* جعل القسم يغطي الشاشة بأكملها */
+  background: linear-gradient(
+      to left,
+      rgba(33, 100, 125, 0.6),
+      /* التدرج فوق الصورة */ rgba(33, 100, 125, 0.7),
+      rgba(33, 100, 125, 0.9)
+    ),
+    url("../Images/photo13.png"); /* صورة الخلفية */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: flex-start;
+  padding: 50px 20px;
+}
+
+.about-us-content {
+  display: flex;
+  flex-direction: column; /* وضع العناصر عموديًا */
+  align-items: flex-start; /* تحديد المحاذاة على اليسار */
+  max-width: 800px;
+  margin-left: 70px;
+}
+
+.about-us-content h2 {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: left; /* محاذاة العنوان على اليسار */
+}
+
+.about-us-content p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  text-align: left; /* محاذاة النص على اليسار */
+  max-width: 700px; /* تحديد أقصى عرض للنص */
+}
+
+/* تنسيق قسم Our Consulting Specialists */
+.consulting-specialists-section {
+  padding: 50px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.consulting-specialists-section h2 {
+  font-size: 2.5rem;
+  color: #21647d;
+  margin-bottom: 20px;
+}
+
+.consulting-specialists-section p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #217f9d;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
+  gap: 20px;
+  padding: 20px;
+}
+
+.service {
+  width: 350px; /* عرض أصغر للمربع */
+  height: auto; /* اجعل الارتفاع يتناسب تلقائيًا مع المحتوى */
+  padding: 15px; /* مسافة داخلية لتقليل حجم المحتوى */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+.service:hover {
+  background: linear-gradient(
+    to right,
+    #21647d,
+    #3cb6e3
+  ); /* تدرج لوني عند التحويم */
+  transform: translateY(-5px); /* رفع العنصر قليلاً */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* تأثير الظل */
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* تأثير سلس */
+}
+
+.service:hover * {
+  color: #fff; /* استهداف كل النصوص الداخلية داخل العنصر */
+}
+
+.service h3 {
+  font-size: 1.5rem;
+  color: #21647d;
+}
+
+.service p {
+  font-size: 1rem;
+  color: #7d7987;
+  white-space: normal; /* للسماح بتوزيع النص بشكل طبيعي على أسطر متعددة */
+  word-wrap: break-word; /* لتقسيم الكلمة الطويلة إذا لزم الأمر */
+  max-width: 80%; /* التحكم في عرض النص ليكون محدودًا */
+  width: 250px; /* يمكنك تعديل العرض كما ترغب */
+  padding: 10px; /* المسافة داخل الحاوية */
+  margin-bottom: 20px; /* المسافة بين العناصر الأخرى */
+}
+
+/* تخصيص الصفوف بحيث تكون الأعمدة مقسمة إلى 3 في كل صف */
+.services-grid .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.services-grid .row .service {
+  width: 30%; /* تعيين عرض العنصر ليشغل 30% من المساحة الكلية */
+}
+
+.header-buttons {
+  text-align: center; /* توسيط العناصر داخل الحاوية */
+  position: relative; /* لجعل التحريك النسبي ممكنًا */
+}
+
+.header-buttons .btn.learn.more {
+  display: inline-block; /* لضمان التحكم في الموضع */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ffffff; /* لون الخلفية */
+  color: #21647d; /* لون النص */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: capitalize;
+  position: relative; /* للتحكم الدقيق */
+  right: -600px; /* تحريك الزر قليلاً لليمين */
+  border-radius: 30px !important ; /* زاوية مستديرة */
+  border: 1px solid #21647d !important;
+  margin-right: 300px; /* أو القيمة اللي تفضلينها */
+}
+
+.header-buttons .btn.learn.more:hover {
+  background: linear-gradient(
+    to right,
+    #21647d,
+    #3cb6e3
+  ) !important; /* تدريج الألوان */
+  color: #ffffff; /* تغيير لون النص ليكون أكثر وضوحًا */
+  transition: background 0.3s ease, color 0.3s ease; /* تأثير ناعم */
+}
+
+/* تنسيق الأيقونات داخل دائرة */
+.icon-cont {
+  background-color: #e6f5fc; /* لون خلفية الدائرة */
+  border-radius: 50%; /* جعل الأيقونة داخل دائرة */
+  padding: 20px; /* المسافة بين الأيقونة وحافة الدائرة */
+  /*display: inline-block; /* لتحديد الأيقونة ككائن داخل الحاوية */ /*
+  margin-bottom: 15px; /* المسافة أسفل الأيقونة */
+  /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف حول الدائرة */ /*
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* تقليل الظل ليبدو متناسبًا */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير عند التمرير */
+  display: flex; /* استخدام flexbox */
+  justify-content: flex-start; /* جعل الأيقونة على اليسار */
+  align-items: center; /* توسيط الأيقونة عموديًا داخل الدائرة */
+  width: 50px; /* تحديد العرض */
+  height: 50px; /* تحديد الارتفاع لجعلها متساوية دائريًا *
+}
+
+
+.icon-container:hover {
+  background-color: #3cb6e3; /* تغيير اللون عند التمرير */
+  transform: scale(1.1); /* تكبير الأيقونة عند التمرير */
+}
+
+.icon-container svg {
+  filter: brightness(0) saturate(100%) invert(19%) sepia(39%) saturate(1032%)
+    hue-rotate(163deg) brightness(90%) contrast(92%) !important;
+}
+
+/* لضبط القسم بالكامل في منتصف الشاشة */
+.top-doctors-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* يجعل القسم يأخذ كل ارتفاع الشاشة */
+  padding: 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.top-doctors-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #3c71e3;
+}
+
+/* شبكة الصور */
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 أعمدة */
+  gap: 30px; /* مسافة بين الصور */
+  justify-content: center;
+  align-items: center;
+  max-width: 90%; /* يضمن ظهور المحتوى بحدود واضحة */
+}
+
+/* تصميم البطاقات */
+.doctor-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-card img {
+  width: 300px; /* تكبير الصور */
+  height: 400px; /* ارتفاع الصور */
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.doctor-info {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  width: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  white-space: nowrap; /* منع التفاف النص */
+}
+
+/* تكبير الصور المطلوبة */
+.doctor-card:nth-child(1) img,
+.doctor-card:nth-child(3) img {
+  width: 350px; /* حجم أكبر للصور المحددة */
+  height: 450px;
+}
+
+/* تأثير التحويم */
+.doctor-card:hover {
+  transform: scale(1.05);
+}
+
+.facilities-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  padding: 50px 20px;
+  scroll-snap-align: start; /* تفعيل ميزة التركيز عند التمرير */
+}
+
+.facilities-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.circle-container {
+  position: relative;
+  width: 500px; /* تكبير الدائرة */
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-circle {
+  position: absolute;
+  width: 400px; /* تكبير الدائرة الوسطى */
+  height: 350px;
+  background-color: #2085a5;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px; /* تكبير النص */
+  font-weight: bold;
+  text-align: center;
+  z-index: 3;
+  margin-bottom: 20px; /* إبعاد النص عن المسارات */
+  margin-right: 300px;
+}
+
+/* المسار الداخلي */
+.inner-circle {
+  position: absolute;
+  width: 600px; /* تكبير المسار الداخلي */
+  height: 500px;
+  border: 3px solid #2085a5; /* جعل المسار أسمك */
+  border-radius: 50%;
+  margin-right: 320px;
+}
+
+.outer-circle {
+  position: absolute;
+  width: 750px; /* تكبير المسار الخارجي */
+  height: 650px;
+  border: 3px solid #2085a5; /* جعل المسار أسمك */
+  border-radius: 50%;
+  margin-right: 300px;
+}
+
+/* تنسيق الأيقونات */
+.iconns {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  width: 80px; /* تكبير الأيقونات */
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px; /* تكبير الرموز */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* الأيقونات على المسار الداخلي */
+.iconns-medical {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #4caf50 !important; /* لون جديد للأيقونة */
+  color: white;
+  border-radius: 50% !important; /* لتحويل الشكل إلى دائرة */
+}
+
+.iconns-heart {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background-color: #f42e88 !important; /* لون جديد للأيقونة */
+  color: #ffffff;
+  border-radius: 50% !important; /* لتحويل الشكل إلى دائرة */
+}
+
+.iconns-volume {
+  bottom: 15%;
+  left: 15%;
+  transform: translate(-50%, 50%);
+  background-color: #4caf50 !important; /* لون جديد للأيقونة */
+  color: white;
+  border-radius: 50% !important; /* لتحويل الشكل إلى دائرة */
+}
+
+/* الأيقونات على المسار الخارجي */
+.iconns-pulse {
+  top: 15%;
+  right: 15%;
+  transform: translate(50%, -50%);
+  background-color: #f42e88 !important; /* لون جديد للأيقونة */
+  color: white;
+  border-radius: 50% !important; /* لتحويل الشكل إلى دائرة */
+}
+
+.facilities-text {
+  max-width: 700px; /* تكبير مساحة النص */
+  text-align: center;
+  margin-top: 50px; /* إبعاد النص عن الدائرة */
+}
+
+.facilities-text h2 {
+  font-size: 28px; /* تكبير عنوان النص */
+  margin-bottom: 15px;
+  color: #2085a5;
+}
+
+.facilities-text p {
+  font-size: 29px; /* تكبير حجم النص */
+  line-height: 1.8;
+  color: #2085a5;
+}
+
+/* تنسيق الـ Footer */
+.footer {
+  background-color: #217f9d;
+  color: white;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-section {
+  background-color: #217f9d; /* Dark background for contrast */
+  color: white; /* Default text color */
+  padding: 40px 20px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.footer-left,
+.footer-middle,
+.footer-right {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.footer-left h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.footer-left p {
+  font-size: 14px; /* حجم النص */
+  margin: 0; /* إزالة المسافات الافتراضية */
+  margin-bottom: 2px; /* إضافة مسافة بين الجمل */
+  line-height: 1.6; /* تحسين المسافة بين الأسطر */
+}
+
+.read-more {
+  background-color: #217f9d;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 14px;
+  border: 1px solid #ddd !important;
+}
+
+.social-icons a {
+  margin-right: 15px;
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  border: none; /* إزالة أي حدود */
+  background: none; /* إزالة أي خلفية */
+  box-shadow: none; /* إزالة أي ظل */
+  outline: none; /* إزالة أي إطار يظهر عند التركيز */
+}
+
+.social-icons a:hover {
+  color: #ddd;
+}
+
+.footer-middle h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.footer-middle ul {
+  list-style-type: none;
+  padding: 0;
+  font-size: 14px;
+}
+
+.footer-middle li {
+  margin-bottom: 10px;
+}
+
+.footer-right h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.footer-right form input,
+.footer-right form textarea {
+  width: 50%;
+  padding: 12px;
+  margin-bottom: 30px; /*بكبر المسافه بين المحتوى*/
+  border: 1px solid #ddd !important;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #217f9d;
+  text-align: left;
+}
+
+/* Placeholder Styling */
+.footer-right form input::placeholder,
+.footer-right form textarea::placeholder {
+  color: white; /* لون النص placeholder */
+  opacity: 1; /* اجعل النص placeholder يظهر بشكل واضح */
+}
+
+.footer-right form button {
+  align-self: flex-start; /* لتحريك الزر إلى اليسار */
+  margin-top: 40px; /* زيادة المسافة بين الزر والعناصر التي فوقه */
+  margin-left: 0; /* تراجع القيمة إن كنتِ تودين ترك الزر في مكانه */
+  padding: 5px 10px;
+  background-color: #217f9d; /* اللون الخلفي */
+  margin-left: -170px; /* إضافة مسافة أكبر لتحريك الزر أكثر لليسار*/
+  color: white; /* اللون الأبيض للنص */
+  border: 1px solid #ddd !important;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+  margin-top: 10px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center; /* محاذاة الأقسام في المنتصف */
+  gap: 40px; /* مسافة بين قسم الهاتف وقسم البريد */
+}
+
+.phone-envelope {
+  display: flex;
+  flex-direction: column; /* ترتيب العناصر بشكل عمودي */
+}
+
+.icon-and-text {
+  display: flex;
+  align-items: flex-start; /* محاذاة الأيقونة مع النص */
+  gap: 10px; /* مسافة بين الأيقونة والنصوص */
+}
+
+.text-group {
+  display: flex;
+  flex-direction: column; /* ترتيب النصوص تحت بعضها */
+}
+
+.icon-white {
+  font-size: 18px; /* حجم الأيقونة */
+  margin-top: 5px; /* محاذاة الأيقونة مع النص */
+  color: #ffffff;
+}
+
+.text-group p {
+  margin: 0;
+  font-size: 14px; /* حجم النصوص */
+  color: #ffffff;
+}

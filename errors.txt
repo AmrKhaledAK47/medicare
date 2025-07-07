@@ -1,0 +1,56 @@
+1- Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary loading={null}>
+              <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/login" tree={[...]} cacheNode={{lazyData:null, ...}} segmentPath={[...]}>
+                      <ClientPageRoot Component={function LoginPage} searchParams={{}} params={{}}>
+                        <LoginPage params={Promise} searchParams={Promise}>
+                          <PageTransition>
++                           <div style={{width:"100%",height:"100%"}}>
+-                           <style data-emotion="css-global m9s2j8" data-s="">
+                      ...
+
+    at throwOnHydrationMismatch (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js:7091:56)
+    at beginWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js:5656:918)
+    at runWithFiberInDEV (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js:1326:74)
+    at performUnitOfWork (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js:7987:97)
+    at workLoopConcurrentByScheduler (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js:7983:58)
+    at renderRootConcurrent (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js:7965:71)
+    at performWorkOnRoot (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js:7603:176)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc06._.js:8565:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3001/_next/static/chunks/node_modules_next_dist_compiled_38d265cf._.js:1956:64)
+    at div (<anonymous>)
+    at PageTransition (http://localhost:3001/_next/static/chunks/src_676ef3f0._.js:1386:218)
+    at LoginPage (http://localhost:3001/_next/static/chunks/src_676ef3f0._.js:1916:214)
+    at ClientPageRoot (http://localhost:3001/_next/static/chunks/node_modules_next_dist_215c0736._.js:2026:50)
+
+2- Error: API Service: Login error occurred
+    at createUnhandledError (http://localhost:3001/_next/static/chunks/node_modules_next_dist_client_ce20a02f._.js:879:71)
+    at handleClientError (http://localhost:3001/_next/static/chunks/node_modules_next_dist_client_ce20a02f._.js:1052:56)
+    at console.error (http://localhost:3001/_next/static/chunks/node_modules_next_dist_client_ce20a02f._.js:1191:56)
+    at ApiService.login (http://localhost:3001/_next/static/chunks/src_956c67be._.js:250:25)
+    at async login (http://localhost:3001/_next/static/chunks/src_956c67be._.js:515:30)
+    at async handleDirectSubmit (http://localhost:3001/_next/static/chunks/src_676ef3f0._.js:661:13)
+
+3- Error: Invalid credentials
+    at ApiService.login (http://localhost:3001/_next/static/chunks/src_956c67be._.js:257:19)
+    at async login (http://localhost:3001/_next/static/chunks/src_956c67be._.js:515:30)
+    at async handleDirectSubmit (http://localhost:3001/_next/static/chunks/src_676ef3f0._.js:661:13)
+

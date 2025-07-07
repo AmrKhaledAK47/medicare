@@ -1,0 +1,356 @@
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+.edit-profile-container {
+    font-family: Arial, sans-serif;
+    padding: 40px; /* تقليل padding لضبط المسافة بين العناصر */
+    color: #333;
+    width: 80%; /* Adjust the width of the container */
+    margin: 50px auto 0; /* Center the container */
+    gap: 20px; /* تقليل المسافة بين العناصر داخل الكونتينر إذا كان داخل عنصر مرن */
+  }
+  .header {
+    display: flex;
+    justify-content: space-between; /* يوزع العناصر عبر الهيدر */
+    align-items: center; /* محاذاة العناصر عموديًا */
+    padding: 5px 20px; /* إضافة padding داخلي */
+    background-color: #fff; /* تحديد لون الخلفية */
+    width: 100%; /* تأكيد أن الهيدر يغطي العرض الكامل */
+    position: fixed; /* يثبت الهيدر في أعلى الصفحة */
+    top: 0; /* تقييد الهيدر بأعلى الصفحة */
+    left: 0; /* تأكيد محاذاة الهيدر لليسار */
+    z-index: 1000; /* التأكد من أن الهيدر في الأعلى */
+  }
+  
+  .edit-profile {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-size: 1.5rem; /* Reduce font size for the heading */
+  }
+  
+  .logo svg {
+    margin-right: 10px; /* المسافة بين الأيقونة والنص */
+  }
+  
+  .profile-photo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    margin: 0; /* إضافة مسافة بين الجرس والصورة */
+    
+  }
+  .profile-photo .photo {
+    width: 60px;  /* حدد العرض المرغوب فيه */
+    height: 60px; /* حدد الارتفاع المطلوب ليكون مربعًا */
+    object-fit: cover; /* تأكد من أن الصورة تملأ المساحة المحددة بشكل جيد */
+    border-radius: 50%; /* إذا كنت ترغب في جعل الصورة دائرية */
+   
+  }
+  
+  button {
+    background: none;
+    border: none ;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin: 0; /* إضافة مسافة بين الجرس والصورة */
+    border: 2px solid #ccc !important; /* تحديد إطار حول الأيقونة */
+    margin-left: auto; /* لتحريك الزر إلى اليمين */
+    margin-right: 0; /* لتقليل المسافة من اليمين */
+  }
+  
+  
+  .photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd !important;
+  }
+  
+  .btn-change-photo {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    background-color: #ffffff;
+    color: #217C99;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 0; /* تأكد من أن الزر في أقصى اليسار */
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    flex-direction: column; /* وضع العناصر فوق بعض */
+    gap: 1px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 10px;
+  }
+  
+  input, textarea, select {
+    padding: 10px;
+    border: 1px solid #ccc !important;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  textarea {
+    resize: none;
+    height: 30px;
+    width: 450px;
+  }
+  
+  
+  
+  /* === Sidebar Container === */
+.containetr {
+  display: flex;
+}
+
+/* === Sidebar Styling === */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 85vh;
+  background-color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 4px !important;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.expanded {
+  width: 220px;
+  
+  
+  
+}
+
+.sidebar.expanded ul {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px; /* زيادة المسافة بين العناصر */
+}
+
+
+
+
+
+
+/* === Sidebar Menu Styling === */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+ 
+}
+
+.menu li:hover {
+  background-color: #ffffff;
+}
+
+/* === Sidebar Icons Styling === */
+.icon {
+  width: 21px !important;
+  height: 21px !important;
+  margin-left:20px !important;
+  margin-bottom:40px !important; /* زيادة المسافة بين الأيقونات */
+  margin-top: -32px !important;
+  
+}
+
+/* === Text Styling === */
+.text {
+  font-size: 16px;
+  color: #003f5c;
+  font-weight: 500;
+  margin-right: 60px !important;
+  transform: translateY(-36px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+/* === Dashboard Item (With Arrow) === */
+.dashboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-right: 60px;
+  
+  
+  
+
+}
+
+.dashboard-item:hover {
+  background-color: #e0f7fa;
+  
+}
+
+/* === Toggle Arrow Styling === */
+.toggle-icon {
+  width: 16px; /* حجم مناسب */
+  height: 16px;
+  color: #21647D; /* لون السهم */
+  transition: transform 0.3s ease-in-out;
+  background-color: white; /* لون الدائرة */
+  border-radius: 50%; /* جعلها دائرية */
+  padding: 5px; /* مساحة داخلية لتوسيع الدائرة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  position: absolute;
+  right: -1px; /* يحرك السهم لليمين */
+  
+}
+
+
+.toggle-icon.rotated {
+  transform: rotate(90deg);
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+ 
+  
+}
+
+/* الأيقونة الثانية التي تظهر بجانبها عند التوسيع */
+.theme-texxt-icon {
+  width: 150px; /* ضبط العرض ليشبه النص */
+  height: auto;
+  margin-left: -4px; /* إزاحة جهة اليمين */
+  transform: translateY(-35px ); /* يحرّك العنصر للأسفل */
+  
+}
+
+  
+  /* Main Content Styling */
+  .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4f6f8;
+    width: 100%; /* اجعل الهيدر يغطي عرض الصفحة بالكامل */
+    position: fixed; /* تثبيت العنصر في المكان */
+    top: 0; /* من أعلى الصفحة */
+    right: 0; /* من الجهة اليمنى */
+    left: 0; /* من الجهة اليسرى */
+    height: 100vh; /* ملء كامل ارتفاع الصفحة */
+    
+    
+  }
+  
+  
+  .header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #217C99;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .header .logo img {
+    width: 40px;
+    height: 40px;
+  
+  }
+  
+  .form-row {
+    display: flex; /* جعل الحقلين جنب بعض */
+    gap: 20px; /* إضافة مسافة بين الحقول */
+  }
+  
+  .input-container {
+    display: flex;
+    flex-direction: column; /* وضع الـ label فوق الـ input */
+    align-items: flex-start; /* محاذاة العناصر إلى اليسار */
+    
+  }
+  
+  label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px; /* إضافة مسافة بين الـ label وحقل الإدخال */
+  }
+  
+  button {
+    border: none !important; /* إزالة الحدود */
+    outline: none !important; /* إزالة الإطار */
+    background: none !important; /* إزالة الخلفية */
+    cursor: pointer !important; /* تغيير المؤشر */
+  }
+  
+  input {
+    padding: 10px;
+    font-size: 1rem;
+    width: 400px; /* تحديد عرض ثابت للحقول */
+    border: 1px solid #ccc !important;
+    border-radius: 5px;
+  }
+  
+
+  .btn-change-photo {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* مسافة بين الصورة والنص */
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border:  2px solid #217C99 !important;
+    background-color: #f0f0f0; /* لون الخلفية */
+    flex-direction: row-reverse; /* عكس الاتجاه الافتراضي */
+    text-align: left;
+  }
+  
+  .btn-icon {
+    width: 22px !important; /* عرض الصورة */
+    height: 22px !important; /* ارتفاع الصورة */
+    object-fit: cover;
+  }
+
+  .seettings-title {
+    margin-top: -30px; /* رفع الكلمة للأعلى */
+    margin-bottom: 20px; /* لضبط المسافة بين كلمة Settings والمحتوى */
+    
+  }
+  
+  .seettings-title h1 {
+    font-size: 24px;
+    color: #217C99;
+  }
+  
+  
+  
+  

@@ -11,6 +11,9 @@ import Logo from '../../../components/common/Logo';
 import { useThemeContext } from '../../../components/patient/Sidebar';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShareProfileModal from '../../../components/patient/ShareProfileModal';
+import RootProvider from '@/providers/RootProvider';
+import { useAuth } from '@/context/AuthContext';
+import LogoutButton from '@/components/auth/LogoutButton';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -67,6 +70,18 @@ export default function PatientDashboardLayout({
 }: {
     children: React.ReactNode;
 }) {
+    return (
+        <RootProvider requireAuth={true} allowedRoles={['patient']}>
+            <PatientDashboardContent>{children}</PatientDashboardContent>
+        </RootProvider>
+    );
+}
+
+function PatientDashboardContent({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     const pathname = usePathname();
     const [isExpanded, setIsExpanded] = useState(false);
     const { mode } = useThemeContext();
@@ -75,6 +90,7 @@ export default function PatientDashboardLayout({
     const isTablet = useMediaQuery(theme.breakpoints.down('md'));
     const [mobileOpen, setMobileOpen] = useState(false);
     const [shareProfileOpen, setShareProfileOpen] = useState(false);
+    const { user } = useAuth();
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
@@ -235,9 +251,15 @@ export default function PatientDashboardLayout({
                         )}
 
                         <Avatar
-                            alt="Patient"
-                            src="/avatars/patient.png"
-                            sx={{ width: { xs: 32, sm: 40 }, height: { xs: 32, sm: 40 } }}
+                            alt={user?.name || "Patient"}
+                            src={user?.profileImageUrl || "/avatars/patient.png"}
+                            sx={{ width: { xs: 32, sm: 40 }, height: { xs: 32, sm: 40 }, mr: 1 }}
+                        />
+
+                        <LogoutButton
+                            variant="icon"
+                            color={mode === 'light' ? '#21647D' : '#B8C7CC'}
+                            size={isMobile ? "small" : "medium"}
                         />
                     </Box>
                 </Toolbar>

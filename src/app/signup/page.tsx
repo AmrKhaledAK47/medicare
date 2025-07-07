@@ -18,6 +18,7 @@ const PageContainer = styled('div')({
     overflow: 'hidden',
     position: 'relative',
     background: '#2C809D',
+    isolation: 'isolate',
 });
 
 const FormSection = styled('div')({
@@ -30,7 +31,7 @@ const FormSection = styled('div')({
     zIndex: 2,
     '@media (max-width: 1200px)': {
         width: '100%',
-        justifyContent:'center'
+        justifyContent: 'center'
     },
     '@media (max-width: 900px)': {
         width: '100%',
@@ -47,7 +48,7 @@ const WelcomeSection = styled('div')({
     position: 'relative',
     zIndex: 2,
     '@media (max-width: 1200px)': {
-        display:'none',
+        display: 'none',
     },
     '@media (max-width: 900px)': {
         display: 'none',
@@ -76,14 +77,14 @@ const LogoContainer = styled('div')({
     left: '56px',
     zIndex: 10,
     '@media (max-width: 1200px)': {
-        marginTop:'-5px',
-      marginLeft:'-35px'
-          
-      },
+        marginTop: '-5px',
+        marginLeft: '-35px'
+
+    },
     '@media (max-width: 900px)': {
-      marginTop:'-5px',
-    marginLeft:'-35px'
-        
+        marginTop: '-5px',
+        marginLeft: '-35px'
+
     },
 });
 
@@ -126,8 +127,8 @@ const SignUpTitle = styled(Typography)({
         lineHeight: '30px',
         marginTop: '70px',
     },
- 
-     
+
+
 });
 
 const SignUpSubtitle = styled(Typography)({
@@ -162,7 +163,7 @@ const HeartIconContainer = styled(motion.div)({
     '@media (max-width: 1200px)': {
         width: '130px',
         height: '130px',
-        
+
     },
 });
 
@@ -255,7 +256,7 @@ const SignUpPage = () => {
     const handleLoginClick = () => {
         setDirection('right'); // Set animation direction
         setTimeout(() => {
-        router.push('/login');
+            router.push('/login');
         }, 100); // Small delay to ensure animation starts before navigation
     };
 
